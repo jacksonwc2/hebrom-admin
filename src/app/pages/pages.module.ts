@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { PageRoutes } from './pages-routing';
+import { AutenticacaoComponent } from './autenticacao/autenticacao.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(PageRoutes)
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent, AutenticacaoComponent]
 })
 export class PagesModule { }
