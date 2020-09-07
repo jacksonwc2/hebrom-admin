@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AutenticacaoGuard } from './guard/autenticacao-guard.guard';
 import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
+import { FullComponent } from './layout/full/full.component';
 
 export const AppRoutes: Routes = [
   {
@@ -12,15 +13,15 @@ export const AppRoutes: Routes = [
   {
     path: '',
     canActivate: [AutenticacaoGuard],
-    component: DashboardComponent,
+    component: FullComponent,
     children: [
       {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/pages',
         pathMatch: 'full'
       },
       {
-        path: 'dashboard',
+        path: 'pages',
         loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
       }
     ]

@@ -1,31 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
-
-interface DataItem {
-  name: string;
-  age: number;
-  address: string;
-}
-
 @Component({
-  selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.css']
+  selector: 'app-categorias',
+  templateUrl: './categorias.component.html',
+  styleUrls: ['./categorias.component.css']
 })
-export class WelcomeComponent implements OnInit {
-
-  listOfData =[
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    }
-  ];
+export class CategoriasComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    
+  ngOnInit(): void {
   }
 
 }

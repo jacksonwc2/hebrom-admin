@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -19,13 +19,18 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import {enableProdMode} from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FullComponent } from './layout/full/full.component';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 enableProdMode();
 registerLocaleData(pt);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FullComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,10 @@ registerLocaleData(pt);
     NzButtonModule,
     NzTableModule,
     NzDropDownModule,
-    NzInputModule
+    NzInputModule,
+    NzAvatarModule,
+    NzIconModule,
+    NzSelectModule
   ],
   providers: [{ provide: NZ_I18N, useValue: pt_BR }],
   bootstrap: [AppComponent],
