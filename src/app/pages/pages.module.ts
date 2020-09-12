@@ -8,6 +8,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { EntidadesComponent } from './entidades/entidades.component';
 import { LocalizacoesComponent } from './localizacoes/localizacoes.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { LocalizacoesComponent } from './localizacoes/localizacoes.component';
     RouterModule.forChild(PageRoutes)
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [DashboardComponent, AutenticacaoComponent, CategoriasComponent, EventosComponent, EntidadesComponent, LocalizacoesComponent]
+  declarations: [DashboardComponent, AutenticacaoComponent, CategoriasComponent, EventosComponent, EntidadesComponent, LocalizacoesComponent, PerfilComponent]
 })
 export class PagesModule { }

@@ -10,7 +10,11 @@ export class AutenticacaoGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
 
-    //this.router.navigate(['autenticacao']);
+    if (!JSON.parse(localStorage.getItem('logado') || 'false')) {
+      this.router.navigate(['autenticacao']);
+      return false;
+    }
+    
     return true;
 
   }

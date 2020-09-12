@@ -23,6 +23,7 @@ import { FullComponent } from './layout/full/full.component';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 enableProdMode();
 registerLocaleData(pt);
@@ -48,7 +49,8 @@ registerLocaleData(pt);
     NzInputModule,
     NzAvatarModule,
     NzIconModule,
-    NzSelectModule
+    NzSelectModule,
+    NzModalModule
   ],
   providers: [{ provide: NZ_I18N, useValue: pt_BR }],
   bootstrap: [AppComponent],

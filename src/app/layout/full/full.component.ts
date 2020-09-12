@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { PerfilComponent } from 'src/app/pages/perfil/perfil.component';
 
 @Component({
   selector: 'app-full',
@@ -80,7 +82,8 @@ export class FullComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private modalService: NzModalService
   ) { }
 
   ngOnInit(): void {
@@ -96,7 +99,7 @@ export class FullComponent implements OnInit {
   }
 
   pesquisarMenu(value) {
-    
+
     if (value.search === "") {
       this.menusFilter = this.menus;
       return;
@@ -110,6 +113,16 @@ export class FullComponent implements OnInit {
     this.router.navigate(['pages/' + rota]);
   }
 
+  perfil() {
+    this.modalService.create({
+      nzTitle: 'Meu Perfil',
+      nzContent: PerfilComponent
+    });
+  }
 
+  sair(){
+    localStorage.setItem('logado', 'false');
+    this.router.navigate(['autenticacao']);
+  }
 
 }
