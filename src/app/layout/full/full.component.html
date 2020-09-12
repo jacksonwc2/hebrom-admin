@@ -20,21 +20,24 @@
 
             <!-- INICIO SEARCH MENU -->
             <div *ngIf="!isCollapsed" class="search-menu">
-                <nz-input-group [nzSuffix]="suffixIconSearch">
-                    <input type="text" nz-input placeholder="input search text" />
-                </nz-input-group>
-                <ng-template #suffixIconSearch>
-                    <i nz-icon nzType="search"></i>
-                </ng-template>
+                <form [formGroup]="searchMenu" (ngSubmit)="pesquisarMenu(searchMenu.value)">
+                    <nz-input-group [nzSuffix]="suffixIconSearch">
+                        <input (ngModelChange)="pesquisarMenu(searchMenu.value)" type="text" formControlName="search"
+                            nz-input placeholder="Pesquisar..." />
+                    </nz-input-group>
+                    <ng-template #suffixIconSearch>
+                        <i nz-icon nzType="search"></i>
+                    </ng-template>
+                </form>
             </div>
             <!-- FINAL SEARCH MENU -->
 
             <!-- INICIO ITENS MENU  -->
             <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menus }"></ng-container>
             <ng-template #menuTpl let-menus>
-                <ng-container *ngFor="let menu of menus">
-                    <li *ngIf="!menu.children" (click)="openRoute(menu.router)" nz-menu-item [nzPaddingLeft]="menu.level * 24" [nzDisabled]="menu.disabled"
-                        [nzSelected]="menu.selected">
+                <ng-container *ngFor="let menu of menusFilter">
+                    <li *ngIf="!menu.children" (click)="openRoute(menu.router)" nz-menu-item
+                        [nzPaddingLeft]="menu.level * 24" [nzDisabled]="menu.disabled" [nzSelected]="menu.selected">
                         <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
                         <span>{{ menu.title }}</span>
                     </li>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -67,15 +68,48 @@ export class FullComponent implements OnInit {
     }
   ];
 
+  /**
+   * Filtragem dos itens do menu
+   */
+  menusFilter = this.menus;
+
+  /**
+   * Formulario para filtragem do menu
+   */
+  searchMenu: FormGroup;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+
+    this.searchMenu = this.fb.group({
+      search: ""
+    });
+
   }
+
+  unaccent(value) {
+    return value?.toLowerCase().normalize("NFD").replace(/[^a-zA-Zs]/g, "");
+  }
+
+  pesquisarMenu(value) {
+    
+    if (value.search === "") {
+      this.menusFilter = this.menus;
+      return;
+    }
+
+    this.menusFilter = this.menus.filter(x => this.unaccent(x.title)?.indexOf(this.unaccent(value.search)) > -1);
+  }
+
 
   openRoute(rota: string) {
     this.router.navigate(['pages/' + rota]);
   }
+
+
 
 }
