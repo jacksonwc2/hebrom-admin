@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ import { LocalizacoesComponent } from './localizacoes/localizacoes.component';
     CommonModule,
     RouterModule.forChild(PageRoutes)
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [DashboardComponent, AutenticacaoComponent, CategoriasComponent, EventosComponent, EntidadesComponent, LocalizacoesComponent]
 })
 export class PagesModule { }

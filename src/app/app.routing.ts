@@ -7,7 +7,7 @@ import { FullComponent } from './layout/full/full.component';
 
 export const AppRoutes: Routes = [
   {
-    path: 'login',
+    path: 'autenticacao',
     component: AutenticacaoComponent,
   },
   {

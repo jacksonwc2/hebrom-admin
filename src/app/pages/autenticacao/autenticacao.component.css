@@ -1,0 +1,48 @@
+:host {
+  text-align: center;
+}
+
+nz-content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  height: 100%;
+  background-color: blue;
+  flex: auto;
+}
+
+.autenticacao {
+  height: 100%;
+  float: right;
+  background-color: red;
+  width: 370px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .content {
+    display: none;
+  }
+
+  .autenticacao {
+    width: 100%;
+  }
+}
+
+.login-form {
+  max-width: 300px;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}

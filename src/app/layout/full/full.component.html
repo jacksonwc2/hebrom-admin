@@ -7,8 +7,11 @@
 
         <!-- INICIO LOGO SLIDER -->
         <div class="sidebar-logo">
-            <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-            <h1>HEBROM MOB</h1>
+            <img *ngIf="isCollapsed" src="../../../assets/images/icone.png" alt="logo">
+            <img *ngIf="!isCollapsed" src="../../../assets/images/logo.png" alt="logo">
+            <span class="header-trigger fold" *ngIf="!isCollapsed" (click)="isCollapsed = !isCollapsed">
+                <i class="trigger" nz-icon nzType="menu-fold"></i>
+            </span>
         </div>
         <!-- FINAL LOGO SLIDER -->
 
@@ -30,13 +33,11 @@
             <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menus }"></ng-container>
             <ng-template #menuTpl let-menus>
                 <ng-container *ngFor="let menu of menus">
-                    <a href="pages/{{menu.router}}" *ngIf="!menu.children">
-                        <li nz-menu-item [nzPaddingLeft]="menu.level * 24" [nzDisabled]="menu.disabled"
-                            [nzSelected]="menu.selected">
-                            <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
-                            <span>{{ menu.title }}</span>
-                        </li>
-                    </a>
+                    <li *ngIf="!menu.children" (click)="openRoute(menu.router)" nz-menu-item [nzPaddingLeft]="menu.level * 24" [nzDisabled]="menu.disabled"
+                        [nzSelected]="menu.selected">
+                        <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
+                        <span>{{ menu.title }}</span>
+                    </li>
                     <li *ngIf="menu.children" nz-submenu [nzPaddingLeft]="menu.level * 24" [nzOpen]="menu.open"
                         [nzTitle]="menu.title" [nzIcon]="menu.icon" [nzDisabled]="menu.disabled">
                         <ul>
@@ -60,12 +61,16 @@
         <!-- INICIO TOPO HEADER -->
         <nz-header>
             <div class="app-header">
-                <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-                    <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+                <span class="header-trigger" *ngIf="isCollapsed" (click)="isCollapsed = !isCollapsed">
+                    <i class="trigger" nz-icon nzType="menu-unfold"></i>
+                </span>
+                <span class="header-trigger titulo-programa">
+                    Nome Programa
                 </span>
                 <div class="usuario">
                     <a nz-dropdown [nzDropdownMenu]="menu">
-                        Jackson Willian
+                        <span>Olá <b>Jackson Willian</b></span>
+                        &nbsp;
                         <i nz-icon nzType="down"></i>
                     </a>
                     <nz-dropdown-menu #menu="nzDropdownMenu">

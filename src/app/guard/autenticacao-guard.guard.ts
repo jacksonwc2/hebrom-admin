@@ -10,7 +10,7 @@ export class AutenticacaoGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
 
-    //this.router.navigate(['login']);
+    //this.router.navigate(['autenticacao']);
     return true;
 
   }
