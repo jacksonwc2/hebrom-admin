@@ -1,33 +1,32 @@
 <nz-content>
-  <div class="content">Opção 1</div>
+  <div class="content">
+    <img src="https://hire4event.com/blogs/wp-content/uploads/2019/05/Event-Management-Proposal-Hire4event.jpg">
+  </div>
   <div class="autenticacao">
     <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <img src="../../../assets/images/logo.png">
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your username!">
+        <nz-form-control nzErrorTip="Informe seu usuario!">
           <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="userName" placeholder="Username" />
+            <input type="text" nz-input formControlName="userName" placeholder="Usuario" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-form-control nzErrorTip="Informe sua senha!">
           <nz-input-group nzPrefixIcon="lock">
-            <input type="password" nz-input formControlName="password" placeholder="Password" />
+            <input type="password" nz-input formControlName="password" placeholder="Senha" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
-      <div nz-row class="login-form-margin">
+      <!-- <div nz-row class="login-form-margin">
         <div nz-col [nzSpan]="12">
           <label nz-checkbox formControlName="remember">
-            <span>Remember me</span>
+            <span>Lembre-me</span>
           </label>
         </div>
-        <div nz-col [nzSpan]="12">
-          <a class="login-form-forgot">Forgot password</a>
-        </div>
-      </div>
-      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
-      Or <a> register now! </a>
+      </div> -->
+      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Entrar</button>
     </form>
   </div>
 </nz-content>
