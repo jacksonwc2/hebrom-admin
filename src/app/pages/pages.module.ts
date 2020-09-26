@@ -1,8 +1,15 @@
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NzFormModule, NzIconModule } from 'ng-zorro-antd';
+import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { IconDefinition } from '@ant-design/icons-angular';
+import {
+  AccountBookFill,
+  AlertFill,
+  AlertOutline,
+} from '@ant-design/icons-angular/icons';
 import { AutenticacaoComponent } from './autenticacao/autenticacao.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -12,12 +19,17 @@ import { LocalizacoesComponent } from './localizacoes/localizacoes.component';
 import { PageRoutes } from './pages-routing';
 import { PerfilComponent } from './perfil/perfil.component';
 
+const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
+
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     NgZorroAntdModule,
+    NzFormModule,
     RouterModule.forChild(PageRoutes),
+    IconsProviderModule,
+    NzIconModule.forRoot(icons),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
