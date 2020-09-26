@@ -1,21 +1,33 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { PageRoutes } from './pages-routing';
 import { AutenticacaoComponent } from './autenticacao/autenticacao.component';
 import { CategoriasComponent } from './categorias/categorias.component';
-import { EventosComponent } from './eventos/eventos.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { EntidadesComponent } from './entidades/entidades.component';
+import { EventosComponent } from './eventos/eventos.component';
 import { LocalizacoesComponent } from './localizacoes/localizacoes.component';
+import { PageRoutes } from './pages-routing';
 import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(PageRoutes)
+    ReactiveFormsModule,
+    NgZorroAntdModule,
+    RouterModule.forChild(PageRoutes),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [DashboardComponent, AutenticacaoComponent, CategoriasComponent, EventosComponent, EntidadesComponent, LocalizacoesComponent, PerfilComponent]
+  declarations: [
+    DashboardComponent,
+    AutenticacaoComponent,
+    CategoriasComponent,
+    EventosComponent,
+    EntidadesComponent,
+    LocalizacoesComponent,
+    PerfilComponent,
+  ],
 })
-export class PagesModule { }
+export class PagesModule {}
