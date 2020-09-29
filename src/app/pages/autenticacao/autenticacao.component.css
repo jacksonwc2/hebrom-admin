@@ -1,62 +1,38 @@
 :host {
-  text-align: center;
+  text-align: left;
 }
 
 nz-content {
   display: flex;
-  height: 100%;
-  width: 100%;
+  background-color: #0c6fa5;
+  height: 100%
 }
 
-form {
-  margin: auto;
-  margin-top: 40%;
-}
-
-.content {
-  height: 100%;
-  background-color: #cccccc;
-  flex: auto;
-}
-
-.content img {
-  margin: auto;
-}
-
-.autenticacao {
-  height: 100%;
+.login-form {
   float: right;
-  background-color: black;
   width: 370px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 5px;
 }
 
-.autenticacao img {
+.login-form .logo {
+  text-align: center;
+}
+
+.login-form img {
   width: 80%;
   margin-bottom: 35px;
 }
 
-@media only screen and (max-width: 1000px) {
-  .content {
-    display: none;
-  }
-
-  .autenticacao {
-    width: 100%;
-  }
+.login-form .lembrar {
+  margin-bottom: 20px;
 }
 
-.login-form {
-  max-width: 300px;
+.login-form .lembrar span {
+  color: #fff;
 }
 
-.login-form-margin {
-  margin-bottom: 16px;
-}
-
-.login-form-forgot {
-  float: right;
-}
-
-.login-form-button {
-  width: 100%;
+.login-form button {
+  background-color: #32d839;
 }

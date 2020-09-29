@@ -1,32 +1,29 @@
 <nz-content>
-  <div class="content">
-    <img src="https://hire4event.com/blogs/wp-content/uploads/2019/05/Event-Management-Proposal-Hire4event.jpg">
-  </div>
-  <div class="autenticacao">
-    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <div class="logo">
       <img src="../../../assets/images/logo.png">
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Informe seu usuario!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="userName" placeholder="Usuario" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Informe sua senha!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input type="password" nz-input formControlName="password" placeholder="Senha" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <!-- <div nz-row class="login-form-margin">
-        <div nz-col [nzSpan]="12">
-          <label nz-checkbox formControlName="remember">
-            <span>Lembre-me</span>
-          </label>
-        </div>
-      </div> -->
-      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Entrar</button>
-    </form>
-  </div>
+    </div>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Informe seu usuario!">
+        <nz-input-group nzPrefixIcon="user" nzSize="large">
+          <input type="text" nz-input formControlName="userName" placeholder="Informe seu usuario" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Informe sua senha!">
+        <nz-input-group nzPrefixIcon="lock" nzSize="large">
+          <input type="password" nz-input formControlName="password" placeholder="Informe sua senha" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="lembrar">
+      <label nz-checkbox>
+        <span>Lembre-me</span>
+      </label>
+    </div>
+    <button (click)="login()" nz-button nzType="primary" nzSize="large" nzBlock>
+      <i nz-icon nzType="login"></i>Entrar
+    </button>
+  </form>
 </nz-content>
