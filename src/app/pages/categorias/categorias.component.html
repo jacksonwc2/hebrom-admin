@@ -17,7 +17,7 @@
   </nz-list-item>
 </nz-list>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Adicionar Categoria" (nzOnOk)="handleOk()">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Adicionar Categoria" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
     <nz-form-item>
       <nz-form-label [nzSpan]="5" nzRequired>Descrição</nz-form-label>
