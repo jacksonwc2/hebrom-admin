@@ -1,1 +1,34 @@
-<p>categorias works!</p>
+<form class="toolbar" [formGroup]="search" (click)="showModal()" (ngSubmit)="pesquisar(search.value)">
+  <nz-input-group [nzSuffix]="suffixIconSearch">
+    <input (ngModelChange)="pesquisar(search.value)" type="text" formControlName="search" nz-input
+      placeholder="Pesquisar..." />
+  </nz-input-group>
+  <ng-template #suffixIconSearch>
+    <i nz-icon nzType="search"></i>
+  </ng-template>
+  <button nz-button nzType="primary">
+    <i nz-icon nzType="plus"></i> Adicionar
+  </button>
+</form>
+
+<nz-list nzBordered nzSize="small">
+  <nz-list-item *ngFor="let item of dataFilter">
+    {{ item }}
+  </nz-list-item>
+</nz-list>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Adicionar Categoria" (nzOnOk)="handleOk()">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>Descrição</nz-form-label>
+      <nz-form-control [nzSpan]="20" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="descricaoErrorTpl">
+        <input nz-input formControlName="descricao" placeholder="Descrição Categoria" />
+        <ng-template #descricaoErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Insira a descrição.
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

@@ -1,0 +1,15 @@
+.toolbar {
+  padding: 10px;
+  background: #f6f6f6;
+  margin-bottom: 20px;
+}
+
+.toolbar nz-input-group {
+  max-width: 300px;
+}
+
+.toolbar button {
+  float: right;
+  background-color: #4CAF50;
+  border: none;
+}
