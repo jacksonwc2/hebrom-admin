@@ -1,5 +1,7 @@
 import { NgZorroAntdModule, NzFormModule, NzIconModule } from 'ng-zorro-antd';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,6 +32,8 @@ const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
     RouterModule.forChild(PageRoutes),
     IconsProviderModule,
     NzIconModule.forRoot(icons),
+    ScrollingModule,
+    NzLayoutModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [

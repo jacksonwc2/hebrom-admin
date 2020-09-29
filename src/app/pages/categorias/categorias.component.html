@@ -1,31 +1,51 @@
-<form class="toolbar" [formGroup]="search" (ngSubmit)="pesquisar(search.value)">
-  <nz-input-group [nzSuffix]="suffixIconSearch">
-    <input (ngModelChange)="pesquisar(search.value)" type="text" formControlName="search" nz-input
-      placeholder="Pesquisar..." />
-  </nz-input-group>
-  <ng-template #suffixIconSearch>
-    <i nz-icon nzType="search"></i>
-  </ng-template>
-  <button (click)="showModal()" nz-button nzType="primary">
-    <i nz-icon nzType="plus"></i> Adicionar
-  </button>
-</form>
+<nz-layout class="layout">
 
-<nz-list nzBordered nzSize="small">
-  <nz-list-item *ngFor="let item of dataFilter">
-    {{ item }}
-  </nz-list-item>
-</nz-list>
+  <div class="toolbar">
+    <form [formGroup]="search" (ngSubmit)="pesquisar(search.value)">
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input (ngModelChange)="pesquisar(search.value)" type="text" formControlName="search" nz-input
+          placeholder="Pesquisar..." />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </form>
+    <button (click)="showModal()" nz-button nzType="primary">
+      <i nz-icon nzType="plus"></i> Adicionar
+    </button>
+  </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Adicionar Categoria" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+  <nz-content class="content">
+    <div class="cabecalho-list">
+      <div class="item">Descrição</div>
+      <div class="item">Ações</div>
+    </div>
+    <cdk-virtual-scroll-viewport itemSize="{{dataFilter.length}}">
+      <nz-list nzSize="small">
+        <nz-list-item *cdkVirtualFor="let item of dataFilter">
+          {{ item }}
+        </nz-list-item>
+      </nz-list>
+    </cdk-virtual-scroll-viewport>
+  </nz-content>
+
+
+</nz-layout>
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Adicionar Categoria" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+  nzOkText="Salvar" nzCancelText="Cancelar">
+  <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
     <nz-form-item>
       <nz-form-label [nzSpan]="5" nzRequired>Descrição</nz-form-label>
-      <nz-form-control [nzSpan]="20" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="descricaoErrorTpl">
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="descricaoErrorTpl">
         <input nz-input formControlName="descricao" placeholder="Descrição Categoria" />
         <ng-template #descricaoErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
             Insira a descrição.
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            Insira no mínimo 3 caracteres.
           </ng-container>
         </ng-template>
       </nz-form-control>

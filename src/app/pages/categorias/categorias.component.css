@@ -5,11 +5,45 @@
 }
 
 .toolbar nz-input-group {
-  max-width: 300px;
+  width: 100%;
 }
 
 .toolbar button {
   float: right;
   background-color: #4CAF50;
   border: none;
+}
+
+.toolbar form {
+  width: 100%;
+  max-width: 300px;
+}
+
+.toolbar form,
+.toolbar nz-input-group {
+  display: inline-flex;
+}
+
+.content,
+.layout,
+.content cdk-virtual-scroll-viewport {
+  height: 100%;
+  background: none;
+}
+
+.content {
+  border: 1px solid #f1f1f1;
+}
+
+.cabecalho-list {
+  display: inline-flex;
+  background: #f6f6f6;
+  width: 100%;
+}
+
+.cabecalho-list .item {
+  padding: 8px 16px;
+  display: inline-flex;
+  border-right: 1px solid #e6e6e6;
+  font-weight: bold;
 }
