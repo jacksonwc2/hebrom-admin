@@ -1,4 +1,4 @@
-<form class="toolbar" [formGroup]="search" (click)="showModal()" (ngSubmit)="pesquisar(search.value)">
+<form class="toolbar" [formGroup]="search" (ngSubmit)="pesquisar(search.value)">
   <nz-input-group [nzSuffix]="suffixIconSearch">
     <input (ngModelChange)="pesquisar(search.value)" type="text" formControlName="search" nz-input
       placeholder="Pesquisar..." />
@@ -6,7 +6,7 @@
   <ng-template #suffixIconSearch>
     <i nz-icon nzType="search"></i>
   </ng-template>
-  <button nz-button nzType="primary">
+  <button (click)="showModal()" nz-button nzType="primary">
     <i nz-icon nzType="plus"></i> Adicionar
   </button>
 </form>
