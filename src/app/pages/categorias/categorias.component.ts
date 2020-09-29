@@ -133,7 +133,10 @@ export class CategoriasComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.validateForm = this.fb.group({
-      descricao: ['', [Validators.required]],
+      descricao: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(3)]),
+      ],
     });
   }
 }
