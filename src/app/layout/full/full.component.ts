@@ -1,16 +1,15 @@
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { PerfilComponent } from 'src/app/pages/perfil/perfil.component';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { PerfilComponent } from 'src/app/pages/perfil/perfil.component';
 
 @Component({
   selector: 'app-full',
   templateUrl: './full.component.html',
-  styleUrls: ['./full.component.css']
+  styleUrls: ['./full.component.css'],
 })
 export class FullComponent implements OnInit {
-
   /**
    * Atributo que minimiza e expande menu
    */
@@ -19,7 +18,7 @@ export class FullComponent implements OnInit {
   /**
    * Dados para menu, em caso de submenus utilize
    * atributo "children", alterando level para 2
-   * 
+   *
    * children: [{level: 2}]
    */
   menus = [
@@ -30,44 +29,44 @@ export class FullComponent implements OnInit {
       router: 'dashboard',
       open: true,
       selected: true,
-      disabled: false
+      disabled: false,
     },
     {
       level: 1,
       title: 'Entidades',
-      icon: 'dashboard',
+      icon: 'home',
       router: 'entidades',
       open: false,
       selected: false,
-      disabled: false
+      disabled: false,
     },
     {
       level: 1,
       title: 'Categorias',
-      icon: 'dashboard',
+      icon: 'tag',
       router: 'categorias',
       open: false,
       selected: false,
-      disabled: false
+      disabled: false,
     },
     {
       level: 1,
       title: 'Localizações',
-      icon: 'dashboard',
+      icon: 'google-plus',
       router: 'localizacoes',
       open: false,
       selected: false,
-      disabled: false
+      disabled: false,
     },
     {
       level: 1,
       title: 'Eventos',
-      icon: 'dashboard',
+      icon: 'calendar',
       router: 'eventos',
       open: false,
       selected: false,
-      disabled: false
-    }
+      disabled: false,
+    },
   ];
 
   /**
@@ -84,30 +83,31 @@ export class FullComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private modalService: NzModalService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     this.searchMenu = this.fb.group({
-      search: ""
+      search: '',
     });
-
   }
 
   unaccent(value) {
-    return value?.toLowerCase().normalize("NFD").replace(/[^a-zA-Zs]/g, "");
+    return value
+      ?.toLowerCase()
+      .normalize('NFD')
+      .replace(/[^a-zA-Zs]/g, '');
   }
 
   pesquisarMenu(value) {
-
-    if (value.search === "") {
+    if (value.search === '') {
       this.menusFilter = this.menus;
       return;
     }
 
-    this.menusFilter = this.menus.filter(x => this.unaccent(x.title)?.indexOf(this.unaccent(value.search)) > -1);
+    this.menusFilter = this.menus.filter(
+      (x) => this.unaccent(x.title)?.indexOf(this.unaccent(value.search)) > -1
+    );
   }
-
 
   openRoute(rota: string) {
     this.router.navigate(['pages/' + rota]);
@@ -116,13 +116,12 @@ export class FullComponent implements OnInit {
   perfil() {
     this.modalService.create({
       nzTitle: 'Meu Perfil',
-      nzContent: PerfilComponent
+      nzContent: PerfilComponent,
     });
   }
 
-  sair(){
+  sair() {
     localStorage.setItem('logado', 'false');
     this.router.navigate(['autenticacao']);
   }
-
 }
