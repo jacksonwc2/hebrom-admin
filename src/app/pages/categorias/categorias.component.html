@@ -1,5 +1,6 @@
 <nz-layout class="layout">
 
+  <!-- Toolbar -->
   <div class="toolbar">
     <form [formGroup]="search" (ngSubmit)="pesquisar(search.value)">
       <nz-input-group [nzSuffix]="suffixIconSearch">
@@ -14,9 +15,9 @@
       <i nz-icon nzType="plus"></i> Adicionar
     </button>
   </div>
+  <!-- Toolbar -->
 
   <nz-content class="content">
-
     <cdk-virtual-scroll-viewport itemSize="{{dataFilter.length}}">
       <nz-list nzSize="small">
         <nz-list-header class="cabecalho-list">
@@ -44,11 +45,9 @@
       </nz-list>
     </cdk-virtual-scroll-viewport>
   </nz-content>
-
-
 </nz-layout>
 
-
+<!-- Formulario Crud Categoria -->
 <nz-modal [(nzVisible)]="isVisible" nzTitle="{{editar ? 'Editar' : 'Nova'}} Categoria" (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar">
   <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
@@ -69,3 +68,4 @@
     </nz-form-item>
   </form>
 </nz-modal>
+<!-- Formulario Crud Categoria -->

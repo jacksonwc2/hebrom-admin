@@ -106,6 +106,7 @@ export class CategoriasComponent implements OnInit {
         '',
         Validators.compose([Validators.required, Validators.minLength(3)]),
       ],
+      id: '',
     });
   }
 
