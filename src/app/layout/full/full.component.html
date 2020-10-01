@@ -1,102 +1,102 @@
 <!-- INICIO LAYOUT FULL (MENU E TOPO) -->
 <nz-layout class="app-layout">
 
-    <!-- INICIO SLIDER -->
-    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
-        [nzTrigger]="null">
+  <!-- INICIO SLIDER -->
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
 
-        <!-- INICIO LOGO SLIDER -->
-        <div class="sidebar-logo">
-            <img *ngIf="isCollapsed" src="../../../assets/images/icone.png" alt="logo">
-            <img *ngIf="!isCollapsed" src="../../../assets/images/logo.png" alt="logo">
-            <span class="header-trigger fold" *ngIf="!isCollapsed" (click)="isCollapsed = !isCollapsed">
-                <i class="trigger" nz-icon nzType="menu-fold"></i>
-            </span>
+    <!-- INICIO LOGO SLIDER -->
+    <div class="sidebar-logo">
+      <img *ngIf="isCollapsed" src="../../../assets/images/icone.png" alt="logo">
+      <img *ngIf="!isCollapsed" src="../../../assets/images/logo.png" alt="logo">
+      <span class="header-trigger fold" *ngIf="!isCollapsed" (click)="isCollapsed = !isCollapsed">
+        <i class="trigger" nz-icon nzType="menu-fold"></i>
+      </span>
+    </div>
+    <!-- FINAL LOGO SLIDER -->
+
+    <!-- INICIO MENU OPTIONS -->
+    <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+
+      <!-- INICIO SEARCH MENU -->
+      <div *ngIf="!isCollapsed" class="search-menu">
+        <form [formGroup]="searchMenu" (ngSubmit)="pesquisarMenu(searchMenu.value)">
+          <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input (ngModelChange)="pesquisarMenu(searchMenu.value)" type="text" formControlName="search" nz-input
+              placeholder="Pesquisar..." />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <i nz-icon nzType="search"></i>
+          </ng-template>
+        </form>
+      </div>
+      <!-- FINAL SEARCH MENU -->
+
+      <!-- INICIO ITENS MENU  -->
+      <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menus }"></ng-container>
+      <ng-template #menuTpl let-menus>
+        <ng-container *ngFor="let menu of menusFilter">
+          <li *ngIf="!menu.children" (click)="openRoute(menu.router)" nz-menu-item [nzPaddingLeft]="menu.level * 24"
+            [nzDisabled]="menu.disabled" [nzSelected]="menu.selected">
+            <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
+            <span>{{ menu.title }}</span>
+          </li>
+          <li *ngIf="menu.children" nz-submenu [nzPaddingLeft]="menu.level * 24" [nzOpen]="menu.open"
+            [nzTitle]="menu.title" [nzIcon]="menu.icon" [nzDisabled]="menu.disabled">
+            <ul>
+              <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children }">
+              </ng-container>
+            </ul>
+          </li>
+        </ng-container>
+      </ng-template>
+      <!-- FINAL ITENS MENU  -->
+
+    </ul>
+    <!-- FINAL MENU OPTIONS -->
+
+  </nz-sider>
+  <!-- FINAL SLIDER -->
+
+  <!-- INICIO LAYOUT PAGINA TOPO E PAGES -->
+  <nz-layout class="layout-full">
+
+    <!-- INICIO TOPO HEADER -->
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" *ngIf="isCollapsed" (click)="isCollapsed = !isCollapsed">
+          <i class="trigger" nz-icon nzType="menu-unfold"></i>
+        </span>
+        <span class="header-trigger titulo-programa">
+          Nome Programa
+        </span>
+        <div class="usuario">
+          <a nz-dropdown [nzDropdownMenu]="menu">
+            <span>Olá <b>Jackson Willian</b></span>
+            &nbsp;
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item (click)="perfil()">Meu Perfil</li>
+              <li nz-menu-item (click)="sair()">Sair</li>
+            </ul>
+          </nz-dropdown-menu>
         </div>
-        <!-- FINAL LOGO SLIDER -->
+      </div>
+    </nz-header>
+    <!-- FINAL TOPO HEADER -->
 
-        <!-- INICIO MENU OPTIONS -->
-        <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <!-- INICIO CONTENT INCLUDES PAGES -->
+    <nz-content class="content-pages">
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <!-- FINAL CONTENT INCLUDES PAGES -->
 
-            <!-- INICIO SEARCH MENU -->
-            <div *ngIf="!isCollapsed" class="search-menu">
-                <form [formGroup]="searchMenu" (ngSubmit)="pesquisarMenu(searchMenu.value)">
-                    <nz-input-group [nzSuffix]="suffixIconSearch">
-                        <input (ngModelChange)="pesquisarMenu(searchMenu.value)" type="text" formControlName="search"
-                            nz-input placeholder="Pesquisar..." />
-                    </nz-input-group>
-                    <ng-template #suffixIconSearch>
-                        <i nz-icon nzType="search"></i>
-                    </ng-template>
-                </form>
-            </div>
-            <!-- FINAL SEARCH MENU -->
-
-            <!-- INICIO ITENS MENU  -->
-            <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menus }"></ng-container>
-            <ng-template #menuTpl let-menus>
-                <ng-container *ngFor="let menu of menusFilter">
-                    <li *ngIf="!menu.children" (click)="openRoute(menu.router)" nz-menu-item
-                        [nzPaddingLeft]="menu.level * 24" [nzDisabled]="menu.disabled" [nzSelected]="menu.selected">
-                        <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
-                        <span>{{ menu.title }}</span>
-                    </li>
-                    <li *ngIf="menu.children" nz-submenu [nzPaddingLeft]="menu.level * 24" [nzOpen]="menu.open"
-                        [nzTitle]="menu.title" [nzIcon]="menu.icon" [nzDisabled]="menu.disabled">
-                        <ul>
-                            <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children }">
-                            </ng-container>
-                        </ul>
-                    </li>
-                </ng-container>
-            </ng-template>
-            <!-- FINAL ITENS MENU  -->
-
-        </ul>
-        <!-- FINAL MENU OPTIONS -->
-
-    </nz-sider>
-    <!-- FINAL SLIDER -->
-
-    <!-- INICIO LAYOUT PAGINA TOPO E PAGES -->
-    <nz-layout>
-
-        <!-- INICIO TOPO HEADER -->
-        <nz-header>
-            <div class="app-header">
-                <span class="header-trigger" *ngIf="isCollapsed" (click)="isCollapsed = !isCollapsed">
-                    <i class="trigger" nz-icon nzType="menu-unfold"></i>
-                </span>
-                <span class="header-trigger titulo-programa">
-                    Nome Programa
-                </span>
-                <div class="usuario">
-                    <a nz-dropdown [nzDropdownMenu]="menu">
-                        <span>Olá <b>Jackson Willian</b></span>
-                        &nbsp;
-                        <i nz-icon nzType="down"></i>
-                    </a>
-                    <nz-dropdown-menu #menu="nzDropdownMenu">
-                        <ul nz-menu nzSelectable>
-                            <li nz-menu-item (click)="perfil()">Meu Perfil</li>
-                            <li nz-menu-item (click)="sair()">Sair</li>
-                        </ul>
-                    </nz-dropdown-menu>
-                </div>
-            </div>
-        </nz-header>
-        <!-- FINAL TOPO HEADER -->
-
-        <!-- INICIO CONTENT INCLUDES PAGES -->
-        <nz-content>
-            <div class="inner-content">
-                <router-outlet></router-outlet>
-            </div>
-        </nz-content>
-        <!-- FINAL CONTENT INCLUDES PAGES -->
-
-    </nz-layout>
-    <!-- FINAL LAYOUT PAGINA TOPO E PAGES -->
+  </nz-layout>
+  <!-- FINAL LAYOUT PAGINA TOPO E PAGES -->
 
 </nz-layout>
 <!-- FINAL LAYOUT FULL (MENU E TOPO) -->

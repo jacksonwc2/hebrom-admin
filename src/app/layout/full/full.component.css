@@ -113,3 +113,11 @@ nz-header {
 .fold {
   float: right;
 }
+
+.layout-full {
+  overflow: hidden;
+}
+
+.content-pages {
+  overflow: auto;
+}
