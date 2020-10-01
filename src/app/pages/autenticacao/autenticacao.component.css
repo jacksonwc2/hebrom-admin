@@ -10,10 +10,11 @@ nz-content {
 
 .login-form {
   float: right;
-  width: 370px;
+  width: 300px;
   margin: auto;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 40px 20px;
+  border-radius: 3px;
+  background: #045e90;
 }
 
 .login-form .logo {

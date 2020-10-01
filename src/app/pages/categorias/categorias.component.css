@@ -35,6 +35,15 @@
   border: 1px solid #f1f1f1;
 }
 
+.cabecalho-list nz-list-item {
+  width: 100%;
+}
+
+.cabecalho-list nz-list-item,
+.cabecalho-list {
+  padding: 0px;
+}
+
 .cabecalho-list {
   display: inline-flex;
   background: #f6f6f6;
@@ -44,6 +53,6 @@
 .cabecalho-list .item {
   padding: 8px 16px;
   display: inline-flex;
-  border-right: 1px solid #e6e6e6;
+  border-left: 1px solid #e6e6e6;
   font-weight: bold;
 }

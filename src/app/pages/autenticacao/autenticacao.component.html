@@ -5,14 +5,14 @@
     </div>
     <nz-form-item>
       <nz-form-control nzErrorTip="Informe seu usuario!">
-        <nz-input-group nzPrefixIcon="user" nzSize="large">
+        <nz-input-group nzPrefixIcon="user">
           <input type="text" nz-input formControlName="userName" placeholder="Informe seu usuario" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Informe sua senha!">
-        <nz-input-group nzPrefixIcon="lock" nzSize="large">
+        <nz-input-group nzPrefixIcon="lock">
           <input type="password" nz-input formControlName="password" placeholder="Informe sua senha" />
         </nz-input-group>
       </nz-form-control>
@@ -22,7 +22,7 @@
         <span>Lembre-me</span>
       </label>
     </div>
-    <button (click)="login()" nz-button nzType="primary" nzSize="large" nzBlock>
+    <button (click)="login()" nz-button nzType="primary" nzBlock>
       <i nz-icon nzType="login"></i>Entrar
     </button>
   </form>

@@ -1,3 +1,4 @@
+import { NzModalService } from 'ng-zorro-antd';
 import { Observable, Observer } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -15,51 +16,43 @@ import {
 })
 export class CategoriasComponent implements OnInit {
   dataFilter = [];
-
   data = [
-    'dssgdfgdf',
-    'fdgdf',
-    'dssgdfgdf',
-    'fdgdf',
-    'dssgdfgdf',
-    'fdgdf',
-    'dssgdfgdf',
-    'fdgdf',
-    ,
-    'dssgdfgdf',
-    'fdgdf',
-    'dssgdfgdf',
-    'fdgdf',
-    'dssgdfgdf',
-    'fdgdf',
-    'dssgdfgdf',
-    'fdgdf',
-    ,
-    'dssgdfgdf',
-    'fdgdf',
-    'dssgdfgdf',
-    'fdgdf',
-    ,
-    'dssgdfgdf',
-    'fdgdf',
-    'dssgdfgdf',
-    'fdgdf',
-    ,
-    'dssgdfgdf',
-    'fdgdf',
-    'dssgdfgdf',
-    'fdgdf',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
+    'Jovens',
   ];
+  editar = false;
 
   /**
    * Formulario para filtragem do menu
    */
   search: FormGroup;
-
   isVisible = false;
 
-  showModal(): void {
+  showModal(item?: any): void {
     this.isVisible = true;
+    this.editar = item != null;
+    this.validateForm.setValue({
+      descricao: item || '',
+      id: null,
+    });
   }
 
   handleOk(): void {
@@ -107,12 +100,24 @@ export class CategoriasComponent implements OnInit {
     console.log(value);
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private modal: NzModalService) {
     this.validateForm = this.fb.group({
       descricao: [
         '',
         Validators.compose([Validators.required, Validators.minLength(3)]),
       ],
+    });
+  }
+
+  delete(): void {
+    this.modal.confirm({
+      nzTitle: 'Atenção!',
+      nzContent: 'Tem certeza que deseja remover a categoria?',
+      nzOkText: 'Remover',
+      nzOkType: 'danger',
+      nzOnOk: () => console.log('OK'),
+      nzCancelText: 'Cancelar',
+      nzOnCancel: () => console.log('Cancel'),
     });
   }
 }
