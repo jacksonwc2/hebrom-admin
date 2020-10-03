@@ -9,6 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./entidades.component.css'],
 })
 export class EntidadesComponent implements OnInit {
+  readonly NOME = 'Nome';
+  readonly RAZAO_SOCIAL = 'Razão Social';
+  readonly DOCUMENTO = 'Documento';
+  readonly LOCALIZACAO = 'Localização';
+  readonly ACOES = 'Ações';
+
   dataFilter = [];
   data = [
     {
@@ -18,46 +24,10 @@ export class EntidadesComponent implements OnInit {
       localizacao: 'Entidade',
     },
     {
-      nome_fantasia: 'Entidade 2',
-      razao_social: 'Entidade 2',
-      documento: 'Entidade 2',
-      localizacao: 'Entidade 2',
-    },
-    {
-      nome_fantasia: 'Entidade 2',
-      razao_social: 'Entidade 2',
-      documento: 'Entidade 2',
-      localizacao: 'Entidade 2',
-    },
-    {
-      nome_fantasia: 'Entidade 2',
-      razao_social: 'Entidade 2',
-      documento: 'Entidade 2',
-      localizacao: 'Entidade 2',
-    },
-    {
-      nome_fantasia: 'Entidade 2',
-      razao_social: 'Entidade 2',
-      documento: 'Entidade 2',
-      localizacao: 'Entidade 2',
-    },
-    {
-      nome_fantasia: 'Entidade 2',
-      razao_social: 'Entidade 2',
-      documento: 'Entidade 2',
-      localizacao: 'Entidade 2',
-    },
-    {
-      nome_fantasia: 'Entidade 2',
-      razao_social: 'Entidade 2',
-      documento: 'Entidade 2',
-      localizacao: 'Entidade 2',
-    },
-    {
-      nome_fantasia: 'Entidade 2',
-      razao_social: 'Entidade 2',
-      documento: 'Entidade 2',
-      localizacao: 'Entidade 2',
+      nome_fantasia: 'Entidade',
+      razao_social: 'Entidade',
+      documento: 'Entidade',
+      localizacao: 'Entidade',
     },
   ];
   editar = false;

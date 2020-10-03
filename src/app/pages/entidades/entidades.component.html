@@ -22,16 +22,16 @@
       <nz-list nzSize="small">
         <nz-list-header class="cabecalho-list">
           <nz-list-item nz-row>
-            <div nz-col nzSpan="6" class="item">Nome</div>
+            <div nz-col nzSpan="6" class="item">{{NOME}}</div>
 
-            <div nz-col nzSpan="8" class="item">Razão Social</div>
+            <div nz-col nzSpan="8" class="item">{{RAZAO_SOCIAL}}</div>
 
-            <div nz-col nzSpan="4" class="item">Documento</div>
+            <div nz-col nzSpan="4" class="item">{{DOCUMENTO}}</div>
 
-            <div nz-col nzSpan="3" class="item">Localização</div>
+            <div nz-col nzSpan="3" class="item">{{LOCALIZACAO}}</div>
 
             <div nz-col nzSpan="3" class="item acoes" nz-list-item-actions>
-              Ações
+              {{ACOES}}
             </div>
           </nz-list-item>
         </nz-list-header>
@@ -67,13 +67,25 @@
   (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar">
   <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
     <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>Descrição</nz-form-label>
+      <nz-form-label [nzSpan]="5" nzRequired>{{NOME}}</nz-form-label>
+
+      <nz-form-label [nzSpan]="5" nzRequired>{{RAZAO_SOCIAL}}</nz-form-label>
+
+      <nz-form-label [nzSpan]="5" nzRequired>{{DOCUMENTO}}</nz-form-label>
+
+      <nz-form-label [nzSpan]="5" nzRequired>{{LOCALIZACAO}}</nz-form-label>
+
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="descricaoErrorTpl">
         <input hidden formControlName="id" />
+
         <input nz-input formControlName="nome_fantasia" placeholder="Nome da entidade" />
+
         <input nz-input formControlName="razao_social" placeholder="Razão social da entidade" />
+
         <input nz-input formControlName="documento" placeholder="Numero de documento" />
+
         <input nz-input formControlName="localizacao" placeholder="Localização" />
+
         <ng-template #descricaoErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
             Insira a descrição.
