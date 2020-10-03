@@ -1,6 +1,6 @@
 <nz-layout class="layout">
 
-  <!-- Toolbar -->
+  <!-- TOOLBAR -->
   <div class="toolbar">
     <form [formGroup]="search" (ngSubmit)="pesquisar(search.value)">
       <nz-input-group [nzSuffix]="suffixIconSearch">
@@ -12,33 +12,39 @@
       </ng-template>
     </form>
     <button (click)="showModal()" nz-button nzType="primary">
-      <i nz-icon nzType="plus"></i> Adicionar
+      <i nz-icon nzType="plus"></i> {{ ADICIONAR }}
     </button>
   </div>
-  <!-- Toolbar -->
+  <!-- TOOLBAR -->
 
+  <!-- GRID DE ENTIDADES -->
   <nz-content class="content">
     <cdk-virtual-scroll-viewport itemSize="{{dataFilter.length}}">
       <nz-list nzSize="small">
+
+        <!-- CABEÇALHO ENTIDADE -->
         <nz-list-header class="cabecalho-list">
           <nz-list-item nz-row>
-            <div nz-col nzSpan="6" class="item">{{NOME}}</div>
+            <div nz-col nzSpan="6" class="item">{{ NOME }}</div>
 
-            <div nz-col nzSpan="8" class="item">{{RAZAO_SOCIAL}}</div>
+            <div nz-col nzSpan="8" class="item">{{ RAZAO_SOCIAL }}</div>
 
-            <div nz-col nzSpan="4" class="item">{{DOCUMENTO}}</div>
+            <div nz-col nzSpan="4" class="item">{{ DOCUMENTO }}</div>
 
-            <div nz-col nzSpan="3" class="item">{{LOCALIZACAO}}</div>
+            <div nz-col nzSpan="3" class="item">{{ LOCALIZACAO }}</div>
 
             <div nz-col nzSpan="3" class="item acoes" nz-list-item-actions>
-              {{ACOES}}
+              {{ ACOES }}
             </div>
           </nz-list-item>
         </nz-list-header>
+        <!-- CABEÇALHO ENTIDADES -->
 
         <nz-list-empty *ngIf="dataFilter.length == 0">
-          Não há Dados
+          {{ EXCECAO_NAO_HA_DADOS }}
         </nz-list-empty>
+
+        <!-- BODY ENTIDADES -->
         <nz-list-body class="body-list">
           <nz-list-item *cdkVirtualFor="let item of dataFilter">
             <div nz-row class="body-list-item">
@@ -57,38 +63,103 @@
             </div>
           </nz-list-item>
         </nz-list-body>
+        <!-- BODY ENTIDADES -->
+
       </nz-list>
     </cdk-virtual-scroll-viewport>
   </nz-content>
+  <!-- GRID DE ENTIDADES -->
+
 </nz-layout>
 
-<!-- Formulario Crud Entidade -->
+<!-- MODAL EDIÇÃO DE ENTIDADE -->
 <nz-modal [(nzVisible)]="isVisible" nzTitle="{{editar ? 'Editar' : 'Nova'}} Entidade" (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar">
   <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
+
+    <input hidden formControlName="id" />
+
+    <!-- NOME FANTASIA -->
     <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>{{NOME}}</nz-form-label>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ NOME }}</nz-form-label>
 
-      <nz-form-label [nzSpan]="5" nzRequired>{{RAZAO_SOCIAL}}</nz-form-label>
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="nomeErrorTpl">
 
-      <nz-form-label [nzSpan]="5" nzRequired>{{DOCUMENTO}}</nz-form-label>
+        <input maxlength="255" nz-input formControlName="nome_fantasia" placeholder="Nome da entidade" />
 
-      <nz-form-label [nzSpan]="5" nzRequired>{{LOCALIZACAO}}</nz-form-label>
+        <ng-template #nomeErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            {{ EXCECAO_ENSIRA_NOME }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            {{ EXCECAO_MINIMO_CARACTERES }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">
+            {{ EXCECAO_MAXIMO_CARACTERES }}
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- NOME FANTASIA -->
 
-      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="descricaoErrorTpl">
+    <!-- RAZÃO SOCIAL -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ RAZAO_SOCIAL }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="razaosocialErrorTpl">
+
+        <input maxlength="255" nz-input formControlName="razao_social" placeholder="Razão social da entidade" />
+
+        <ng-template #razaosocialErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            {{ EXCECAO_INSIRA_RAZAO_SOCIAL }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            {{ EXCECAO_MINIMO_CARACTERES }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">
+            {{ EXCECAO_MAXIMO_CARACTERES }}
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- RAZÃO SOCIAL -->
+
+    <!-- DOCUMENTO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ DOCUMENTO }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="documentoErrorTpl">
+
+        <input maxlength="18" nz-input formControlName="documento" placeholder="Numero de documento" />
+
+        <ng-template #documentoErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            {{ EXCECAO_ENSIRA_DOCUMENTO }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            {{ EXCECAO_MINIMO_DOCUMENTO }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">
+            {{ EXCECAO_MAXIMO_DOCUMENTO }}
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- DOCUMENTO -->
+
+    <!-- LOCALIZAÇÃO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ LOCALIZACAO }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="localizacaoErrorTpl">
         <input hidden formControlName="id" />
-
-        <input nz-input formControlName="nome_fantasia" placeholder="Nome da entidade" />
-
-        <input nz-input formControlName="razao_social" placeholder="Razão social da entidade" />
-
-        <input nz-input formControlName="documento" placeholder="Numero de documento" />
 
         <input nz-input formControlName="localizacao" placeholder="Localização" />
 
-        <ng-template #descricaoErrorTpl let-control>
+        <ng-template #localizacaoErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
-            Insira a descrição.
+            {{ EXCECAO_ESCOLHA_LOCALIZACAO }}
           </ng-container>
           <ng-container *ngIf="control.hasError('minlength')">
             Insira no mínimo 3 caracteres.
@@ -96,6 +167,8 @@
         </ng-template>
       </nz-form-control>
     </nz-form-item>
+    <!-- LOCALIZAÇÃO -->
+
   </form>
 </nz-modal>
-<!-- Formulario Crud Entidade -->
+<!-- MODAL EDIÇÃO DE ENTIDADE -->
