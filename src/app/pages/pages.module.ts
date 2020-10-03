@@ -1,6 +1,8 @@
 import { NgZorroAntdModule, NzFormModule, NzIconModule } from 'ng-zorro-antd';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
@@ -36,6 +38,8 @@ const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
     ScrollingModule,
     NzLayoutModule,
     NzCalendarModule,
+    NzAutocompleteModule,
+    NzSelectModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
