@@ -1,13 +1,6 @@
 import { NzModalService } from 'ng-zorro-antd';
-import { Observable, Observer } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-categorias',
@@ -46,23 +39,16 @@ export class CategoriasComponent implements OnInit {
   search: FormGroup;
   isVisible = false;
 
-  showModal(item?: any): void {
-    this.isVisible = true;
-    this.editar = item != null;
-    this.validateForm.setValue({
-      descricao: item || '',
-      id: null,
+  validateForm: FormGroup;
+
+  constructor(private fb: FormBuilder, private modal: NzModalService) {
+    this.validateForm = this.fb.group({
+      descricao: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(3)]),
+      ],
+      id: '',
     });
-  }
-
-  handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
-  }
-
-  handleCancel(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible = false;
   }
 
   ngOnInit(): void {
@@ -90,24 +76,31 @@ export class CategoriasComponent implements OnInit {
       .replace(/[^a-zA-Zs]/g, '');
   }
 
-  validateForm: FormGroup;
-
   submitForm(value: { descricao: string }): void {
-    for (const key in this.validateForm.controls) {
+    for (const key of Object.keys(this.validateForm.controls)) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
     console.log(value);
   }
 
-  constructor(private fb: FormBuilder, private modal: NzModalService) {
-    this.validateForm = this.fb.group({
-      descricao: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(3)]),
-      ],
-      id: '',
+  showModal(item?: any): void {
+    this.isVisible = true;
+    this.editar = item != null;
+    this.validateForm.setValue({
+      descricao: item || '',
+      id: null,
     });
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
 
   delete(): void {

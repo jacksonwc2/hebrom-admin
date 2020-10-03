@@ -10,6 +10,16 @@ import { Router } from '@angular/router';
 export class AutenticacaoComponent implements OnInit {
   public validateForm!: FormGroup;
 
+  constructor(private fb: FormBuilder, public router: Router) {}
+
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      userName: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [true],
+    });
+  }
+
   submitForm(): void {
     // tslint:disable-next-line: forin
     for (const i in this.validateForm.controls) {
@@ -21,15 +31,5 @@ export class AutenticacaoComponent implements OnInit {
   login(): void {
     localStorage.setItem('logado', 'true');
     this.router.navigate(['pages/dashboard']);
-  }
-
-  constructor(private fb: FormBuilder, public router: Router) {}
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true],
-    });
   }
 }
