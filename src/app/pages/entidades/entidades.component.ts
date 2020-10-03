@@ -14,6 +14,20 @@ export class EntidadesComponent implements OnInit {
   readonly DOCUMENTO = 'Documento';
   readonly LOCALIZACAO = 'Localização';
   readonly ACOES = 'Ações';
+  readonly ADICIONAR = 'Adicionar';
+
+  readonly EXCECAO_NAO_HA_DADOS = 'Não há Dados.';
+  readonly EXCECAO_ENSIRA_NOME = 'Insira o nome.';
+  readonly EXCECAO_MINIMO_CARACTERES = 'Insira no mínimo 3 caracteres.';
+  readonly EXCECAO_MAXIMO_CARACTERES = 'Insira no máximo 255 caracteres.';
+
+  readonly EXCECAO_INSIRA_RAZAO_SOCIAL = 'Insira a razão social.';
+
+  readonly EXCECAO_ENSIRA_DOCUMENTO = 'Insira o documento.';
+  readonly EXCECAO_MINIMO_DOCUMENTO = 'Insira no mínimo 14 caracteres.';
+  readonly EXCECAO_MAXIMO_DOCUMENTO = 'Insira no máximo 18 caracteres.';
+
+  readonly EXCECAO_ESCOLHA_LOCALIZACAO = 'Escolha uma localização.';
 
   dataFilter = [];
   data = [
@@ -42,10 +56,32 @@ export class EntidadesComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private modal: NzModalService) {
     this.validateForm = this.fb.group({
-      nome_fantasia: [null, [Validators.required]],
-      razao_social: [null, [Validators.required]],
-      documento: [null, [Validators.required]],
+      nome_fantasia: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(255),
+        ]),
+      ],
+      razao_social: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(255),
+        ]),
+      ],
+      documento: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(14),
+          Validators.maxLength(18),
+        ]),
+      ],
       localizacao: [null, [Validators.required]],
+      id: null,
     });
   }
 
@@ -86,7 +122,10 @@ export class EntidadesComponent implements OnInit {
     this.isVisible = true;
     this.editar = item != null;
     this.validateForm.setValue({
-      descricao: item || '',
+      nome_fantasia: this.editar ? item.nome_fantasia : '',
+      razao_social: this.editar ? item.razao_social : '',
+      documento: this.editar ? item.documento : '',
+      localizacao: this.editar ? item.localizacao : '',
       id: null,
     });
   }
