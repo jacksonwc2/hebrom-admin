@@ -1,4 +1,5 @@
 import { NzModalService } from 'ng-zorro-antd';
+import { TitleService } from 'src/assets/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -41,7 +42,11 @@ export class CategoriasComponent implements OnInit {
 
   validateForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private modal: NzModalService) {
+  constructor(
+    private fb: FormBuilder,
+    private modal: NzModalService,
+    private titleService: TitleService
+  ) {
     this.validateForm = this.fb.group({
       descricao: [
         '',
@@ -55,7 +60,10 @@ export class CategoriasComponent implements OnInit {
     this.search = this.fb.group({
       search: '',
     });
+
     this.dataFilter = this.data;
+
+    this.titleService.atualizar('Categoria');
   }
 
   pesquisar(value) {

@@ -1,7 +1,9 @@
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { Observable, of } from 'rxjs';
 import { PerfilComponent } from 'src/app/pages/perfil/perfil.component';
+import { TitleService } from 'src/assets/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./full.component.css'],
 })
 export class FullComponent implements OnInit {
+  tituloPrograma$: Observable<string>;
+
   /**
    * Atributo que minimiza e expande menu
    */
@@ -82,13 +86,18 @@ export class FullComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private titleService: TitleService
   ) {}
 
   ngOnInit(): void {
     this.searchMenu = this.fb.group({
       search: '',
     });
+
+    this.titleService
+      .observable()
+      .subscribe((titulo) => (this.tituloPrograma$ = of(titulo)));
   }
 
   unaccent(value) {

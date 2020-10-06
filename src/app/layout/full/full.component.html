@@ -68,7 +68,7 @@
           <i class="trigger" nz-icon nzType="menu-unfold"></i>
         </span>
         <span class="header-trigger titulo-programa">
-          Nome Programa
+          {{ tituloPrograma$  | async}}
         </span>
         <div class="usuario">
           <a nz-dropdown [nzDropdownMenu]="menu">

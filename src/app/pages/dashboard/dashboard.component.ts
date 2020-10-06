@@ -1,3 +1,4 @@
+import { TitleService } from 'src/assets/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
   selectedValue = new Date('2017-01-25');
 
-  constructor() {}
+  constructor(private titleService: TitleService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.titleService.atualizar('Dashboard');
+  }
 }
