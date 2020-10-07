@@ -22,13 +22,21 @@
       <nz-list nzSize="small">
         <nz-list-header class="cabecalho-list">
           <nz-list-item nz-row>
-            <div nz-col nzSpan="6" class="item">{{NOME}}</div>
+            <div nz-col nzSpan="2" class="item">{{ TITULO }}</div>
 
-            <div nz-col nzSpan="8" class="item">{{RAZAO_SOCIAL}}</div>
+            <div nz-col nzSpan="3" class="item">{{ DESCRICAO }}</div>
 
-            <div nz-col nzSpan="4" class="item">{{DOCUMENTO}}</div>
+            <div nz-col nzSpan="3" class="item">{{ ENTIDADE }}</div>
 
-            <div nz-col nzSpan="3" class="item">{{LOCALIZACAO}}</div>
+            <div nz-col nzSpan="3" class="item">{{ CATEGORIA }}</div>
+
+            <div nz-col nzSpan="4" class="item">{{ LOCALIZACAO }}</div>
+
+            <div nz-col nzSpan="2" class="item">{{ DATA_INICIO }}</div>
+
+            <div nz-col nzSpan="2" class="item">{{ DATA_FINAL }}</div>
+
+            <div nz-col nzSpan="2" class="item">{{ BANNER }}</div>
 
             <div nz-col nzSpan="3" class="item acoes" nz-list-item-actions>
               {{ACOES}}
@@ -42,13 +50,21 @@
         <nz-list-body class="body-list">
           <nz-list-item *cdkVirtualFor="let item of dataFilter">
             <div nz-row class="body-list-item">
-              <div nz-col nzSpan="6" class="item">{{item.nome_fantasia}}</div>
+              <div nz-col nzSpan="2" class="item">{{item.titulo}}</div>
 
-              <div nz-col nzSpan="8" class="item"> {{item.razao_social}}</div>
+              <div nz-col nzSpan="3" class="item"> {{item.descricao}}</div>
 
-              <div nz-col nzSpan="4" class="item">{{item.documento}}</div>
+              <div nz-col nzSpan="3" class="item">{{item.entidade}}</div>
 
-              <div nz-col nzSpan="3" class="item">{{item.localizacao}}</div>
+              <div nz-col nzSpan="3" class="item">{{item.categoria}}</div>
+
+              <div nz-col nzSpan="4" class="item">{{item.localizacao}}</div>
+
+              <div nz-col nzSpan="2" class="item">{{item.dataInicio}}</div>
+
+              <div nz-col nzSpan="2" class="item">{{item.dataFinal}}</div>
+
+              <div nz-col nzSpan="2" class="item">{{item.banner}}</div>
 
               <div nz-col nzSpan="3" class="item acoes">
                 <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>

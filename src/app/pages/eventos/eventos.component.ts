@@ -9,25 +9,37 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./eventos.component.css'],
 })
 export class EventosComponent implements OnInit {
-  readonly NOME = 'Nome';
-  readonly RAZAO_SOCIAL = 'Razão Social';
-  readonly DOCUMENTO = 'Documento';
   readonly LOCALIZACAO = 'Localização';
+  readonly TITULO = 'Titulo';
+  readonly DESCRICAO = 'Descrição';
+  readonly ENTIDADE = 'Entidade';
+  readonly CATEGORIA = 'Categoria';
+  readonly DATA_INICIO = 'Data inicial';
+  readonly DATA_FINAL = 'Data final';
+  readonly BANNER = 'Banner';
   readonly ACOES = 'Ações';
 
   dataFilter = [];
   data = [
     {
-      nome_fantasia: 'Entidade',
-      razao_social: 'Entidade',
-      documento: 'Entidade',
+      titulo: 'Entidade',
+      descricao: 'Entidade',
+      entidade: 'Entidade',
+      categoria: 'Entidade',
       localizacao: 'Entidade',
+      dataInicio: 'Entidade',
+      dataFinal: 'Entidade',
+      banner: 'banner',
     },
     {
-      nome_fantasia: 'Entidade',
-      razao_social: 'Entidade',
-      documento: 'Entidade',
+      titulo: 'Entidade',
+      descricao: 'Entidade',
+      entidade: 'Entidade',
+      categoria: 'Entidade',
       localizacao: 'Entidade',
+      dataInicio: 'Entidade',
+      dataFinal: 'Entidade',
+      banner: 'banner',
     },
   ];
   editar = false;
@@ -46,10 +58,15 @@ export class EventosComponent implements OnInit {
     private titleService: TitleService
   ) {
     this.validateForm = this.fb.group({
-      nome_fantasia: [null, [Validators.required]],
-      razao_social: [null, [Validators.required]],
-      documento: [null, [Validators.required]],
+      titulo: [null, [Validators.required]],
+      descricao: [null, [Validators.required]],
+      entidade: [null, [Validators.required]],
+      categoria: [null, [Validators.required]],
       localizacao: [null, [Validators.required]],
+      dataInicio: [null, [Validators.required]],
+      dataFinal: [null, [Validators.required]],
+      banner: [null, [Validators.required]],
+      id: null,
     });
   }
 
