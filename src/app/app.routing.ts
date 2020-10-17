@@ -1,9 +1,9 @@
+import { AutenticacaoGuard } from 'src/app/core/guard/autenticacao-guard.guard';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AutenticacaoGuard } from './guard/autenticacao-guard.guard';
-import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
+import { RouterModule, Routes } from '@angular/router';
 import { FullComponent } from './layout/full/full.component';
+import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const AppRoutes: Routes = [
   {
@@ -18,12 +18,13 @@ export const AppRoutes: Routes = [
       {
         path: '',
         redirectTo: '/pages',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'pages',
-        loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
-      }
-    ]
-  }
+        loadChildren: () =>
+          import('./pages/pages.module').then((m) => m.PagesModule),
+      },
+    ],
+  },
 ];

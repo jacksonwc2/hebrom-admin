@@ -1,5 +1,5 @@
 import { NzModalService } from 'ng-zorro-antd';
-import { TitleService } from 'src/assets/services/tittle.service';
+import { TitleService } from 'src/app/core/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 

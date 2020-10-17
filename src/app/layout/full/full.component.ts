@@ -1,7 +1,7 @@
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Observable, of } from 'rxjs';
+import { TitleService } from 'src/app/core/services/tittle.service';
 import { PerfilComponent } from 'src/app/pages/perfil/perfil.component';
-import { TitleService } from 'src/assets/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
