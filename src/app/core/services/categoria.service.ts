@@ -19,7 +19,7 @@ export class CategoriaService {
     const params = new HttpParams().set('id', id.toString());
 
     return this.http.get<Array<CategoriaRetrieveDTO>>(
-      EndpointsConstants.CATEGORIAS.ADQUIRIR_TODAS,
+      EndpointsConstants.CATEGORIAS.ADQUIRIR_POR_ID,
       { params }
     );
   }
