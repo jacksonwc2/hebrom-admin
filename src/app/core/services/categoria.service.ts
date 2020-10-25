@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs';
 import { EndpointsConstants } from 'src/app/constants/endpoints.constants';
 import { CategoriaDTO } from 'src/app/models/payload/categoria/categoria.dto';
-import { EntidadeDTO } from 'src/app/models/payload/entidade/entidade.dto';
 import { CategoriaRetrieveDTO } from 'src/app/models/retrieve/categorias/categoria-retrieve.dto';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';

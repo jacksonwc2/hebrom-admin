@@ -25,5 +25,6 @@ export class EndpointsConstants {
   static readonly LOCALIZACAO = {
     ADQUIRIR_TODOS: URL_BASE.concat('/localizacaoService/adquirirTodos'),
     SALVAR: URL_BASE.concat('/localizacaoService/salvar'),
+    DELETAR: URL_BASE.concat('/localizacaoService/deletar/'),
   };
 }

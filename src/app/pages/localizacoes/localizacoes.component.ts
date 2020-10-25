@@ -1,4 +1,6 @@
-import { NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { take } from 'rxjs/operators';
+import { LocalizacaoService } from 'src/app/core/services/localizacao.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,43 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LocalizacoesComponent implements OnInit {
   dataFilter = [];
-  data = [
-    {
-      descricao: 'Templo Sede',
-      uri: 'https://goo.gl/maps/SV2K1qdyqU7tuToG6',
-      observacao: 'Próximo ao mercado Treviso.',
-    },
-    {
-      descricao: 'Templo Sede',
-      uri: 'https://goo.gl/maps/SV2K1qdyqU7tuToG6',
-      observacao: 'Próximo ao mercado Treviso.',
-    },
-    {
-      descricao: 'Templo Sede',
-      uri: 'https://goo.gl/maps/SV2K1qdyqU7tuToG6',
-      observacao: 'Próximo ao mercado Treviso.',
-    },
-    {
-      descricao: 'Templo Sede',
-      uri: 'https://goo.gl/maps/SV2K1qdyqU7tuToG6',
-      observacao: 'Próximo ao mercado Treviso.',
-    },
-    {
-      descricao: 'Templo Sede',
-      uri: 'https://goo.gl/maps/SV2K1qdyqU7tuToG6',
-      observacao: 'Próximo ao mercado Treviso.',
-    },
-    {
-      descricao: 'Templo Sede',
-      uri: 'https://goo.gl/maps/SV2K1qdyqU7tuToG6',
-      observacao: 'Próximo ao mercado Treviso.',
-    },
-    {
-      descricao: 'Templo Sede',
-      uri: 'https://goo.gl/maps/SV2K1qdyqU7tuToG6',
-      observacao: 'Próximo ao mercado Treviso.',
-    },
-  ];
+  data = [];
   editar = false;
 
   /**
@@ -60,14 +26,16 @@ export class LocalizacoesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private modal: NzModalService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private localizacaoService: LocalizacaoService,
+    private message: NzMessageService
   ) {
     this.validateForm = this.fb.group({
       descricao: [
         '',
         Validators.compose([Validators.required, Validators.minLength(3)]),
       ],
-      uri: ['', Validators.compose([Validators.required])],
+      uriMaps: ['', Validators.compose([Validators.required])],
       observacao: '',
       id: '',
     });
@@ -77,9 +45,18 @@ export class LocalizacoesComponent implements OnInit {
     this.search = this.fb.group({
       search: '',
     });
-    this.dataFilter = this.data;
-
+    this.adquirirTodos();
     this.titleService.atualizar('Localizações');
+  }
+
+  private adquirirTodos() {
+    this.localizacaoService
+      .adquirirTodas()
+      .pipe(take(1))
+      .subscribe((retorno) => {
+        this.data = retorno;
+        this.pesquisar(this.search.value);
+      });
   }
 
   pesquisar(value) {
@@ -89,7 +66,8 @@ export class LocalizacoesComponent implements OnInit {
     }
 
     this.dataFilter = this.data.filter(
-      (x) => this.unaccent(x)?.indexOf(this.unaccent(value.search)) > -1
+      (x) =>
+        this.unaccent(x.descricao)?.indexOf(this.unaccent(value.search)) > -1
     );
   }
 
@@ -113,15 +91,21 @@ export class LocalizacoesComponent implements OnInit {
     this.editar = item != null;
     this.validateForm.setValue({
       descricao: this.editar ? item.descricao : '',
-      uri: this.editar ? item.uri : '',
+      uriMaps: this.editar ? item.uriMaps : '',
       observacao: this.editar ? item.observacao : '',
-      id: null,
+      id: this.editar ? item.id : '',
     });
   }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
+    this.localizacaoService
+      .salvar(this.validateForm.value)
+      .pipe(take(1))
+      .subscribe((x) => {
+        this.message.success('Dados Salvos com Sucesso!');
+        this.isVisible = false;
+        this.adquirirTodos();
+      });
   }
 
   handleCancel(): void {
@@ -129,15 +113,24 @@ export class LocalizacoesComponent implements OnInit {
     this.isVisible = false;
   }
 
-  delete(): void {
+  delete(item): void {
     this.modal.confirm({
       nzTitle: 'Atenção!',
       nzContent: 'Tem certeza que deseja remover a Localização?',
       nzOkText: 'Remover',
       nzOkType: 'danger',
-      nzOnOk: () => console.log('OK'),
+      nzOnOk: () => this.deletar(item.id),
       nzCancelText: 'Cancelar',
-      nzOnCancel: () => console.log('Cancel'),
     });
+  }
+
+  private deletar(id) {
+    this.localizacaoService
+      .deletar(id)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.message.success('Localização excluida com Sucesso!');
+        this.adquirirTodos();
+      });
   }
 }
