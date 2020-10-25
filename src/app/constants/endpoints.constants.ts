@@ -2,7 +2,7 @@ const URL_BASE = 'http://127.0.0.1:8080';
 
 export class EndpointsConstants {
   static readonly AUTENTICACAO = {
-    AUTENTICAR: URL_BASE.concat('/'),
+    AUTENTICAR: URL_BASE.concat('/autenticacao/login'),
   };
 
   static readonly EVENTOS = {

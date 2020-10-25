@@ -1,19 +1,19 @@
 <nz-content>
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <form nz-form [formGroup]="autenticacaoForm" class="login-form" (ngSubmit)="submitForm()">
     <div class="logo">
       <img src="../../../assets/images/logo.png">
     </div>
     <nz-form-item>
       <nz-form-control nzErrorTip="Informe seu usuario!">
         <nz-input-group nzPrefixIcon="user">
-          <input type="text" nz-input formControlName="userName" placeholder="Informe seu usuario" />
+          <input type="text" nz-input formControlName="usuario" placeholder="Informe seu usuario" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Informe sua senha!">
         <nz-input-group nzPrefixIcon="lock">
-          <input type="password" nz-input formControlName="password" placeholder="Informe sua senha" />
+          <input type="password" nz-input formControlName="senha" placeholder="Informe sua senha" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
@@ -22,7 +22,8 @@
         <span>Lembre-me</span>
       </label>
     </div>
-    <button (click)="login()" nz-button nzType="primary" nzBlock>
+    <button (click)="login()" nz-button nzType="primary" nzBlock [nzLoading]="requesting"
+      [disabled]="requesting || autenticacaoForm.invalid">
       <i nz-icon nzType="login"></i>Entrar
     </button>
   </form>
