@@ -24,7 +24,7 @@ export class AutenticacaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.autenticacaoForm = this.fb.group({
-      usuario: [null, [Validators.required]],
+      login: [null, [Validators.required]],
       senha: [null, [Validators.required]],
     });
   }

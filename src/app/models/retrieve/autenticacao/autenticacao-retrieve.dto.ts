@@ -1,4 +1,5 @@
 export interface AutenticacaoRetrieveDTO {
-  token: string;
-  nome: string;
+  id: number;
+  login: string;
+  senha: string;
 }
