@@ -16,8 +16,8 @@ export class EndpointsConstants {
   };
 
   static readonly CATEGORIAS = {
-    ADQUIRIR_TODAS: URL_BASE.concat('/'),
-    SALVAR: URL_BASE.concat('/'),
+    ADQUIRIR_TODAS: URL_BASE.concat('/categoriaService/adquirirTodos'),
+    SALVAR: URL_BASE.concat('/categoriaService/salvar'),
   };
 
   static readonly LOCALIZACAO = {
