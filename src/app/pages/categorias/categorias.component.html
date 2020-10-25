@@ -32,13 +32,13 @@
           Não há Dados
         </nz-list-empty>
         <nz-list-item *cdkVirtualFor="let item of dataFilter">
-          {{ item }}
+          {{ item.descricao }}
           <ul nz-list-item-actions>
             <nz-list-item-action>
               <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>
             </nz-list-item-action>
             <nz-list-item-action>
-              <a (click)="delete()"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
+              <a (click)="delete(item)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
             </nz-list-item-action>
           </ul>
         </nz-list-item>

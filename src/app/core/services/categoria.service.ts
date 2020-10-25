@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { EndpointsConstants } from 'src/app/constants/endpoints.constants';
+import { CategoriaDTO } from 'src/app/models/payload/categoria/categoria.dto';
 import { EntidadeDTO } from 'src/app/models/payload/entidade/entidade.dto';
 import { CategoriaRetrieveDTO } from 'src/app/models/retrieve/categorias/categoria-retrieve.dto';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -16,7 +17,7 @@ export class CategoriaService {
   }
 
   adquirirPorId(id: number): Observable<Array<CategoriaRetrieveDTO>> {
-    const params = new HttpParams().set('id', id.toString());
+    const params = new HttpParams().set('codigoCategoria', id.toString());
 
     return this.http.get<Array<CategoriaRetrieveDTO>>(
       EndpointsConstants.CATEGORIAS.ADQUIRIR_POR_ID,
@@ -24,18 +25,16 @@ export class CategoriaService {
     );
   }
 
-  salvar(entidade: EntidadeDTO): Observable<boolean> {
-    return this.http.post<boolean>(
+  salvar(categoria: CategoriaDTO): Observable<CategoriaRetrieveDTO> {
+    return this.http.post<CategoriaRetrieveDTO>(
       EndpointsConstants.CATEGORIAS.SALVAR,
-      entidade
+      categoria
     );
   }
 
   deletar(id: number): Observable<boolean> {
-    const params = new HttpParams().set('id', id.toString());
-
-    return this.http.delete<boolean>(EndpointsConstants.CATEGORIAS.DELETAR, {
-      params,
-    });
+    return this.http.delete<boolean>(
+      EndpointsConstants.CATEGORIAS.DELETAR + id
+    );
   }
 }

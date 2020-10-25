@@ -1,4 +1,4 @@
-import { NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
@@ -12,28 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CategoriasComponent implements OnInit {
   dataFilter = [];
-  data = [
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-    'Jovens',
-  ];
+  data = [];
   editar = false;
 
   /**
@@ -48,30 +27,36 @@ export class CategoriasComponent implements OnInit {
     private fb: FormBuilder,
     private modal: NzModalService,
     private titleService: TitleService,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private message: NzMessageService
   ) {
     this.validateForm = this.fb.group({
       descricao: [
         '',
         Validators.compose([Validators.required, Validators.minLength(3)]),
       ],
-      id: '',
+      id: null,
     });
   }
 
   ngOnInit(): void {
-    this.categoriaService
-      .adquirirTodas()
-      .pipe(take(1))
-      .subscribe((retorno) => console.log(retorno));
-
+    this.adquirirTodos();
     this.search = this.fb.group({
       search: '',
     });
 
     this.dataFilter = this.data;
-
     this.titleService.atualizar('Categoria');
+  }
+
+  private adquirirTodos() {
+    this.categoriaService
+      .adquirirTodas()
+      .pipe(take(1))
+      .subscribe((retorno) => {
+        this.data = retorno;
+        this.pesquisar(this.search.value);
+      });
   }
 
   pesquisar(value) {
@@ -81,7 +66,8 @@ export class CategoriasComponent implements OnInit {
     }
 
     this.dataFilter = this.data.filter(
-      (x) => this.unaccent(x)?.indexOf(this.unaccent(value.search)) > -1
+      (x) =>
+        this.unaccent(x.descricao)?.indexOf(this.unaccent(value.search)) > -1
     );
   }
 
@@ -104,14 +90,20 @@ export class CategoriasComponent implements OnInit {
     this.isVisible = true;
     this.editar = item != null;
     this.validateForm.setValue({
-      descricao: item || '',
-      id: null,
+      descricao: this.editar ? item.descricao : '',
+      id: this.editar ? item.id : null,
     });
   }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
+    this.categoriaService
+      .salvar(this.validateForm.value)
+      .pipe(take(1))
+      .subscribe((x) => {
+        this.message.success('Dados Salvos com Sucesso!');
+        this.isVisible = false;
+        this.adquirirTodos();
+      });
   }
 
   handleCancel(): void {
@@ -119,15 +111,24 @@ export class CategoriasComponent implements OnInit {
     this.isVisible = false;
   }
 
-  delete(): void {
+  delete(item): void {
     this.modal.confirm({
       nzTitle: 'Atenção!',
       nzContent: 'Tem certeza que deseja remover a categoria?',
       nzOkText: 'Remover',
       nzOkType: 'danger',
-      nzOnOk: () => console.log('OK'),
+      nzOnOk: () => this.deletar(item.id),
       nzCancelText: 'Cancelar',
-      nzOnCancel: () => console.log('Cancel'),
     });
+  }
+
+  private deletar(id) {
+    this.categoriaService
+      .deletar(id)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.message.success('Categoria excluida com Sucesso!');
+        this.adquirirTodos();
+      });
   }
 }
