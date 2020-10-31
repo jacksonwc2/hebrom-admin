@@ -1,4 +1,6 @@
-import { NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { take } from 'rxjs/operators';
+import { EventoService } from 'src/app/core/services/evento.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,28 +22,7 @@ export class EventosComponent implements OnInit {
   readonly ACOES = 'Ações';
 
   dataFilter = [];
-  data = [
-    {
-      titulo: 'Entidade',
-      descricao: 'Entidade',
-      entidade: 'Entidade',
-      categoria: 'Entidade',
-      localizacao: 'Entidade',
-      dataInicio: 'Entidade',
-      dataFinal: 'Entidade',
-      banner: 'banner',
-    },
-    {
-      titulo: 'Entidade',
-      descricao: 'Entidade',
-      entidade: 'Entidade',
-      categoria: 'Entidade',
-      localizacao: 'Entidade',
-      dataInicio: 'Entidade',
-      dataFinal: 'Entidade',
-      banner: 'banner',
-    },
-  ];
+  data = [];
   editar = false;
 
   /**
@@ -55,7 +36,9 @@ export class EventosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private modal: NzModalService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private eventosService: EventoService,
+    private message: NzMessageService
   ) {
     this.validateForm = this.fb.group({
       titulo: [null, [Validators.required]],
@@ -76,7 +59,20 @@ export class EventosComponent implements OnInit {
     });
     this.dataFilter = this.data;
 
+    this.adquirirTodos();
+
     this.titleService.atualizar('Eventos');
+  }
+
+  private adquirirTodos() {
+    this.eventosService
+      .adquirirTodos()
+      .pipe(take(1))
+      .subscribe((eventos) => {
+        this.data = eventos;
+
+        this.pesquisar(this.search.value);
+      });
   }
 
   pesquisar(value) {
@@ -124,15 +120,25 @@ export class EventosComponent implements OnInit {
     this.isVisible = false;
   }
 
-  delete(): void {
+  delete(item): void {
     this.modal.confirm({
       nzTitle: 'Atenção!',
-      nzContent: 'Tem certeza que deseja remover a entidade?',
+      nzContent: 'Tem certeza que deseja remover o evento?',
       nzOkText: 'Remover',
       nzOkType: 'danger',
-      nzOnOk: () => console.log('OK'),
+      nzOnOk: () => this.deletar(item.id),
       nzCancelText: 'Cancelar',
-      nzOnCancel: () => console.log('Cancel'),
     });
+  }
+
+  private deletar(id) {
+    this.eventosService
+      .deletar(id)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.message.success('Evento excluido com Sucesso!');
+
+        this.adquirirTodos();
+      });
   }
 }
