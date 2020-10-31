@@ -1,10 +1,11 @@
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
 import { EntidadeService } from 'src/app/core/services/entidade.service';
+import { LocalizacaoService } from 'src/app/core/services/localizacao.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
+import { LocalizacaoDTO } from 'src/app/models/payload/localizacao/localizacao.dto';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LocalizacaoDTO } from 'src/app/models/payload/localizacao/localizacao.dto';
 
 @Component({
   selector: 'app-entidades',
@@ -51,7 +52,8 @@ export class EntidadesComponent implements OnInit {
     private modal: NzModalService,
     private titleService: TitleService,
     private entidadeService: EntidadeService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private localizacaoService: LocalizacaoService
   ) {
     this.validateForm = this.fb.group({
       nome_fantasia: [
@@ -91,7 +93,16 @@ export class EntidadesComponent implements OnInit {
 
     this.adquirirTodos();
 
+    this.adquirirLocalizacoes();
+
     this.titleService.atualizar('Entidades');
+  }
+
+  private adquirirLocalizacoes() {
+    this.localizacaoService
+      .adquirirTodas()
+      .pipe(take(1))
+      .subscribe((localizacoes) => (this.localizacoes = localizacoes));
   }
 
   private adquirirTodos() {
