@@ -8,11 +8,15 @@ export class EndpointsConstants {
   static readonly EVENTOS = {
     ADQUIRIR_TODOS: URL_BASE.concat('/eventoService/adquirTodos'),
     SALVAR: URL_BASE.concat('/eventoService/salvar'),
+    ADQUIRIR_POR_ID: URL_BASE.concat('/eventoService/adquirirPorId'),
+    DELETAR: URL_BASE.concat('/eventoService/deletar/'),
   };
 
-  static readonly ENTENIDADES = {
+  static readonly ENTIDADES = {
     ADQUIRIR_TODOS: URL_BASE.concat('/entidadeService/adquirirTodos'),
     SALVAR: URL_BASE.concat('/entidadeService/salvar'),
+    ADQUIRIR_POR_ID: URL_BASE.concat('/entidadeService/adquirirPorId'),
+    DELETAR: URL_BASE.concat('/entidadeService/deletar/'),
   };
 
   static readonly CATEGORIAS = {

@@ -1,4 +1,4 @@
-import { NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
 import { EntidadeService } from 'src/app/core/services/entidade.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
@@ -47,7 +47,8 @@ export class EntidadesComponent implements OnInit {
     private fb: FormBuilder,
     private modal: NzModalService,
     private titleService: TitleService,
-    private entidadeService: EntidadeService
+    private entidadeService: EntidadeService,
+    private message: NzMessageService
   ) {
     this.validateForm = this.fb.group({
       nome_fantasia: [
@@ -149,15 +150,25 @@ export class EntidadesComponent implements OnInit {
     this.isVisible = false;
   }
 
-  delete(): void {
+  delete(item): void {
     this.modal.confirm({
       nzTitle: 'Atenção!',
       nzContent: 'Tem certeza que deseja remover a entidade?',
       nzOkText: 'Remover',
       nzOkType: 'danger',
-      nzOnOk: () => console.log('OK'),
+      nzOnOk: () => this.deletar(item.id),
       nzCancelText: 'Cancelar',
-      nzOnCancel: () => console.log('Cancel'),
     });
+  }
+
+  private deletar(id) {
+    this.entidadeService
+      .deletar(id)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.message.success('Entidade excluida com Sucesso!');
+
+        this.adquirirTodos();
+      });
   }
 }

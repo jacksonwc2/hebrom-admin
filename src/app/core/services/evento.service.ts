@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { EndpointsConstants } from 'src/app/constants/endpoints.constants';
 import { EventoDTO } from 'src/app/models/payload/eventos/eventos.dto';
 import { EventoRetrieveDTO } from 'src/app/models/retrieve/eventos/eventos-retrieve.dto';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
@@ -17,5 +17,18 @@ export class EventoService {
 
   salvar(evento: EventoDTO): Observable<boolean> {
     return this.http.post<boolean>(EndpointsConstants.EVENTOS.SALVAR, evento);
+  }
+
+  deletar(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(EndpointsConstants.EVENTOS.DELETAR + id);
+  }
+
+  adquirirPorId(id: number): Observable<Array<EventoRetrieveDTO>> {
+    const params = new HttpParams().set('codigoEvento', id.toString());
+
+    return this.http.get<Array<EventoRetrieveDTO>>(
+      EndpointsConstants.EVENTOS.ADQUIRIR_POR_ID,
+      { params }
+    );
   }
 }
