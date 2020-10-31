@@ -130,7 +130,16 @@ export class FullComponent implements OnInit {
   }
 
   sair() {
-    localStorage.setItem('logado', 'false');
-    this.router.navigate(['autenticacao']);
+    this.modalService.confirm({
+      nzTitle: 'Atenção!',
+      nzContent: 'Tem certeza que deseja sair?',
+      nzOkText: 'Sair',
+      nzOkType: 'primary',
+      nzOnOk: () => {
+        localStorage.setItem('logado', 'false');
+        this.router.navigate(['autenticacao']);
+      },
+      nzCancelText: 'Cancelar',
+    });
   }
 }

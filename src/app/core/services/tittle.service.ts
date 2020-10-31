@@ -1,7 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class TitleService {
