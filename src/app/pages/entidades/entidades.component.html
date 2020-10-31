@@ -48,13 +48,13 @@
         <nz-list-body class="body-list">
           <nz-list-item *cdkVirtualFor="let item of dataFilter">
             <div nz-row class="body-list-item">
-              <div nz-col nzSpan="6" class="item">{{item.nome_fantasia}}</div>
+              <div nz-col nzSpan="6" class="item">{{item.nomeFantasia}}</div>
 
-              <div nz-col nzSpan="8" class="item"> {{item.razao_social}}</div>
+              <div nz-col nzSpan="8" class="item"> {{item.razaoSocial}}</div>
 
               <div nz-col nzSpan="4" class="item">{{item.documento}}</div>
 
-              <div nz-col nzSpan="3" class="item">{{item.localizacao}}</div>
+              <div nz-col nzSpan="3" class="item">{{item.localizacao.uriMaps}}</div>
 
               <div nz-col nzSpan="3" class="item acoes">
                 <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>
@@ -85,7 +85,7 @@
 
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="nomeErrorTpl">
 
-        <input maxlength="255" nz-input formControlName="nome_fantasia" placeholder="Nome da entidade" />
+        <input maxlength="255" nz-input formControlName="nomeFantasia" placeholder="Nome da entidade" />
 
         <ng-template #nomeErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
@@ -108,7 +108,7 @@
 
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="razaosocialErrorTpl">
 
-        <input maxlength="255" nz-input formControlName="razao_social" placeholder="Razão social da entidade" />
+        <input maxlength="255" nz-input formControlName="razaoSocial" placeholder="Razão social da entidade" />
 
         <ng-template #razaosocialErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
@@ -160,16 +160,9 @@
           </nz-option>
         </nz-select>
 
-        <input hidden formControlName="id" />
-
-        <input nz-input formControlName="localizacao" placeholder="Localização" />
-
         <ng-template #localizacaoErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
             {{ EXCECAO_ESCOLHA_LOCALIZACAO }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('minlength')">
-            Insira no mínimo 3 caracteres.
           </ng-container>
         </ng-template>
       </nz-form-control>

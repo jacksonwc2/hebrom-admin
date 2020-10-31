@@ -56,7 +56,7 @@ export class EntidadesComponent implements OnInit {
     private localizacaoService: LocalizacaoService
   ) {
     this.validateForm = this.fb.group({
-      nome_fantasia: [
+      nomeFantasia: [
         '',
         Validators.compose([
           Validators.required,
@@ -64,7 +64,7 @@ export class EntidadesComponent implements OnInit {
           Validators.maxLength(255),
         ]),
       ],
-      razao_social: [
+      razaoSocial: [
         '',
         Validators.compose([
           Validators.required,
@@ -80,7 +80,7 @@ export class EntidadesComponent implements OnInit {
           Validators.maxLength(18),
         ]),
       ],
-      localizacao: [null, [Validators.required]],
+      codigoLocalizacao: [null, [Validators.required]],
       id: null,
     });
   }
@@ -123,7 +123,8 @@ export class EntidadesComponent implements OnInit {
     }
 
     this.dataFilter = this.data.filter(
-      (x) => this.unaccent(x)?.indexOf(this.unaccent(value.search)) > -1
+      (x) =>
+        this.unaccent(x.nomeFantasia)?.indexOf(this.unaccent(value.search)) > -1
     );
   }
 
@@ -146,21 +147,28 @@ export class EntidadesComponent implements OnInit {
     this.isVisible = true;
     this.editar = item != null;
     this.validateForm.setValue({
-      nome_fantasia: this.editar ? item.nome_fantasia : '',
-      razao_social: this.editar ? item.razao_social : '',
+      nomeFantasia: this.editar ? item.nomeFantasia : '',
+      razaoSocial: this.editar ? item.razaoSocial : '',
       documento: this.editar ? item.documento : '',
-      localizacao: this.editar ? item.localizacao : '',
+      codigoLocalizacao: this.editar ? item.codigoLocalizacao : '',
       id: null,
     });
   }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
+    this.entidadeService
+      .salvar(this.validateForm.value)
+      .pipe(take(1))
+      .subscribe((x) => {
+        this.message.success('Entidade salva com sucesso!');
+
+        this.isVisible = false;
+
+        this.adquirirTodos();
+      });
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
   }
 
