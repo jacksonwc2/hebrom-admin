@@ -1,4 +1,6 @@
 import { NzModalService } from 'ng-zorro-antd';
+import { take } from 'rxjs/operators';
+import { EntidadeService } from 'src/app/core/services/entidade.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -30,20 +32,7 @@ export class EntidadesComponent implements OnInit {
   readonly EXCECAO_ESCOLHA_LOCALIZACAO = 'Escolha uma localização.';
 
   dataFilter = [];
-  data = [
-    {
-      nome_fantasia: 'Entidade',
-      razao_social: 'Entidade',
-      documento: 'Entidade',
-      localizacao: 'Entidade',
-    },
-    {
-      nome_fantasia: 'Entidade',
-      razao_social: 'Entidade',
-      documento: 'Entidade',
-      localizacao: 'Entidade',
-    },
-  ];
+  data = [];
   editar = false;
 
   /**
@@ -57,7 +46,8 @@ export class EntidadesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private modal: NzModalService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private entidadeService: EntidadeService
   ) {
     this.validateForm = this.fb.group({
       nome_fantasia: [
@@ -95,7 +85,20 @@ export class EntidadesComponent implements OnInit {
     });
     this.dataFilter = this.data;
 
+    this.adquirirTodos();
+
     this.titleService.atualizar('Entidades');
+  }
+
+  private adquirirTodos() {
+    this.entidadeService
+      .adquirirTodos()
+      .pipe(take(1))
+      .subscribe((entidades) => {
+        this.data = entidades;
+
+        this.pesquisar(this.search.value);
+      });
   }
 
   pesquisar(value) {
