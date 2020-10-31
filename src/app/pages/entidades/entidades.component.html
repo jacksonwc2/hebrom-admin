@@ -153,6 +153,13 @@
       <nz-form-label [nzSpan]="5" nzRequired>{{ LOCALIZACAO }}</nz-form-label>
 
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="localizacaoErrorTpl">
+
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe localização" formControlName="codigoLocalizacao">
+          <nz-option *ngFor="let localizacao of localizacoes" [nzLabel]="localizacao.descricao"
+            [nzValue]="localizacao.id">
+          </nz-option>
+        </nz-select>
+
         <input hidden formControlName="id" />
 
         <input nz-input formControlName="localizacao" placeholder="Localização" />

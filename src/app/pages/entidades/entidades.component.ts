@@ -4,6 +4,7 @@ import { EntidadeService } from 'src/app/core/services/entidade.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocalizacaoDTO } from 'src/app/models/payload/localizacao/localizacao.dto';
 
 @Component({
   selector: 'app-entidades',
@@ -34,6 +35,8 @@ export class EntidadesComponent implements OnInit {
   dataFilter = [];
   data = [];
   editar = false;
+
+  localizacoes: Array<LocalizacaoDTO>;
 
   /**
    * Formulario para filtragem do menu
