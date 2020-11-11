@@ -1,6 +1,9 @@
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
+import { CategoriaService } from 'src/app/core/services/categoria.service';
+import { EntidadeService } from 'src/app/core/services/entidade.service';
 import { EventoService } from 'src/app/core/services/evento.service';
+import { LocalizacaoService } from 'src/app/core/services/localizacao.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -21,13 +24,12 @@ export class EventosComponent implements OnInit {
   readonly BANNER = 'Banner';
   readonly ACOES = 'Ações';
 
+  categorias = [];
+  localizacoes = [];
+  entidades = [];
   dataFilter = [];
   data = [];
   editar = false;
-
-  /**
-   * Formulario para filtragem do menu
-   */
   search: FormGroup;
   isVisible = false;
   validateForm: FormGroup;
@@ -38,17 +40,20 @@ export class EventosComponent implements OnInit {
     private modal: NzModalService,
     private titleService: TitleService,
     private eventosService: EventoService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private entidadeService: EntidadeService,
+    private localizacaoService: LocalizacaoService,
+    private categoriaService: CategoriaService
   ) {
     this.validateForm = this.fb.group({
       titulo: [null, [Validators.required]],
-      descricao: [null, [Validators.required]],
-      entidade: [null, [Validators.required]],
-      categoria: [null, [Validators.required]],
-      localizacao: [null, [Validators.required]],
+      descricao: null,
+      codigoEntidade: [null, [Validators.required]],
+      codigoCategoria: [null, [Validators.required]],
+      codigoLocalizacao: [null, [Validators.required]],
       dataInicio: [null, [Validators.required]],
-      dataFinal: [null, [Validators.required]],
-      banner: [null, [Validators.required]],
+      dataFinal: null,
+      banner: null,
       id: null,
     });
   }
@@ -57,9 +62,23 @@ export class EventosComponent implements OnInit {
     this.search = this.fb.group({
       search: '',
     });
-    this.dataFilter = this.data;
 
     this.adquirirTodos();
+
+    this.entidadeService
+      .adquirirTodos()
+      .pipe(take(1))
+      .subscribe((entidades) => (this.entidades = entidades));
+
+    this.categoriaService
+      .adquirirTodas()
+      .pipe(take(1))
+      .subscribe((categorias) => (this.categorias = categorias));
+
+    this.localizacaoService
+      .adquirirTodas()
+      .pipe(take(1))
+      .subscribe((localizacoes) => (this.localizacoes = localizacoes));
 
     this.titleService.atualizar('Eventos');
   }
@@ -82,7 +101,7 @@ export class EventosComponent implements OnInit {
     }
 
     this.dataFilter = this.data.filter(
-      (x) => this.unaccent(x)?.indexOf(this.unaccent(value.search)) > -1
+      (x) => this.unaccent(x.titulo)?.indexOf(this.unaccent(value.search)) > -1
     );
   }
 
@@ -93,7 +112,7 @@ export class EventosComponent implements OnInit {
       .replace(/[^a-zA-Zs]/g, '');
   }
 
-  submitForm(value: { descricao: string }): void {
+  submitForm(value): void {
     for (const key of Object.keys(this.validateForm.controls)) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
@@ -105,18 +124,30 @@ export class EventosComponent implements OnInit {
     this.isVisible = true;
     this.editar = item != null;
     this.validateForm.setValue({
-      descricao: item || '',
-      id: null,
+      titulo: this.editar ? item.titulo : '',
+      descricao: this.editar ? item.descricao : '',
+      codigoEntidade: this.editar ? item.codigoEntidade : null,
+      codigoCategoria: this.editar ? item.codigoCategoria : null,
+      codigoLocalizacao: this.editar ? item.codigoLocalizacao : null,
+      dataInicio: this.editar ? item.dataInicio : null,
+      dataFinal: this.editar ? item.dataFinal : null,
+      banner: this.editar ? null : null,
+      id: this.editar ? item.id : null,
     });
   }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
+    this.eventosService
+      .salvar(this.validateForm.value)
+      .pipe(take(1))
+      .subscribe((x) => {
+        this.message.success('Dados Salvos com Sucesso!');
+        this.isVisible = false;
+        this.adquirirTodos();
+      });
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
   }
 

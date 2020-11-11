@@ -1,5 +1,16 @@
 /* Import basic styles */
-@import "~ng-zorro-antd/style/index.min.css"; 
+@import "~ng-zorro-antd/style/index.min.css";
 
 /* Import styles of the component */
-@import "~ng-zorro-antd/button/style/index.min.css";  
+@import "~ng-zorro-antd/button/style/index.min.css";
+
+/* POSICIONAMENTO MODAL CENTRALIZADA */
+.vertical-center-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical-center-modal .ant-modal {
+  top: 0;
+}

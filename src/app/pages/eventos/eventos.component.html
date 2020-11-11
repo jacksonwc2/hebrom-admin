@@ -22,23 +22,13 @@
       <nz-list nzSize="small">
         <nz-list-header class="cabecalho-list">
           <nz-list-item nz-row>
-            <div nz-col nzSpan="2" class="item">{{ TITULO }}</div>
+            <div nz-col nzSpan="12" class="item">{{ TITULO }}</div>
 
-            <div nz-col nzSpan="3" class="item">{{ DESCRICAO }}</div>
+            <div nz-col nzSpan="4" class="item">{{ DATA_INICIO }}</div>
 
-            <div nz-col nzSpan="3" class="item">{{ ENTIDADE }}</div>
+            <div nz-col nzSpan="4" class="item">{{ DATA_FINAL }}</div>
 
-            <div nz-col nzSpan="3" class="item">{{ CATEGORIA }}</div>
-
-            <div nz-col nzSpan="4" class="item">{{ LOCALIZACAO }}</div>
-
-            <div nz-col nzSpan="2" class="item">{{ DATA_INICIO }}</div>
-
-            <div nz-col nzSpan="2" class="item">{{ DATA_FINAL }}</div>
-
-            <div nz-col nzSpan="2" class="item">{{ BANNER }}</div>
-
-            <div nz-col nzSpan="3" class="item acoes" nz-list-item-actions>
+            <div nz-col nzSpan="4" class="item acoes" nz-list-item-actions>
               {{ACOES}}
             </div>
           </nz-list-item>
@@ -50,23 +40,13 @@
         <nz-list-body class="body-list">
           <nz-list-item *cdkVirtualFor="let item of dataFilter">
             <div nz-row class="body-list-item">
-              <div nz-col nzSpan="2" class="item">{{item.titulo}}</div>
+              <div nz-col nzSpan="12" class="item">{{item.titulo}}</div>
 
-              <div nz-col nzSpan="3" class="item"> {{item.descricao}}</div>
+              <div nz-col nzSpan="4" class="item">{{item.dataInicio | date:'dd/MM/yyyy HH:mm'}}</div>
 
-              <div nz-col nzSpan="3" class="item">{{item.entidade}}</div>
+              <div nz-col nzSpan="4" class="item">{{item.dataFinal | date:'dd/MM/yyyy HH:mm'}}</div>
 
-              <div nz-col nzSpan="3" class="item">{{item.categoria}}</div>
-
-              <div nz-col nzSpan="4" class="item">{{item.localizacao}}</div>
-
-              <div nz-col nzSpan="2" class="item">{{item.dataInicio}}</div>
-
-              <div nz-col nzSpan="2" class="item">{{item.dataFinal}}</div>
-
-              <div nz-col nzSpan="2" class="item">{{item.banner}}</div>
-
-              <div nz-col nzSpan="3" class="item acoes">
+              <div nz-col nzSpan="4" class="item acoes">
                 <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>
                 <a (click)="delete(item)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
               </div>
@@ -80,15 +60,15 @@
 
 <!-- Formulario Crud Entidade -->
 <nz-modal [(nzVisible)]="isVisible" nzTitle="{{editar ? 'Editar' : 'Novo'}} Evento" (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar">
+  (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar" nzWrapClassName="vertical-center-modal" nzWidth="700">
 
   <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
     <input hidden formControlName="id" />
 
     <!-- TITULO -->
     <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>Título</nz-form-label>
-      <nz-form-control [nzSpan]="19" nzHasFeedback>
+      <nz-form-label [nzSpan]="4" nzRequired>Título</nz-form-label>
+      <nz-form-control [nzSpan]="20" nzHasFeedback>
         <input nz-input formControlName="titulo" placeholder="Título" />
       </nz-form-control>
     </nz-form-item>
@@ -96,77 +76,82 @@
 
     <!-- DESCRIÇÃO -->
     <nz-form-item>
-      <nz-form-label [nzSpan]="5">Descrição</nz-form-label>
-      <nz-form-control [nzSpan]="19" nzHasFeedback>
+      <nz-form-label [nzSpan]="4">Descrição</nz-form-label>
+      <nz-form-control [nzSpan]="20" nzHasFeedback>
         <input nz-input formControlName="descricao" placeholder="Descrição" />
       </nz-form-control>
     </nz-form-item>
     <!-- DESCRIÇÃO -->
 
-    <!-- ENTIDADE -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>Entidade</nz-form-label>
-      <nz-form-control [nzSpan]="19">
-        <nz-select nzPlaceHolder="Select a person" formControlName="entidade">
-          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- ENTIDADE -->
-
-    <!-- CATEGORIA -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>Categoria</nz-form-label>
-      <nz-form-control [nzSpan]="19" nzHasFeedback>
-        <nz-select nzPlaceHolder="Select a person" formControlName="categoria">
-          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- CATEGORIA -->
-
     <!-- LOCALIZAÇÃO -->
     <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>Localização</nz-form-label>
-      <nz-form-control [nzSpan]="19" nzHasFeedback>
-        <nz-select nzPlaceHolder="Select a person" formControlName="localizacao">
-          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+      <nz-form-label [nzSpan]="4" nzRequired>Localização</nz-form-label>
+      <nz-form-control [nzSpan]="20" nzHasFeedback>
+        <nz-select nzShowSearch nzPlaceHolder="Selecione uma Localização" formControlName="codigoLocalizacao">
+          <nz-option *ngFor="let localizacao of localizacoes" [nzLabel]="localizacao.descricao"
+            [nzValue]="localizacao.id">
+          </nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
-    <!-- DATA INICIO -->
+    <!-- LOCALIZAÇÃO -->
 
-    <!-- DATA INICIO -->
     <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>Data Inicio</nz-form-label>
-      <nz-form-control [nzSpan]="19" nzHasFeedback>
-        <nz-date-picker formControlName="dataInicio"></nz-date-picker>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- DATA INICIO -->
 
-    <!-- DATA FINAL -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5">Data Final</nz-form-label>
-      <nz-form-control [nzSpan]="19" nzHasFeedback>
-        <nz-date-picker formControlName="dataFinal"></nz-date-picker>
+      <!-- ENTIDADE -->
+      <nz-form-label [nzSpan]="4" nzRequired>Entidade</nz-form-label>
+      <nz-form-control [nzSpan]="9" style="padding-right: 10px">
+        <nz-select nzShowSearch nzPlaceHolder="Selecione uma Entidade" formControlName="codigoEntidade">
+          <nz-option *ngFor="let entidade of entidades" [nzLabel]="entidade.nomeFantasia" [nzValue]="entidade.id">
+          </nz-option>
+        </nz-select>
       </nz-form-control>
+      <!-- ENTIDADE -->
+
+      <!-- CATEGORIA -->
+      <nz-form-label [nzSpan]="3" nzRequired>Categoria</nz-form-label>
+      <nz-form-control [nzSpan]="8" nzHasFeedback>
+        <nz-select nzShowSearch nzPlaceHolder="Selecione uma Categoria" formControlName="codigoCategoria">
+          <nz-option *ngFor="let categoria of categorias" [nzLabel]="categoria.descricao" [nzValue]="categoria.id">
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+      <!-- CATEGORIA -->
+
     </nz-form-item>
-    <!-- DATA FINAL -->
+
+    <nz-form-item>
+
+      <!-- DATA INICIO -->
+      <nz-form-label [nzSpan]="4" nzRequired>Data Inicio</nz-form-label>
+      <nz-form-control [nzSpan]="9" nzHasFeedback style="padding-right: 10px">
+        <nz-date-picker style="width: 100%;" formControlName="dataInicio" nzShowTime nzFormat="dd/MM/yyyy HH:mm">
+        </nz-date-picker>
+      </nz-form-control>
+      <!-- DATA INICIO -->
+
+      <!-- DATA FINAL -->
+      <nz-form-label [nzSpan]="3">Data Final</nz-form-label>
+      <nz-form-control [nzSpan]="8" nzHasFeedback>
+        <nz-date-picker style="width: 100%;" formControlName="dataFinal" nzShowTime nzFormat="dd/MM/yyyy HH:mm">
+        </nz-date-picker>
+      </nz-form-control>
+      <!-- DATA FINAL -->
+    </nz-form-item>
+
 
     <!-- BANNER -->
     <nz-form-item>
-      <nz-form-label [nzSpan]="5">Banner</nz-form-label>
-      <nz-form-control [nzSpan]="19" nzHasFeedback>
-
-        <input nz-input formControlName="banner" placeholder="Banner" />
-
+      <nz-form-control [nzSpan]=" 4">
+      </nz-form-control>
+      <nz-form-control [nzSpan]="20" nzHasFeedback>
+        <nz-upload style="width: 100%;" nzType="drag">
+          <p class="ant-upload-drag-icon">
+            <i nz-icon nzType="inbox"></i>
+          </p>
+          <p class="ant-upload-text">Banner do Evento</p>
+          <p class="ant-upload-hint">Clique ou arraste para selecionar o banner do Evento.</p>
+        </nz-upload>
       </nz-form-control>
     </nz-form-item>
     <!-- BANNER -->

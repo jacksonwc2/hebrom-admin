@@ -74,7 +74,7 @@
 
 <!-- MODAL EDIÇÃO DE ENTIDADE -->
 <nz-modal [(nzVisible)]="isVisible" nzTitle="{{editar ? 'Editar' : 'Nova'}} Entidade" (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar">
+  (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar" nzWrapClassName="vertical-center-modal">
   <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
 
     <input hidden formControlName="id" />

@@ -49,7 +49,7 @@
 
 <!-- Formulario Crud Categoria -->
 <nz-modal [(nzVisible)]="isVisible" nzTitle="{{editar ? 'Editar' : 'Nova'}} Categoria" (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar">
+  (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar" nzWrapClassName="vertical-center-modal">
   <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
     <nz-form-item>
       <nz-form-label [nzSpan]="5" nzRequired>Descrição</nz-form-label>

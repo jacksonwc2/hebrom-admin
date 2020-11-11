@@ -6,7 +6,7 @@ export class EndpointsConstants {
   };
 
   static readonly EVENTOS = {
-    ADQUIRIR_TODOS: URL_BASE.concat('/eventoService/adquirTodos'),
+    ADQUIRIR_TODOS: URL_BASE.concat('/eventoService/adquirirTodos'),
     SALVAR: URL_BASE.concat('/eventoService/salvar'),
     ADQUIRIR_POR_ID: URL_BASE.concat('/eventoService/adquirirPorId'),
     DELETAR: URL_BASE.concat('/eventoService/deletar/'),
