@@ -11,7 +11,21 @@ export class DashboardComponent implements OnInit {
 
   constructor(private titleService: TitleService) {}
 
+  dias = [];
+
+  datasFilter = [];
+
+  datas = [
+    {
+      data: '10/11/2020',
+      items: [{ content: 'Evento 1' }, { content: 'Evento 2' }],
+    },
+  ];
+
   ngOnInit() {
     this.titleService.atualizar('Dashboard');
+    this.datasFilter = this.datas.filter((x) => x.data === '10/11/2020');
+    this.dias = this.datasFilter.map((x) => x.data.split('/')[0]);
+    debugger;
   }
 }

@@ -5,6 +5,11 @@ export class EndpointsConstants {
     AUTENTICAR: URL_BASE.concat('/autenticacao/login'),
   };
 
+  static readonly FILES = {
+    UPLOAD: URL_BASE.concat('/fileService/upload'),
+    FILE: URL_BASE.concat('/fileService/files/'),
+  };
+
   static readonly EVENTOS = {
     ADQUIRIR_TODOS: URL_BASE.concat('/eventoService/adquirirTodos'),
     SALVAR: URL_BASE.concat('/eventoService/salvar'),

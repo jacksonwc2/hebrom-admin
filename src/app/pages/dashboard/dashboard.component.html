@@ -1,1 +1,14 @@
-<nz-calendar></nz-calendar>
+<nz-calendar>
+  <ul *nzDateCell="let date" class="events">
+    <ng-container [ngSwitch]="date.getDate()" *ngFor="let dia of dias">
+
+      <ng-container *ngSwitchCase="dia">
+        <li *ngFor="let item of datasFilter">
+          <nz-badge [nzStatus]="'success'" [nzText]="item.data.content"></nz-badge>
+        </li>
+      </ng-container>
+
+
+    </ng-container>
+  </ul>
+</nz-calendar>

@@ -145,7 +145,7 @@
       <nz-form-control [nzSpan]=" 4">
       </nz-form-control>
       <nz-form-control [nzSpan]="20" nzHasFeedback>
-        <nz-upload style="width: 100%;" nzType="drag">
+        <nz-upload [nzBeforeUpload]="beforeUpload" style="width: 100%;" nzType="drag">
           <p class="ant-upload-drag-icon">
             <i nz-icon nzType="inbox"></i>
           </p>
@@ -153,8 +153,23 @@
           <p class="ant-upload-hint">Clique ou arraste para selecionar o banner do Evento.</p>
         </nz-upload>
       </nz-form-control>
+
     </nz-form-item>
     <!-- BANNER -->
+
+    <!-- FILES -->
+    <nz-form-item>
+      <nz-form-control [nzSpan]=" 4">
+      </nz-form-control>
+      <div class="files">
+        <div class="item" *ngFor="let file of fileList">
+          <i class="icon-file" nz-icon nzType="file"></i>
+          <span>{{ file.name }}</span>
+          <i (click)="removeFile(file)" class="icon-delete" nz-icon nzType="close-circle"></i>
+        </div>
+      </div>
+    </nz-form-item>
+    <!-- FILES -->
 
   </form>
 </nz-modal>

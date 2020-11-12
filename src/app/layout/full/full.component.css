@@ -99,6 +99,7 @@ nz-header {
   padding: 24px;
   background: #fff;
   height: 100%;
+  overflow: auto;
 }
 
 .usuario {

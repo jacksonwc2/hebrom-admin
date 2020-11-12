@@ -9,6 +9,16 @@ import { Injectable } from '@angular/core';
 export class EventoService {
   constructor(private http: HttpClient) {}
 
+  upload(files: Array<File>): Observable<any> {
+    const formData = new FormData();
+
+    files.forEach((x) => {
+      formData.append('filename', x);
+    });
+
+    return this.http.post<any>(EndpointsConstants.FILES.UPLOAD, formData);
+  }
+
   adquirirTodos(): Observable<Array<EventoRetrieveDTO>> {
     return this.http.get<Array<EventoRetrieveDTO>>(
       EndpointsConstants.EVENTOS.ADQUIRIR_TODOS

@@ -1,4 +1,4 @@
-import { NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService, NzUploadFile } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { EntidadeService } from 'src/app/core/services/entidade.service';
@@ -24,6 +24,7 @@ export class EventosComponent implements OnInit {
   readonly BANNER = 'Banner';
   readonly ACOES = 'Ações';
 
+  fileList = [];
   categorias = [];
   localizacoes = [];
   entidades = [];
@@ -57,6 +58,13 @@ export class EventosComponent implements OnInit {
       id: null,
     });
   }
+
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.fileList.push(file);
+    return false;
+  };
+
+  removeFile = (file) => this.fileList.splice(this.fileList.indexOf(file), 1);
 
   ngOnInit(): void {
     this.search = this.fb.group({
@@ -137,6 +145,15 @@ export class EventosComponent implements OnInit {
   }
 
   handleOk(): void {
+    debugger;
+    this.eventosService
+      .upload(this.fileList)
+      .pipe(take(1))
+      .subscribe((x) => {
+        debugger;
+        alert(x);
+      });
+
     this.eventosService
       .salvar(this.validateForm.value)
       .pipe(take(1))
