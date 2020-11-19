@@ -1,0 +1,62 @@
+.toolbar {
+  padding: 10px;
+  background: #f6f6f6;
+  margin-bottom: 20px;
+}
+
+.toolbar nz-input-group {
+  width: 100%;
+}
+
+.toolbar button {
+  float: right;
+  background-color: #4CAF50;
+  border: none;
+}
+
+.toolbar form {
+  width: 100%;
+  max-width: 300px;
+}
+
+.toolbar form,
+.toolbar nz-input-group {
+  display: inline-flex;
+}
+
+.content,
+.layout,
+.content cdk-virtual-scroll-viewport {
+  height: 100%;
+  background: none;
+}
+
+.content {
+  border: 1px solid #f1f1f1;
+}
+
+.cabecalho-list nz-list-item {
+  width: 100%;
+}
+
+.cabecalho-list nz-list-item,
+.cabecalho-list {
+  padding: 0px;
+}
+
+.cabecalho-list {
+  display: inline-flex;
+  background: #f6f6f6;
+  width: 100%;
+}
+
+.cabecalho-list .item {
+  padding: 8px 16px;
+  display: inline-flex;
+  border-left: 1px solid #e6e6e6;
+  font-weight: bold;
+}
+
+.anticon-delete {
+  color: #ef0808
+}

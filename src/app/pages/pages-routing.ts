@@ -1,15 +1,17 @@
-import { Routes, RouterModule } from '@angular/router';
+import { AcervoComponent } from 'src/app/pages/acervo/acervo.component';
+import { EspacoComponent } from 'src/app/pages/espaco/espaco.component';
+import { Routes } from '@angular/router';
+import { CategoriasComponent } from './categorias/categorias.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EntidadesComponent } from './entidades/entidades.component';
-import { CategoriasComponent } from './categorias/categorias.component';
-import { LocalizacoesComponent } from './localizacoes/localizacoes.component';
 import { EventosComponent } from './eventos/eventos.component';
 
 export const PageRoutes: Routes = [
-  { path: '', component: DashboardComponent},
+  { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'entidades', component: EntidadesComponent },
   { path: 'categorias', component: CategoriasComponent },
-  { path: 'localizacoes', component: LocalizacoesComponent },
-  { path: 'eventos', component: EventosComponent }
+  { path: 'acervo', component: AcervoComponent },
+  { path: 'espaco', component: EspacoComponent },
+  { path: 'eventos', component: EventosComponent },
 ];

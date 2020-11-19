@@ -1,51 +1,36 @@
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
-import { EntidadeService } from 'src/app/core/services/entidade.service';
-import { LocalizacaoService } from 'src/app/core/services/localizacao.service';
+import { AcervoService } from 'src/app/core/services/acervo.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
 import { LocalizacaoDTO } from 'src/app/models/payload/localizacao/localizacao.dto';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-entidades',
-  templateUrl: './entidades.component.html',
-  styleUrls: ['./entidades.component.css'],
+  selector: 'app-acervo',
+  templateUrl: './acervo.component.html',
+  styleUrls: ['./acervo.component.css'],
 })
-export class EntidadesComponent implements OnInit {
+export class AcervoComponent implements OnInit {
   readonly NOME = 'Nome';
-  readonly RAZAO_SOCIAL = 'Razão Social';
-  readonly DOCUMENTO = 'Documento';
-  readonly ENDERECO = 'Endereço';
-  readonly CONTATO = 'Contato';
-  readonly EMAIL = 'Email';
-  readonly ACOES = 'Ações';
-  readonly ADICIONAR = 'Adicionar';
+  readonly DESCRICAO = 'Razão Social';
+  readonly CATEGORIA = 'Categoria';
+  readonly ESPACO = 'Espaço';
+  readonly ATIVO = 'Ativo';
+  readonly STATUS = 'Status';
+  readonly DATA = 'Data Cadastro';
+  readonly ACOES = 'AÇÕES';
+  readonly ADICIONAR = 'ADICIONAR';
 
   readonly EXCECAO_NAO_HA_DADOS = 'Não há Dados.';
   readonly EXCECAO_ENSIRA_NOME = 'Insira o nome.';
+  readonly EXCECAO_INSIRA_DESCRICAO = 'Insira o descrição';
   readonly EXCECAO_MINIMO_CARACTERES = 'Insira no mínimo 3 caracteres.';
   readonly EXCECAO_MAXIMO_CARACTERES = 'Insira no máximo 255 caracteres.';
 
-  readonly EXCECAO_INSIRA_RAZAO_SOCIAL = 'Insira a razão social.';
-
-  readonly EXCECAO_ENSIRA_DOCUMENTO = 'Insira o cnpj.';
-  readonly EXCECAO_MINIMO_DOCUMENTO = 'Insira no mínimo 14 caracteres.';
-  readonly EXCECAO_MAXIMO_DOCUMENTO = 'Insira no máximo 18 caracteres.';
-
-  readonly EXCECAO_ENSIRA_EMAIL = 'Insira o email.';
-  readonly EXCECAO_MINIMO_EMAIL = 'Insira no mínimo 14 caracteres.';
-  readonly EXCECAO_MAXIMO_EMAIL = 'Insira no máximo 18 caracteres.';
-
-  readonly EXCECAO_ENSIRA_CONTATO = 'Insira o contato.';
-  readonly EXCECAO_MINIMO_CONTATO = 'Insira no mínimo 14 caracteres.';
-  readonly EXCECAO_MAXIMO_CONTATO = 'Insira no máximo 18 caracteres.';
-
-  readonly EXCECAO_ENSIRA_ENDERECO = 'Insira o endereço.';
-  readonly EXCECAO_MINIMO_ENDERECO = 'Insira no mínimo 14 caracteres.';
-  readonly EXCECAO_MAXIMO_ENDERECO = 'Insira no máximo 18 caracteres.';
-
-  readonly EXCECAO_ESCOLHA_LOCALIZACAO = 'Escolha uma localização.';
+  readonly EXCECAO_ENSIRA_DATACADASTRO = 'Insira a data cadastro.';
+  readonly EXCECAO_MINIMO_DATACADASTRO = 'Insira no mínimo 14 caracteres.';
+  readonly EXCECAO_MAXIMO_DATACADASTRO = 'Insira no máximo 18 caracteres.';
 
   dataFilter = [];
   data = [];
@@ -65,11 +50,11 @@ export class EntidadesComponent implements OnInit {
     private fb: FormBuilder,
     private modal: NzModalService,
     private titleService: TitleService,
-    private entidadeService: EntidadeService,
+    private entidadeService: AcervoService,
     private message: NzMessageService
   ) {
     this.validateForm = this.fb.group({
-      nomeFantasia: [
+      nome: [
         '',
         Validators.compose([
           Validators.required,
@@ -77,7 +62,7 @@ export class EntidadesComponent implements OnInit {
           Validators.maxLength(255),
         ]),
       ],
-      razaoSocial: [
+      descricao: [
         '',
         Validators.compose([
           Validators.required,
@@ -85,7 +70,7 @@ export class EntidadesComponent implements OnInit {
           Validators.maxLength(255),
         ]),
       ],
-      cnpj: [
+      categoria: [
         '',
         Validators.compose([
           Validators.required,
@@ -93,7 +78,7 @@ export class EntidadesComponent implements OnInit {
           Validators.maxLength(18),
         ]),
       ],
-      contato: [
+      espaco: [
         '',
         Validators.compose([
           Validators.required,
@@ -101,7 +86,15 @@ export class EntidadesComponent implements OnInit {
           Validators.maxLength(15),
         ]),
       ],
-      email: [
+      flagAtivo: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(14)]),
+      ],
+      status: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(14)]),
+      ],
+      dataCadastro: [
         '',
         Validators.compose([Validators.required, Validators.minLength(14)]),
       ],
@@ -162,12 +155,13 @@ export class EntidadesComponent implements OnInit {
     this.isVisible = true;
     this.editar = item != null;
     this.validateForm.setValue({
-      nomeFantasia: this.editar ? item.nomeFantasia : '',
-      razaoSocial: this.editar ? item.razaoSocial : '',
-      cnpj: this.editar ? item.cnpj : '',
-      contato: this.editar ? item.contato : '',
-      endereco: this.editar ? item.endereco : '',
-      email: this.editar ? item.email : '',
+      nome: this.editar ? item.nome : '',
+      descricao: this.editar ? item.descricao : '',
+      codigoCategoria: this.editar ? item.codigoCategoria : '',
+      codigoEspaco: this.editar ? item.codigoEspaco : '',
+      flagAtivo: this.editar ? item.flagAtivo : '',
+      codigoAcervoStatus: this.editar ? item.codigoAcervoStatus : '',
+      dataCadastro: this.editar ? item.dataCadastro : '',
       id: null,
     });
   }

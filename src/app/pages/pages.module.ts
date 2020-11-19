@@ -5,6 +5,8 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
+import { AcervoComponent } from 'src/app/pages/acervo/acervo.component';
+import { EspacoComponent } from 'src/app/pages/espaco/espaco.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -21,7 +23,6 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EntidadesComponent } from './entidades/entidades.component';
 import { EventosComponent } from './eventos/eventos.component';
-import { LocalizacoesComponent } from './localizacoes/localizacoes.component';
 import { PageRoutes } from './pages-routing';
 import { PerfilComponent } from './perfil/perfil.component';
 
@@ -50,8 +51,9 @@ const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
     CategoriasComponent,
     EventosComponent,
     EntidadesComponent,
-    LocalizacoesComponent,
     PerfilComponent,
+    EspacoComponent,
+    AcervoComponent,
   ],
 })
 export class PagesModule {}

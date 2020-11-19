@@ -1,0 +1,226 @@
+<nz-layout class="layout">
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <form [formGroup]="search" (ngSubmit)="pesquisar(search.value)">
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input (ngModelChange)="pesquisar(search.value)" type="text" formControlName="search" nz-input
+          placeholder="Pesquisar..." />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </form>
+    <button (click)="showModal()" nz-button nzType="primary">
+      <i nz-icon nzType="plus"></i> {{ ADICIONAR }}
+    </button>
+  </div>
+  <!-- TOOLBAR -->
+
+  <!-- GRID DE ENTIDADES -->
+  <nz-content class="content">
+    <cdk-virtual-scroll-viewport itemSize="{{dataFilter.length}}">
+      <nz-list nzSize="small">
+
+        <!-- CABEÇALHO ENTIDADE -->
+        <nz-list-header class="cabecalho-list">
+          <nz-list-item nz-row>
+            <div nz-col nzSpan="4" class="item">{{ NOME }}</div>
+
+            <div nz-col nzSpan="4" class="item">{{ DESCRICAO }}</div>
+
+            <div nz-col nzSpan="4" class="item">{{ CATEGORIA }}</div>
+
+            <div nz-col nzSpan="2" class="item">{{ ESPACO }}</div>
+
+            <div nz-col nzSpan="5" class="item">{{ ATIVO }}</div>
+
+            <div nz-col nzSpan="2" class="item">{{ STATUS }}</div>
+
+            <div nz-col nzSpan="4" class="item">{{ DATA }}</div>
+
+            <div nz-col nzSpan="3" class="item acoes" nz-list-item-actions>
+              {{ ACOES }}
+            </div>
+          </nz-list-item>
+        </nz-list-header>
+        <!-- CABEÇALHO ENTIDADES -->
+
+        <nz-list-empty *ngIf="dataFilter.length == 0">
+          {{ EXCECAO_NAO_HA_DADOS }}
+        </nz-list-empty>
+
+        <!-- BODY ENTIDADES -->
+        <nz-list-body class="body-list">
+          <nz-list-item *cdkVirtualFor="let item of dataFilter">
+            <div nz-row class="body-list-item">
+              <div nz-col nzSpan="4" class="item">{{item.nome}}</div>
+
+              <div nz-col nzSpan="4" class="item">{{item.descricao}}</div>
+
+              <div nz-col nzSpan="3" class="item"> {{item.codigoCategoria}}</div>
+
+              <div nz-col nzSpan="4" class="item">{{item.codigoEspaco}}</div>
+
+              <div nz-col nzSpan="2" class="item">{{item.flagAtivo}}</div>
+
+              <div nz-col nzSpan="2" class="item">{{item.codigoAcervoStatus}}</div>
+
+              <div nz-col nzSpan="2" class="item">{{item.dataCadastro}}</div>
+
+              <div nz-col nzSpan="3" class="item acoes">
+                <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>
+                <a (click)="delete(item)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
+              </div>
+            </div>
+          </nz-list-item>
+        </nz-list-body>
+        <!-- BODY ENTIDADES -->
+
+      </nz-list>
+    </cdk-virtual-scroll-viewport>
+  </nz-content>
+  <!-- GRID DE ENTIDADES -->
+
+</nz-layout>
+
+<!-- MODAL EDIÇÃO DE ACERVO -->
+<nz-modal [(nzVisible)]="isVisible" nzTitle="{{editar ? 'Editar' : 'Nova'}} Acervo" (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar" nzWrapClassName="vertical-center-modal">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+
+    <input hidden formControlName="id" />
+
+    <!-- NOME -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ NOME }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="nomeErrorTpl">
+
+        <input maxlength="255" nz-input formControlName="nome" placeholder="Nome do acervo" />
+
+        <ng-template #nomeErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            {{ EXCECAO_ENSIRA_NOME }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            {{ EXCECAO_MINIMO_CARACTERES }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">
+            {{ EXCECAO_MAXIMO_CARACTERES }}
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- NOME -->
+
+    <!-- DESCRICAO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ DESCRICAO }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="descricaoErrorTpl">
+
+        <input maxlength="255" nz-input formControlName="descricao" placeholder="Descricão do acervo" />
+
+        <ng-template #descricaoErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            {{ EXCECAO_INSIRA_DESCRICAO }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            {{ EXCECAO_MINIMO_CARACTERES }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">
+            {{ EXCECAO_MAXIMO_CARACTERES }}
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- DESCRICAO -->
+
+    <!-- CATEGORIA -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ CATEGORIA }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe a Categoria" formControlName="categoria">
+          <nz-option *ngFor="let categoria of categorias" [nzLabel]="categoria.descricao" [nzValue]="categoria.id">
+          </nz-option>
+        </nz-select>
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- CATEGORIA -->
+
+    <!-- ESPAÇO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ ESPACO }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe o Espaço" formControlName="espaco">
+          <nz-option *ngFor="let espaco of espacos" [nzLabel]="espaco.descricao" [nzValue]="espaco.id">
+          </nz-option>
+        </nz-select>
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- ESPAÇO -->
+
+    <!-- ATIVO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ ATIVO }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe se esta ativo" formControlName="flagAtivo">
+          <nz-option *ngFor="let flag of listaFlags" [nzLabel]="flag.descricao" [nzValue]="flag.id">
+          </nz-option>
+        </nz-select>
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- ATIVO -->
+
+    <!-- STATUS -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ STATUS }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe o status" formControlName="status">
+          <nz-option *ngFor="let stato of listaStatus" [nzLabel]="stato.descricao" [nzValue]="stato.id">
+          </nz-option>
+        </nz-select>
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- STATUS -->
+
+    <!-- DATA CADASTRO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ DATA }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="datacadastroErrorTpl">
+
+        <input maxlength="18" nz-input formControlName="dataCadastro" placeholder="Data cadastro" />
+
+        <ng-template #datacadastroErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            {{ EXCECAO_ENSIRA_DATACADASTRO }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            {{ EXCECAO_MINIMO_DATACADASTRO }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">
+            {{ EXCECAO_MAXIMO_DATACADASTRO }}
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- DATA CADASTRO -->
+
+
+  </form>
+</nz-modal>
+<!-- MODAL EDIÇÃO DE ACERVO -->

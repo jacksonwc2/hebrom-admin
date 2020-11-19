@@ -19,6 +19,13 @@ export class EndpointsConstants {
     DELETAR: URL_BASE.concat('/entidadeService/deletar/'),
   };
 
+  static readonly ACERVO = {
+    ADQUIRIR_TODOS: URL_BASE.concat('/acervoService/adquirirTodos'),
+    SALVAR: URL_BASE.concat('/acervoService/salvar'),
+    ADQUIRIR_POR_ID: URL_BASE.concat('/acervoService/adquirirPorId'),
+    DELETAR: URL_BASE.concat('/acervoService/deletar/'),
+  };
+
   static readonly CATEGORIAS = {
     ADQUIRIR_TODAS: URL_BASE.concat('/categoriaService/adquirirTodos'),
     SALVAR: URL_BASE.concat('/categoriaService/salvar'),
@@ -26,9 +33,10 @@ export class EndpointsConstants {
     DELETAR: URL_BASE.concat('/categoriaService/deletar/'),
   };
 
-  static readonly LOCALIZACAO = {
-    ADQUIRIR_TODOS: URL_BASE.concat('/localizacaoService/adquirirTodos'),
-    SALVAR: URL_BASE.concat('/localizacaoService/salvar'),
-    DELETAR: URL_BASE.concat('/localizacaoService/deletar/'),
+  static readonly ESPACO = {
+    ADQUIRIR_TODOS: URL_BASE.concat('/espacoService/adquirirTodos'),
+    SALVAR: URL_BASE.concat('/espacoService/salvar'),
+    ADQUIRIR_POR_ID: URL_BASE.concat('/espacoService/adquirirPorId'),
+    DELETAR: URL_BASE.concat('/espacoService/deletar/'),
   };
 }

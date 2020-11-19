@@ -2,6 +2,8 @@ export interface EntidadeDTO {
   id: number;
   nomeFantasia: string;
   razaoSocial: string;
-  documento: string;
-  localizacao: string;
+  cnpj: string;
+  contato: string;
+  endereco: string;
+  email: string;
 }

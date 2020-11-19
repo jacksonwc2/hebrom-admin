@@ -25,13 +25,17 @@
         <!-- CABEÇALHO ENTIDADE -->
         <nz-list-header class="cabecalho-list">
           <nz-list-item nz-row>
-            <div nz-col nzSpan="6" class="item">{{ NOME }}</div>
+            <div nz-col nzSpan="4" class="item">{{ NOME }}</div>
 
-            <div nz-col nzSpan="8" class="item">{{ RAZAO_SOCIAL }}</div>
+            <div nz-col nzSpan="4" class="item">{{ RAZAO_SOCIAL }}</div>
 
-            <div nz-col nzSpan="4" class="item">{{ DOCUMENTO }}</div>
+            <div nz-col nzSpan="2" class="item">{{ DOCUMENTO }}</div>
 
-            <div nz-col nzSpan="3" class="item">{{ LOCALIZACAO }}</div>
+            <div nz-col nzSpan="5" class="item">{{ ENDERECO }}</div>
+
+            <div nz-col nzSpan="2" class="item">{{ CONTATO }}</div>
+
+            <div nz-col nzSpan="4" class="item">{{ EMAIL }}</div>
 
             <div nz-col nzSpan="3" class="item acoes" nz-list-item-actions>
               {{ ACOES }}
@@ -48,13 +52,17 @@
         <nz-list-body class="body-list">
           <nz-list-item *cdkVirtualFor="let item of dataFilter">
             <div nz-row class="body-list-item">
-              <div nz-col nzSpan="6" class="item">{{item.nomeFantasia}}</div>
+              <div nz-col nzSpan="4" class="item">{{item.nomeFantasia}}</div>
 
-              <div nz-col nzSpan="8" class="item"> {{item.razaoSocial}}</div>
+              <div nz-col nzSpan="4" class="item"> {{item.razaoSocial}}</div>
 
-              <div nz-col nzSpan="4" class="item">{{item.documento}}</div>
+              <div nz-col nzSpan="2" class="item">{{item.cnpj}}</div>
 
-              <div nz-col nzSpan="3" class="item">{{item.localizacao.uriMaps}}</div>
+              <div nz-col nzSpan="5" class="item">{{item.endereco}}</div>
+
+              <div nz-col nzSpan="2" class="item">{{item.contato}}</div>
+
+              <div nz-col nzSpan="4" class="item">{{item.email}}</div>
 
               <div nz-col nzSpan="3" class="item acoes">
                 <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>
@@ -131,7 +139,7 @@
 
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="documentoErrorTpl">
 
-        <input maxlength="18" nz-input formControlName="documento" placeholder="Numero de documento" />
+        <input maxlength="18" nz-input formControlName="cnpj" placeholder="Numero de documento" />
 
         <ng-template #documentoErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
@@ -148,26 +156,75 @@
     </nz-form-item>
     <!-- DOCUMENTO -->
 
-    <!-- LOCALIZAÇÃO -->
+    <!-- ENDERECO -->
     <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>{{ LOCALIZACAO }}</nz-form-label>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ ENDERECO }}</nz-form-label>
 
-      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="localizacaoErrorTpl">
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="enderecoErrorTpl">
 
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe localização" formControlName="codigoLocalizacao">
-          <nz-option *ngFor="let localizacao of localizacoes" [nzLabel]="localizacao.descricao"
-            [nzValue]="localizacao.id">
-          </nz-option>
-        </nz-select>
+        <input maxlength="18" nz-input formControlName="endereco" placeholder="Endereço" />
 
-        <ng-template #localizacaoErrorTpl let-control>
+        <ng-template #enderecoErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
-            {{ EXCECAO_ESCOLHA_LOCALIZACAO }}
+            {{ EXCECAO_ENSIRA_ENDERECO }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            {{ EXCECAO_MINIMO_ENDERECO }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">
+            {{ EXCECAO_MAXIMO_ENDERECO }}
           </ng-container>
         </ng-template>
       </nz-form-control>
     </nz-form-item>
-    <!-- LOCALIZAÇÃO -->
+    <!-- ENDERECO -->
+
+    <!-- CONTATO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ CONTATO }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="contatoErrorTpl">
+
+        <input maxlength="18" nz-input formControlName="contato" placeholder="Contato" />
+
+        <ng-template #contatoErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            {{ EXCECAO_ENSIRA_CONTATO }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            {{ EXCECAO_MINIMO_CONTATO }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">
+            {{ EXCECAO_MAXIMO_CONTATO }}
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- CONTATO -->
+
+    <!-- EMAIL -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ EMAIL }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="emailErrorTpl">
+
+        <input maxlength="18" nz-input formControlName="email" placeholder="Email" />
+
+        <ng-template #emailErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            {{ EXCECAO_ENSIRA_EMAIL }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            {{ EXCECAO_MINIMO_EMAIL }}
+          </ng-container>
+          <ng-container *ngIf="control.hasError('maxlength')">
+            {{ EXCECAO_MAXIMO_EMAIL }}
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- EMAIL -->
+
 
   </form>
 </nz-modal>
