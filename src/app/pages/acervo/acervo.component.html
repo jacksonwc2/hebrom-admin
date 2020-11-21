@@ -163,7 +163,9 @@
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
 
         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe se esta ativo" formControlName="flagAtivo">
-          <nz-option *ngFor="let flag of listaFlags" [nzLabel]="flag.descricao" [nzValue]="flag.id">
+          <nz-option nzLabel="SIM" nzValue="true">
+          </nz-option>
+          <nz-option nzLabel="NÃO" nzValue="false">
           </nz-option>
         </nz-select>
 
@@ -178,7 +180,9 @@
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
 
         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe o status" formControlName="status">
-          <nz-option *ngFor="let stato of listaStatus" [nzLabel]="stato.descricao" [nzValue]="stato.id">
+          <nz-option nzLabel="Exposição" nzValue="1">
+          </nz-option>
+          <nz-option nzLabel="Manutenção" nzValue="2">
           </nz-option>
         </nz-select>
 

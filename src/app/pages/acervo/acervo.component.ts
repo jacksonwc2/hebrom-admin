@@ -45,9 +45,7 @@ export class AcervoComponent implements OnInit {
   isVisible = false;
 
   espacos = [];
-  listaFlags = [];
   categorias = [];
-  listaStatus = [];
 
   validateForm: FormGroup;
 
