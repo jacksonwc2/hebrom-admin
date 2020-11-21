@@ -1,0 +1,39 @@
+:host {
+  text-align: left;
+}
+
+nz-content {
+  display: flex;
+  background-color: #0c6fa5;
+  height: 100%
+}
+
+.login-form {
+  float: right;
+  width: 300px;
+  margin: auto;
+  padding: 40px 20px;
+  border-radius: 3px;
+  background: #045e90;
+}
+
+.login-form .logo {
+  text-align: center;
+}
+
+.login-form img {
+  width: 80%;
+  margin-bottom: 35px;
+}
+
+.login-form .lembrar {
+  margin-bottom: 20px;
+}
+
+.login-form .lembrar span {
+  color: #fff;
+}
+
+.login-form button {
+  background-color: #32d839;
+}

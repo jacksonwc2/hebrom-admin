@@ -44,6 +44,11 @@ export class AcervoComponent implements OnInit {
   search: FormGroup;
   isVisible = false;
 
+  espacos = [];
+  listaFlags = [];
+  categorias = [];
+  listaStatus = [];
+
   validateForm: FormGroup;
 
   constructor(
@@ -110,7 +115,7 @@ export class AcervoComponent implements OnInit {
 
     this.adquirirTodos();
 
-    this.titleService.atualizar('Entidades');
+    this.titleService.atualizar('Acervo');
   }
 
   private adquirirTodos() {

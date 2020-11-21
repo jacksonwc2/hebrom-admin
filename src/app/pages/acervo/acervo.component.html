@@ -25,19 +25,13 @@
         <!-- CABEÇALHO ENTIDADE -->
         <nz-list-header class="cabecalho-list">
           <nz-list-item nz-row>
-            <div nz-col nzSpan="4" class="item">{{ NOME }}</div>
+            <div nz-col nzSpan="8" class="item">{{ NOME }}</div>
 
-            <div nz-col nzSpan="4" class="item">{{ DESCRICAO }}</div>
+            <div nz-col nzSpan="8" class="item">{{ DESCRICAO }}</div>
 
-            <div nz-col nzSpan="4" class="item">{{ CATEGORIA }}</div>
+            <div nz-col nzSpan="2" class="item">{{ ATIVO }}</div>
 
-            <div nz-col nzSpan="2" class="item">{{ ESPACO }}</div>
-
-            <div nz-col nzSpan="5" class="item">{{ ATIVO }}</div>
-
-            <div nz-col nzSpan="2" class="item">{{ STATUS }}</div>
-
-            <div nz-col nzSpan="4" class="item">{{ DATA }}</div>
+            <div nz-col nzSpan="3" class="item">{{ STATUS }}</div>
 
             <div nz-col nzSpan="3" class="item acoes" nz-list-item-actions>
               {{ ACOES }}
@@ -54,19 +48,13 @@
         <nz-list-body class="body-list">
           <nz-list-item *cdkVirtualFor="let item of dataFilter">
             <div nz-row class="body-list-item">
-              <div nz-col nzSpan="4" class="item">{{item.nome}}</div>
+              <div nz-col nzSpan="8" class="item">{{item.nome}}</div>
 
-              <div nz-col nzSpan="4" class="item">{{item.descricao}}</div>
-
-              <div nz-col nzSpan="3" class="item"> {{item.codigoCategoria}}</div>
-
-              <div nz-col nzSpan="4" class="item">{{item.codigoEspaco}}</div>
+              <div nz-col nzSpan="8" class="item">{{item.descricao}}</div>
 
               <div nz-col nzSpan="2" class="item">{{item.flagAtivo}}</div>
 
-              <div nz-col nzSpan="2" class="item">{{item.codigoAcervoStatus}}</div>
-
-              <div nz-col nzSpan="2" class="item">{{item.dataCadastro}}</div>
+              <div nz-col nzSpan="3" class="item">{{item.codigoAcervoStatus}}</div>
 
               <div nz-col nzSpan="3" class="item acoes">
                 <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>

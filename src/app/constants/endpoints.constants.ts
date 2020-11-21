@@ -39,4 +39,11 @@ export class EndpointsConstants {
     ADQUIRIR_POR_ID: URL_BASE.concat('/espacoService/adquirirPorId'),
     DELETAR: URL_BASE.concat('/espacoService/deletar/'),
   };
+
+  static readonly LOCALIZACAO = {
+    ADQUIRIR_TODOS: URL_BASE.concat('/espacoService/adquirirTodos'),
+    SALVAR: URL_BASE.concat('/espacoService/salvar'),
+    ADQUIRIR_POR_ID: URL_BASE.concat('/espacoService/adquirirPorId'),
+    DELETAR: URL_BASE.concat('/espacoService/deletar/'),
+  };
 }

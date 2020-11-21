@@ -7,7 +7,7 @@ import { EntidadesComponent } from './entidades/entidades.component';
 import { EventosComponent } from './eventos/eventos.component';
 
 export const PageRoutes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: EntidadesComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'entidades', component: EntidadesComponent },
   { path: 'categorias', component: CategoriasComponent },

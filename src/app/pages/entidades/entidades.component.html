@@ -1,231 +1,159 @@
 <nz-layout class="layout">
 
-  <!-- TOOLBAR -->
-  <div class="toolbar">
-    <form [formGroup]="search" (ngSubmit)="pesquisar(search.value)">
-      <nz-input-group [nzSuffix]="suffixIconSearch">
-        <input (ngModelChange)="pesquisar(search.value)" type="text" formControlName="search" nz-input
-          placeholder="Pesquisar..." />
-      </nz-input-group>
-      <ng-template #suffixIconSearch>
-        <i nz-icon nzType="search"></i>
-      </ng-template>
-    </form>
-    <button (click)="showModal()" nz-button nzType="primary">
-      <i nz-icon nzType="plus"></i> {{ ADICIONAR }}
-    </button>
-  </div>
-  <!-- TOOLBAR -->
-
   <!-- GRID DE ENTIDADES -->
-  <nz-content class="content">
-    <cdk-virtual-scroll-viewport itemSize="{{dataFilter.length}}">
-      <nz-list nzSize="small">
+  <nz-content>
+    <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
 
-        <!-- CABEÇALHO ENTIDADE -->
-        <nz-list-header class="cabecalho-list">
-          <nz-list-item nz-row>
-            <div nz-col nzSpan="4" class="item">{{ NOME }}</div>
+      <input hidden formControlName="id" />
 
-            <div nz-col nzSpan="4" class="item">{{ RAZAO_SOCIAL }}</div>
+      <!-- NOME FANTASIA -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>{{ NOME }}</nz-form-label>
 
-            <div nz-col nzSpan="2" class="item">{{ DOCUMENTO }}</div>
+        <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="nomeErrorTpl">
 
-            <div nz-col nzSpan="5" class="item">{{ ENDERECO }}</div>
+          <input maxlength="255" nz-input formControlName="nomeFantasia" placeholder="Nome da entidade" />
 
-            <div nz-col nzSpan="2" class="item">{{ CONTATO }}</div>
+          <ng-template #nomeErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              {{ EXCECAO_ENSIRA_NOME }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">
+              {{ EXCECAO_MINIMO_CARACTERES }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('maxlength')">
+              {{ EXCECAO_MAXIMO_CARACTERES }}
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- NOME FANTASIA -->
 
-            <div nz-col nzSpan="4" class="item">{{ EMAIL }}</div>
+      <!-- RAZÃO SOCIAL -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>{{ RAZAO_SOCIAL }}</nz-form-label>
 
-            <div nz-col nzSpan="3" class="item acoes" nz-list-item-actions>
-              {{ ACOES }}
-            </div>
-          </nz-list-item>
-        </nz-list-header>
-        <!-- CABEÇALHO ENTIDADES -->
+        <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="razaosocialErrorTpl">
 
-        <nz-list-empty *ngIf="dataFilter.length == 0">
-          {{ EXCECAO_NAO_HA_DADOS }}
-        </nz-list-empty>
+          <input maxlength="255" nz-input formControlName="razaoSocial" placeholder="Razão social da entidade" />
 
-        <!-- BODY ENTIDADES -->
-        <nz-list-body class="body-list">
-          <nz-list-item *cdkVirtualFor="let item of dataFilter">
-            <div nz-row class="body-list-item">
-              <div nz-col nzSpan="4" class="item">{{item.nomeFantasia}}</div>
+          <ng-template #razaosocialErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              {{ EXCECAO_INSIRA_RAZAO_SOCIAL }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">
+              {{ EXCECAO_MINIMO_CARACTERES }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('maxlength')">
+              {{ EXCECAO_MAXIMO_CARACTERES }}
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- RAZÃO SOCIAL -->
 
-              <div nz-col nzSpan="4" class="item"> {{item.razaoSocial}}</div>
+      <!-- DOCUMENTO -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>{{ DOCUMENTO }}</nz-form-label>
 
-              <div nz-col nzSpan="2" class="item">{{item.cnpj}}</div>
+        <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="documentoErrorTpl">
 
-              <div nz-col nzSpan="5" class="item">{{item.endereco}}</div>
+          <input maxlength="18" nz-input formControlName="cnpj" placeholder="Numero de documento" />
 
-              <div nz-col nzSpan="2" class="item">{{item.contato}}</div>
+          <ng-template #documentoErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              {{ EXCECAO_ENSIRA_DOCUMENTO }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">
+              {{ EXCECAO_MINIMO_DOCUMENTO }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('maxlength')">
+              {{ EXCECAO_MAXIMO_DOCUMENTO }}
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- DOCUMENTO -->
 
-              <div nz-col nzSpan="4" class="item">{{item.email}}</div>
+      <!-- ENDERECO -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>{{ ENDERECO }}</nz-form-label>
 
-              <div nz-col nzSpan="3" class="item acoes">
-                <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>
-                <a (click)="delete(item)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
-              </div>
-            </div>
-          </nz-list-item>
-        </nz-list-body>
-        <!-- BODY ENTIDADES -->
+        <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="enderecoErrorTpl">
 
-      </nz-list>
-    </cdk-virtual-scroll-viewport>
+          <input maxlength="18" nz-input formControlName="endereco" placeholder="Endereço" />
+
+          <ng-template #enderecoErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              {{ EXCECAO_ENSIRA_ENDERECO }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">
+              {{ EXCECAO_MINIMO_ENDERECO }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('maxlength')">
+              {{ EXCECAO_MAXIMO_ENDERECO }}
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- ENDERECO -->
+
+      <!-- CONTATO -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>{{ CONTATO }}</nz-form-label>
+
+        <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="contatoErrorTpl">
+
+          <input maxlength="18" nz-input formControlName="contato" placeholder="Contato" />
+
+          <ng-template #contatoErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              {{ EXCECAO_ENSIRA_CONTATO }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">
+              {{ EXCECAO_MINIMO_CONTATO }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('maxlength')">
+              {{ EXCECAO_MAXIMO_CONTATO }}
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- CONTATO -->
+
+      <!-- EMAIL -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>{{ EMAIL }}</nz-form-label>
+
+        <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="emailErrorTpl">
+
+          <input maxlength="18" nz-input formControlName="email" placeholder="Email" />
+
+          <ng-template #emailErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              {{ EXCECAO_ENSIRA_EMAIL }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">
+              {{ EXCECAO_MINIMO_EMAIL }}
+            </ng-container>
+            <ng-container *ngIf="control.hasError('maxlength')">
+              {{ EXCECAO_MAXIMO_EMAIL }}
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- EMAIL -->
+      <nz-form-item>
+        <button (click)="handleOk()" nz-button nzType="primary" style="right: 62px;
+    display: block;
+    position: fixed;">
+          {{ SALVAR }}
+        </button>
+      </nz-form-item>
+    </form>
+
   </nz-content>
   <!-- GRID DE ENTIDADES -->
 
+
 </nz-layout>
-
-<!-- MODAL EDIÇÃO DE ENTIDADE -->
-<nz-modal [(nzVisible)]="isVisible" nzTitle="{{editar ? 'Editar' : 'Nova'}} Entidade" (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar" nzWrapClassName="vertical-center-modal">
-  <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
-
-    <input hidden formControlName="id" />
-
-    <!-- NOME FANTASIA -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>{{ NOME }}</nz-form-label>
-
-      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="nomeErrorTpl">
-
-        <input maxlength="255" nz-input formControlName="nomeFantasia" placeholder="Nome da entidade" />
-
-        <ng-template #nomeErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            {{ EXCECAO_ENSIRA_NOME }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('minlength')">
-            {{ EXCECAO_MINIMO_CARACTERES }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('maxlength')">
-            {{ EXCECAO_MAXIMO_CARACTERES }}
-          </ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- NOME FANTASIA -->
-
-    <!-- RAZÃO SOCIAL -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>{{ RAZAO_SOCIAL }}</nz-form-label>
-
-      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="razaosocialErrorTpl">
-
-        <input maxlength="255" nz-input formControlName="razaoSocial" placeholder="Razão social da entidade" />
-
-        <ng-template #razaosocialErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            {{ EXCECAO_INSIRA_RAZAO_SOCIAL }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('minlength')">
-            {{ EXCECAO_MINIMO_CARACTERES }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('maxlength')">
-            {{ EXCECAO_MAXIMO_CARACTERES }}
-          </ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- RAZÃO SOCIAL -->
-
-    <!-- DOCUMENTO -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>{{ DOCUMENTO }}</nz-form-label>
-
-      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="documentoErrorTpl">
-
-        <input maxlength="18" nz-input formControlName="cnpj" placeholder="Numero de documento" />
-
-        <ng-template #documentoErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            {{ EXCECAO_ENSIRA_DOCUMENTO }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('minlength')">
-            {{ EXCECAO_MINIMO_DOCUMENTO }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('maxlength')">
-            {{ EXCECAO_MAXIMO_DOCUMENTO }}
-          </ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- DOCUMENTO -->
-
-    <!-- ENDERECO -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>{{ ENDERECO }}</nz-form-label>
-
-      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="enderecoErrorTpl">
-
-        <input maxlength="18" nz-input formControlName="endereco" placeholder="Endereço" />
-
-        <ng-template #enderecoErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            {{ EXCECAO_ENSIRA_ENDERECO }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('minlength')">
-            {{ EXCECAO_MINIMO_ENDERECO }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('maxlength')">
-            {{ EXCECAO_MAXIMO_ENDERECO }}
-          </ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- ENDERECO -->
-
-    <!-- CONTATO -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>{{ CONTATO }}</nz-form-label>
-
-      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="contatoErrorTpl">
-
-        <input maxlength="18" nz-input formControlName="contato" placeholder="Contato" />
-
-        <ng-template #contatoErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            {{ EXCECAO_ENSIRA_CONTATO }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('minlength')">
-            {{ EXCECAO_MINIMO_CONTATO }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('maxlength')">
-            {{ EXCECAO_MAXIMO_CONTATO }}
-          </ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- CONTATO -->
-
-    <!-- EMAIL -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5" nzRequired>{{ EMAIL }}</nz-form-label>
-
-      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="emailErrorTpl">
-
-        <input maxlength="18" nz-input formControlName="email" placeholder="Email" />
-
-        <ng-template #emailErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            {{ EXCECAO_ENSIRA_EMAIL }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('minlength')">
-            {{ EXCECAO_MINIMO_EMAIL }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('maxlength')">
-            {{ EXCECAO_MAXIMO_EMAIL }}
-          </ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- EMAIL -->
-
-
-  </form>
-</nz-modal>
-<!-- MODAL EDIÇÃO DE ENTIDADE -->

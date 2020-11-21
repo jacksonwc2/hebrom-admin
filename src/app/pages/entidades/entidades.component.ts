@@ -19,8 +19,7 @@ export class EntidadesComponent implements OnInit {
   readonly ENDERECO = 'Endereço';
   readonly CONTATO = 'Contato';
   readonly EMAIL = 'Email';
-  readonly ACOES = 'Ações';
-  readonly ADICIONAR = 'Adicionar';
+  readonly SALVAR = 'SALVAR';
 
   readonly EXCECAO_NAO_HA_DADOS = 'Não há Dados.';
   readonly EXCECAO_ENSIRA_NOME = 'Insira o nome.';
@@ -69,38 +68,11 @@ export class EntidadesComponent implements OnInit {
     private message: NzMessageService
   ) {
     this.validateForm = this.fb.group({
-      nomeFantasia: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(255),
-        ]),
-      ],
-      razaoSocial: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(255),
-        ]),
-      ],
-      cnpj: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(14),
-          Validators.maxLength(18),
-        ]),
-      ],
-      contato: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(15),
-        ]),
-      ],
+      nomeFantasia: ['', Validators.compose([Validators.required])],
+      razaoSocial: ['', Validators.compose([Validators.required])],
+      cnpj: ['', Validators.compose([Validators.required])],
+      contato: ['', Validators.compose([Validators.required])],
+      endereco: ['', Validators.compose([Validators.required])],
       email: [
         '',
         Validators.compose([Validators.required, Validators.minLength(14)]),
@@ -125,9 +97,16 @@ export class EntidadesComponent implements OnInit {
       .adquirirTodos()
       .pipe(take(1))
       .subscribe((entidades) => {
-        this.data = entidades;
-
-        this.pesquisar(this.search.value);
+        const editar = entidades[0] != null;
+        this.validateForm.setValue({
+          nomeFantasia: this.editar ? entidades[0].nomeFantasia : '',
+          razaoSocial: this.editar ? entidades[0].razaoSocial : '',
+          cnpj: this.editar ? entidades[0].cnpj : '',
+          contato: this.editar ? entidades[0].contato : '',
+          endereco: this.editar ? entidades[0].endereco : '',
+          email: this.editar ? entidades[0].email : '',
+          id: null,
+        });
       });
   }
 

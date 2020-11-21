@@ -7,6 +7,8 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { AcervoComponent } from 'src/app/pages/acervo/acervo.component';
 import { EspacoComponent } from 'src/app/pages/espaco/espaco.component';
+import { LocalizacoesComponent } from 'src/app/pages/localizacoes/localizacoes.component';
+import { MuseuComponent } from 'src/app/pages/museu/museu.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -54,6 +56,8 @@ const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
     PerfilComponent,
     EspacoComponent,
     AcervoComponent,
+    MuseuComponent,
+    LocalizacoesComponent,
   ],
 })
 export class PagesModule {}
