@@ -47,15 +47,15 @@
   </nz-content>
 </nz-layout>
 
-<!-- Formulario Crud Categoria -->
-<nz-modal [(nzVisible)]="isVisible" nzTitle="{{editar ? 'Editar' : 'Nova'}} Categoria" (nzOnCancel)="handleCancel()"
+<!-- Formulario Crud Espaço -->
+<nz-modal [(nzVisible)]="isVisible" nzTitle="{{editar ? 'Editar' : 'Novo'}} Espaço" (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()" nzOkText="Salvar" nzCancelText="Cancelar" nzWrapClassName="vertical-center-modal">
   <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
     <nz-form-item>
       <nz-form-label [nzSpan]="5" nzRequired>Descrição</nz-form-label>
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="descricaoErrorTpl">
         <input hidden formControlName="id" />
-        <input nz-input formControlName="descricao" placeholder="Descrição Categoria" />
+        <input nz-input formControlName="descricao" placeholder="Descrição Espaço" />
         <ng-template #descricaoErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
             Insira a descrição.
@@ -68,4 +68,4 @@
     </nz-form-item>
   </form>
 </nz-modal>
-<!-- Formulario Crud Categoria -->
+<!-- Formulario Crud Espaço -->

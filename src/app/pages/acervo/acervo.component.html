@@ -132,7 +132,8 @@
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
 
         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe a Categoria" formControlName="categoria">
-          <nz-option *ngFor="let categoria of categorias" [nzLabel]="categoria.descricao" [nzValue]="categoria.id">
+          <nz-option *ngFor="let itemcategoria of categorias" [nzLabel]="itemcategoria.descricao"
+            [nzValue]="itemcategoria.id">
           </nz-option>
         </nz-select>
 
