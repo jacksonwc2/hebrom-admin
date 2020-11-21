@@ -1,6 +1,8 @@
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
 import { AcervoService } from 'src/app/core/services/acervo.service';
+import { CategoriaService } from 'src/app/core/services/categoria.service';
+import { EspacoService } from 'src/app/core/services/espaco.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
 import { LocalizacaoDTO } from 'src/app/models/payload/localizacao/localizacao.dto';
 import { Component, OnInit } from '@angular/core';
@@ -54,7 +56,9 @@ export class AcervoComponent implements OnInit {
     private modal: NzModalService,
     private titleService: TitleService,
     private entidadeService: AcervoService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private categoriaService: CategoriaService,
+    private espacoService: EspacoService
   ) {
     this.validateForm = this.fb.group({
       nome: [
@@ -125,6 +129,16 @@ export class AcervoComponent implements OnInit {
 
         this.pesquisar(this.search.value);
       });
+
+    this.categoriaService
+      .adquirirTodas()
+      .pipe(take(1))
+      .subscribe((categoria) => (this.categorias = categoria));
+
+    this.espacoService
+      .adquirirTodos()
+      .pipe(take(1))
+      .subscribe((espacos) => (this.espacos = espacos));
   }
 
   pesquisar(value) {
