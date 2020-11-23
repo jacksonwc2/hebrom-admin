@@ -3,7 +3,7 @@ export interface EntidadeRetrieveDTO {
   nomeFantasia: string;
   razaoSocial: string;
   cnpj: string;
-  contato: string;
+  telefone: string;
   endereco: string;
   email: string;
 }

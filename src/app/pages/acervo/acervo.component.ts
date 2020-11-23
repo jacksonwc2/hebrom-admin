@@ -1,4 +1,4 @@
-import { NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService, NzUploadFile } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
 import { AcervoService } from 'src/app/core/services/acervo.service';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
@@ -15,7 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AcervoComponent implements OnInit {
   readonly NOME = 'Nome';
-  readonly DESCRICAO = 'Razão Social';
+  readonly DESCRICAO = 'Descrição';
   readonly CATEGORIA = 'Categoria';
   readonly ESPACO = 'Espaço';
   readonly ATIVO = 'Ativo';
@@ -37,6 +37,7 @@ export class AcervoComponent implements OnInit {
   dataFilter = [];
   data = [];
   editar = false;
+  fileList = [];
 
   localizacoes: Array<LocalizacaoDTO>;
 
@@ -77,34 +78,11 @@ export class AcervoComponent implements OnInit {
           Validators.maxLength(255),
         ]),
       ],
-      categoria: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(14),
-          Validators.maxLength(18),
-        ]),
-      ],
-      espaco: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(15),
-        ]),
-      ],
-      flagAtivo: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(14)]),
-      ],
-      status: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(14)]),
-      ],
-      dataCadastro: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(14)]),
-      ],
+      codigoCategoria: ['', Validators.compose([Validators.required])],
+      codigoEspaco: ['', Validators.compose([Validators.required])],
+      flagAtivo: ['', Validators.compose([Validators.required])],
+      codigoAcervoStatus: ['', Validators.compose([Validators.required])],
+      dataCadastro: ['', Validators.compose([Validators.required])],
       id: null,
     });
   }
@@ -184,14 +162,33 @@ export class AcervoComponent implements OnInit {
   }
 
   handleOk(): void {
+    if (this.fileList.length > 0) {
+      this.entidadeService
+        .upload(this.fileList)
+        .pipe(take(1))
+        .subscribe((x) => {
+          this.fileList = [];
+          this.salvarAcervo(x);
+        });
+    } else {
+      this.salvarAcervo();
+    }
+  }
+
+  salvarAcervo(x?) {
+    const parametros = this.validateForm.value;
+
+    debugger;
+    if (x != null) {
+      parametros.files = x;
+    }
+
     this.entidadeService
-      .salvar(this.validateForm.value)
+      .salvar(parametros)
       .pipe(take(1))
       .subscribe((x) => {
-        this.message.success('Entidade salva com sucesso!');
-
+        this.message.success('Acervo salva com sucesso!');
         this.isVisible = false;
-
         this.adquirirTodos();
       });
   }
@@ -221,4 +218,11 @@ export class AcervoComponent implements OnInit {
         this.adquirirTodos();
       });
   }
+
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.fileList.push(file);
+    return false;
+  };
+
+  removeFile = (file) => this.fileList.splice(this.fileList.indexOf(file), 1);
 }

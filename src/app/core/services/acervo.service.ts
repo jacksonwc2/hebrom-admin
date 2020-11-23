@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { EndpointsConstants } from 'src/app/constants/endpoints.constants';
 import { AcervoDTO } from 'src/app/models/payload/acervo/acervo.dto';
 import { AcervoRetrieveDTO } from 'src/app/models/retrieve/acervo/acervo-retrieve.dto';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
@@ -29,6 +29,23 @@ export class AcervoService {
     return this.http.get<Array<AcervoRetrieveDTO>>(
       EndpointsConstants.ACERVO.ADQUIRIR_POR_ID,
       { params }
+    );
+  }
+
+  upload(files): Observable<Array<string>> {
+    // Permitir content-type indefinido para o navegador definir corretamente
+    const headers = new HttpHeaders().set('Content-Type', '');
+
+    const formData = new FormData();
+    debugger;
+    files.forEach((x) => {
+      formData.append('filename', x);
+    });
+
+    return this.http.post<Array<string>>(
+      EndpointsConstants.ACERVO.UPLOAD,
+      formData,
+      { headers }
     );
   }
 }

@@ -131,7 +131,7 @@
 
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
 
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe a Categoria" formControlName="categoria">
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe a Categoria" formControlName="codigoCategoria">
           <nz-option *ngFor="let itemcategoria of categorias" [nzLabel]="itemcategoria.descricao"
             [nzValue]="itemcategoria.id">
           </nz-option>
@@ -147,7 +147,7 @@
 
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
 
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe o Espaço" formControlName="espaco">
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe o Espaço" formControlName="codigoEspaco">
           <nz-option *ngFor="let espaco of espacos" [nzLabel]="espaco.descricao" [nzValue]="espaco.id">
           </nz-option>
         </nz-select>
@@ -179,7 +179,7 @@
 
       <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
 
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe o status" formControlName="status">
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Informe o status" formControlName="codigoAcervoStatus">
           <nz-option nzLabel="Exposição" nzValue="1">
           </nz-option>
           <nz-option nzLabel="Manutenção" nzValue="2">
@@ -194,25 +194,41 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="5" nzRequired>{{ DATA }}</nz-form-label>
 
-      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando..." [nzErrorTip]="datacadastroErrorTpl">
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
 
-        <input maxlength="18" nz-input formControlName="dataCadastro" placeholder="Data cadastro" />
+        <nz-date-picker style="width: 100%;" formControlName="dataCadastro" nzShowTime nzFormat="dd/MM/yyyy HH:mm">
+        </nz-date-picker>
 
-        <ng-template #datacadastroErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            {{ EXCECAO_ENSIRA_DATACADASTRO }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('minlength')">
-            {{ EXCECAO_MINIMO_DATACADASTRO }}
-          </ng-container>
-          <ng-container *ngIf="control.hasError('maxlength')">
-            {{ EXCECAO_MAXIMO_DATACADASTRO }}
-          </ng-container>
-        </ng-template>
       </nz-form-control>
     </nz-form-item>
     <!-- DATA CADASTRO -->
 
+    <!-- BANNER -->
+    <nz-form-item>
+      <nz-form-control [nzSpan]=" 4">
+      </nz-form-control>
+      <nz-form-control [nzSpan]="20" nzHasFeedback>
+        <nz-upload [nzBeforeUpload]="beforeUpload" style="width: 100%;">
+          <button nz-button><i nz-icon nzType="upload"></i>Anexos</button>
+        </nz-upload>
+      </nz-form-control>
+
+    </nz-form-item>
+    <!-- BANNER -->
+
+    <!-- FILES -->
+    <nz-form-item>
+      <nz-form-control [nzSpan]="4">
+      </nz-form-control>
+      <div class="files">
+        <div class="item" *ngFor="let file of fileList">
+          <i class="icon-file" nz-icon nzType="file"></i>
+          <span>{{ file.name }}</span>
+          <i (click)="removeFile(file)" class="icon-delete" nz-icon nzType="close-circle"></i>
+        </div>
+      </div>
+    </nz-form-item>
+    <!-- FILES -->
 
   </form>
 </nz-modal>

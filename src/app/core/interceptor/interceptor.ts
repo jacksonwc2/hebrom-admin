@@ -33,10 +33,18 @@ export class RequestInterceptor implements HttpInterceptor {
   }
 
   private setHeaders(req: HttpRequest<any>): HttpRequest<any> {
-    if (!req.headers.has('Content-Type')) {
+    const hasContentType = req.headers.has('Content-Type');
+    debugger;
+    if (!hasContentType) {
       req = req.clone({
         headers: req.headers.set('Content-Type', 'application/json'),
       });
+    }
+
+    // Content-type empty é removido para ser definido pelo navegador
+    debugger;
+    if (hasContentType && !req.headers.get('Content-Type')) {
+      req = req.clone({ headers: req.headers.delete('Content-Type') });
     }
 
     return req;

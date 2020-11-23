@@ -17,7 +17,7 @@ export class EntidadesComponent implements OnInit {
   readonly RAZAO_SOCIAL = 'Razão Social';
   readonly DOCUMENTO = 'Documento';
   readonly ENDERECO = 'Endereço';
-  readonly CONTATO = 'Contato';
+  readonly CONTATO = 'Telefone';
   readonly EMAIL = 'Email';
   readonly SALVAR = 'SALVAR';
 
@@ -48,7 +48,6 @@ export class EntidadesComponent implements OnInit {
 
   dataFilter = [];
   data = [];
-  editar = false;
 
   localizacoes: Array<LocalizacaoDTO>;
 
@@ -71,7 +70,7 @@ export class EntidadesComponent implements OnInit {
       nomeFantasia: ['', Validators.compose([Validators.required])],
       razaoSocial: ['', Validators.compose([Validators.required])],
       cnpj: ['', Validators.compose([Validators.required])],
-      contato: ['', Validators.compose([Validators.required])],
+      telefone: ['', Validators.compose([Validators.required])],
       endereco: ['', Validators.compose([Validators.required])],
       email: [
         '',
@@ -99,56 +98,15 @@ export class EntidadesComponent implements OnInit {
       .subscribe((entidades) => {
         const editar = entidades[0] != null;
         this.validateForm.setValue({
-          nomeFantasia: this.editar ? entidades[0].nomeFantasia : '',
-          razaoSocial: this.editar ? entidades[0].razaoSocial : '',
-          cnpj: this.editar ? entidades[0].cnpj : '',
-          contato: this.editar ? entidades[0].contato : '',
-          endereco: this.editar ? entidades[0].endereco : '',
-          email: this.editar ? entidades[0].email : '',
-          id: null,
+          nomeFantasia: editar ? entidades[0].nomeFantasia || '' : '',
+          razaoSocial: editar ? entidades[0].razaoSocial || '' : '',
+          cnpj: editar ? entidades[0].cnpj || '' : '',
+          telefone: editar ? entidades[0].telefone || '' : '',
+          endereco: editar ? entidades[0].endereco || '' : '',
+          email: editar ? entidades[0].email || '' : '',
+          id: editar ? entidades[0].id || null : null,
         });
       });
-  }
-
-  pesquisar(value) {
-    if (value.search === '') {
-      this.dataFilter = this.data;
-      return;
-    }
-
-    this.dataFilter = this.data.filter(
-      (x) =>
-        this.unaccent(x.nomeFantasia)?.indexOf(this.unaccent(value.search)) > -1
-    );
-  }
-
-  unaccent(value) {
-    return value
-      ?.toLowerCase()
-      .normalize('NFD')
-      .replace(/[^a-zA-Zs]/g, '');
-  }
-
-  submitForm(value: { descricao: string }): void {
-    for (const key of Object.keys(this.validateForm.controls)) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
-    console.log(value);
-  }
-
-  showModal(item?: any): void {
-    this.isVisible = true;
-    this.editar = item != null;
-    this.validateForm.setValue({
-      nomeFantasia: this.editar ? item.nomeFantasia : '',
-      razaoSocial: this.editar ? item.razaoSocial : '',
-      cnpj: this.editar ? item.cnpj : '',
-      contato: this.editar ? item.contato : '',
-      endereco: this.editar ? item.endereco : '',
-      email: this.editar ? item.email : '',
-      id: null,
-    });
   }
 
   handleOk(): void {
@@ -157,35 +115,6 @@ export class EntidadesComponent implements OnInit {
       .pipe(take(1))
       .subscribe((x) => {
         this.message.success('Entidade salva com sucesso!');
-
-        this.isVisible = false;
-
-        this.adquirirTodos();
-      });
-  }
-
-  handleCancel(): void {
-    this.isVisible = false;
-  }
-
-  delete(item): void {
-    this.modal.confirm({
-      nzTitle: 'Atenção!',
-      nzContent: 'Tem certeza que deseja remover a entidade?',
-      nzOkText: 'Remover',
-      nzOkType: 'danger',
-      nzOnOk: () => this.deletar(item.id),
-      nzCancelText: 'Cancelar',
-    });
-  }
-
-  private deletar(id) {
-    this.entidadeService
-      .deletar(id)
-      .pipe(take(1))
-      .subscribe(() => {
-        this.message.success('Entidade excluida com Sucesso!');
-
         this.adquirirTodos();
       });
   }

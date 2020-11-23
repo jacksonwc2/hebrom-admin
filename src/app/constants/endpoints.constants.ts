@@ -24,6 +24,7 @@ export class EndpointsConstants {
     SALVAR: URL_BASE.concat('/acervoService/salvar'),
     ADQUIRIR_POR_ID: URL_BASE.concat('/acervoService/adquirirPorId'),
     DELETAR: URL_BASE.concat('/acervoService/deletar/'),
+    UPLOAD: URL_BASE.concat('/fileService/upload/'),
   };
 
   static readonly CATEGORIAS = {
