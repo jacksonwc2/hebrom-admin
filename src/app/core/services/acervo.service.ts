@@ -34,7 +34,7 @@ export class AcervoService {
 
   upload(files): Observable<Array<string>> {
     // Permitir content-type indefinido para o navegador definir corretamente
-    const headers = new HttpHeaders().set('Content-Type', '');
+    //const headers = new HttpHeaders().set('Content-Type', '');
 
     const formData = new FormData();
     debugger;
@@ -44,8 +44,7 @@ export class AcervoService {
 
     return this.http.post<Array<string>>(
       EndpointsConstants.ACERVO.UPLOAD,
-      formData,
-      { headers }
+      formData
     );
   }
 }
