@@ -9,9 +9,19 @@ import { Injectable } from '@angular/core';
 export class AcervoService {
   constructor(private http: HttpClient) {}
 
-  adquirirTodos(): Observable<Array<AcervoRetrieveDTO>> {
+  adquirirTodos(
+    codigoCategoria?,
+    codigoEspaco?,
+    nome?
+  ): Observable<Array<AcervoRetrieveDTO>> {
+    const params = new HttpParams();
+    params.set('codigoCategoria', codigoCategoria);
+    params.set('codigoEspaco', codigoEspaco);
+    params.set('nome', nome);
+
     return this.http.get<Array<AcervoRetrieveDTO>>(
-      EndpointsConstants.ACERVO.ADQUIRIR_TODOS
+      EndpointsConstants.ACERVO.ADQUIRIR_TODOS,
+      { params }
     );
   }
 

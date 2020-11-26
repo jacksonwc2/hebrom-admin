@@ -1,5 +1,6 @@
 import { NzMessageService } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
+import { AcervoService } from 'src/app/core/services/acervo.service';
 import { VisitanteService } from 'src/app/core/services/visitante.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -35,9 +36,13 @@ export class MuseuComponent implements OnInit {
 
   flagVisitanteInformado = false;
 
+  pesquisando = false;
+  items = [];
+
   constructor(
     private fb: FormBuilder,
     private visitanteService: VisitanteService,
+    private acervoService: AcervoService,
     private message: NzMessageService
   ) {}
 
@@ -79,6 +84,21 @@ export class MuseuComponent implements OnInit {
       dataCadastro: ['', Validators.compose([Validators.required])],
       id: null,
     });
+
+    this.pesquisar();
+  }
+
+  pesquisar() {
+    this.pesquisando = true;
+
+    this.acervoService
+      .adquirirTodos()
+      .pipe(take(1))
+      .subscribe((x) => {
+        debugger;
+        this.pesquisando = false;
+        this.items = x;
+      });
   }
 
   showModal(): void {
