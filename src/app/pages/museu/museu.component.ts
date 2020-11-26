@@ -11,13 +11,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class MuseuComponent implements OnInit {
   public validateForm!: FormGroup;
+  public filtroForm!: FormGroup;
+  public itemForm!: FormGroup;
 
   readonly NOME = 'Nome';
   readonly IDADE = 'Idade';
   readonly TELEFONE = 'Telefone';
   readonly EMAIL = 'Email';
+  readonly DESCRICAO = 'Descrição';
+  readonly CATEGORIA = 'Categoria';
+  readonly ESPACO = 'Espaço';
+  readonly ATIVO = 'Ativo';
+  readonly STATUS = 'Status';
+  readonly DATA = 'Data Cadastro';
+
+  campoData;
+  campoStatus;
+  campoEspaco;
 
   isVisible = false;
+
+  isVisible2 = false;
 
   flagVisitanteInformado = false;
 
@@ -33,6 +47,36 @@ export class MuseuComponent implements OnInit {
       idade: [null, [Validators.required]],
       telefone: [null, [Validators.required]],
       email: [null, [Validators.required]],
+      id: null,
+    });
+
+    this.filtroForm = this.fb.group({
+      codigoCategoria: [null, [Validators.required]],
+      codigoEspaco: [null, [Validators.required]],
+      nome: [null, [Validators.required]],
+    });
+
+    this.itemForm = this.fb.group({
+      nome: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(255),
+        ]),
+      ],
+      descricao: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(255),
+        ]),
+      ],
+      codigoCategoria: ['', Validators.compose([Validators.required])],
+      codigoEspaco: ['', Validators.compose([Validators.required])],
+      codigoAcervoStatus: ['', Validators.compose([Validators.required])],
+      dataCadastro: ['', Validators.compose([Validators.required])],
       id: null,
     });
   }
@@ -65,5 +109,30 @@ export class MuseuComponent implements OnInit {
       this.validateForm.controls[key].updateValueAndValidity();
     }
     console.log(value);
+  }
+
+  submitFormItem(value: { descricao: string }): void {
+    for (const key of Object.keys(this.itemForm.controls)) {
+      this.itemForm.controls[key].markAsDirty();
+      this.itemForm.controls[key].updateValueAndValidity();
+    }
+    console.log(value);
+  }
+
+  showModalItem(): void {
+    this.isVisible2 = true;
+    this.itemForm.setValue({
+      nome: '',
+      descricao: '',
+      codigoCategoria: '',
+      codigoEspaco: '',
+      codigoAcervoStatus: '',
+      dataCadastro: '',
+      id: null,
+    });
+  }
+
+  handleOkItem(): void {
+    this.isVisible2 = false;
   }
 }
