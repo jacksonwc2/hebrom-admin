@@ -40,18 +40,18 @@
       <input nz-col [nzSpan]="8" maxlength="255" nz-input placeholder="Nome do acervo" />
 
       <div nz-col [nzSpan]="4" style="padding-left: 15px;">
-        <button style="width: 100%;" nzType="primary" [nzLoading]="true" nz-button><i nz-icon
+        <button style="width: 100%;" nzType="primary" [nzLoading]="pesquisando" nz-button><i nz-icon
             nzType="search"></i>Pesquisar</button>
       </div>
     </div>
 
     <div style="padding: 50px;">
-      <div *ngFor="let item of []">
+      <div *ngFor="let item of items">
         <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
           <nz-card-meta nzTitle="item.nome" nzDescription="item.descricao"></nz-card-meta>
         </nz-card>
         <ng-template #coverTemplate>
-          <img alt="example" src="item.imagem" alt="Sem Imagem" width="100%" />
+          <img alt="example" src="item.files[0]" alt="Sem Imagem" width="100%" />
         </ng-template>
       </div>
     </div>
