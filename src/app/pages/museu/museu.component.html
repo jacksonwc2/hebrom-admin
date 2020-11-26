@@ -11,7 +11,7 @@
         Atraves das imagens e outros dados disponibilizados, você terá acesso a informações sobre peças, sites entre
         outros.
       </p>
-      <a (click)="showModal()" href="#" style="background: #545456  !important"
+      <a (click)="showModal()" style="background: #545456  !important"
         class="u-btn u-btn-round u-button-style u-hover-black u-palette-2-base u-radius-50 u-btn-3">
         Iniciar Visita ao Museu</a>
     </div>
@@ -20,7 +20,7 @@
         display: flex;">
     </div>
   </div>
-  <nz-content style="background: #fff;">
+  <nz-content *ngIf="!flagVisitanteInformado" style="background: #fff;">
     <div nz-row style="padding: 30px 50px; background: #e2e2e2;">
 
       <div nz-col [nzSpan]="6" style="padding-right: 15px;">
@@ -44,6 +44,19 @@
             nzType="search"></i>Pesquisar</button>
       </div>
     </div>
+
+    <div style="padding: 50px;">
+      <div *ngFor="let item of []">
+        <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
+          <nz-card-meta nzTitle="item.nome" nzDescription="item.descricao"></nz-card-meta>
+        </nz-card>
+        <ng-template #coverTemplate>
+          <img alt="example" src="item.imagem" alt="Sem Imagem" width="100%" />
+        </ng-template>
+      </div>
+    </div>
+
+
   </nz-content>
   <nz-footer style="padding: 50px; background: #474747;">Footer</nz-footer>
 </nz-layout>
