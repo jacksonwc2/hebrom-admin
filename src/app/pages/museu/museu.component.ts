@@ -1,6 +1,8 @@
 import { NzMessageService } from 'ng-zorro-antd';
 import { take } from 'rxjs/operators';
 import { AcervoService } from 'src/app/core/services/acervo.service';
+import { CategoriaService } from 'src/app/core/services/categoria.service';
+import { EspacoService } from 'src/app/core/services/espaco.service';
 import { VisitanteService } from 'src/app/core/services/visitante.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -26,9 +28,8 @@ export class MuseuComponent implements OnInit {
   readonly STATUS = 'Status';
   readonly DATA = 'Data Cadastro';
 
-  campoData;
-  campoStatus;
-  campoEspaco;
+  espacos = [];
+  categorias = [];
 
   isVisible = false;
 
@@ -43,7 +44,9 @@ export class MuseuComponent implements OnInit {
     private fb: FormBuilder,
     private visitanteService: VisitanteService,
     private acervoService: AcervoService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private categoriaService: CategoriaService,
+    private espacoService: EspacoService
   ) {}
 
   ngOnInit(): void {
@@ -94,9 +97,22 @@ export class MuseuComponent implements OnInit {
       .adquirirTodos()
       .pipe(take(1))
       .subscribe((x) => {
-        debugger;
         this.pesquisando = false;
         this.items = x;
+      });
+
+    this.categoriaService
+      .adquirirTodas()
+      .pipe(take(1))
+      .subscribe((retorno) => {
+        this.categorias = retorno;
+      });
+
+    this.espacoService
+      .adquirirTodos()
+      .pipe(take(1))
+      .subscribe((retorno) => {
+        this.espacos = retorno;
       });
   }
 
@@ -138,6 +154,14 @@ export class MuseuComponent implements OnInit {
     console.log(value);
   }
 
+  submitFormFiltro(value: { descricao: string }): void {
+    for (const key of Object.keys(this.filtroForm.controls)) {
+      this.filtroForm.controls[key].markAsDirty();
+      this.filtroForm.controls[key].updateValueAndValidity();
+    }
+    console.log(value);
+  }
+
   showModalItem(): void {
     this.isVisible2 = true;
     this.itemForm.setValue({
@@ -153,5 +177,19 @@ export class MuseuComponent implements OnInit {
 
   handleOkItem(): void {
     this.isVisible2 = false;
+  }
+
+  fazerPesquisa() {
+    this.acervoService
+      .adquirirTodos(
+        this.filtroForm.get('codigoCategoria').value,
+        this.filtroForm.get('codigoEsoaco').value,
+        this.filtroForm.get('nome').value
+      )
+      .pipe(take(1))
+      .subscribe((x) => {
+        this.pesquisando = false;
+        this.items = x;
+      });
   }
 }
