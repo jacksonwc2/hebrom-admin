@@ -20,6 +20,30 @@
         display: flex;">
     </div>
   </div>
-  <nz-content>Content</nz-content>
-  <nz-footer>Footer</nz-footer>
+  <nz-content style="background: #fff;">
+    <div nz-row style="padding: 30px 50px; background: #e2e2e2;">
+
+      <div nz-col [nzSpan]="6" style="padding-right: 15px;">
+        <nz-select style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Informe o Espaço">
+          <nz-option *ngFor="let espaco of []" [nzLabel]="espaco.descricao" [nzValue]="espaco.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div nz-col [nzSpan]="6" style="padding-right: 15px;">
+        <nz-select style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Informe a Categoria">
+          <nz-option *ngFor="let itemcategoria of []" [nzLabel]="itemcategoria.descricao" [nzValue]="itemcategoria.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <input nz-col [nzSpan]="8" maxlength="255" nz-input placeholder="Nome do acervo" />
+
+      <div nz-col [nzSpan]="4" style="padding-left: 15px;">
+        <button style="width: 100%;" nzType="primary" [nzLoading]="true" nz-button><i nz-icon
+            nzType="search"></i>Pesquisar</button>
+      </div>
+    </div>
+  </nz-content>
+  <nz-footer style="padding: 50px; background: #474747;">Footer</nz-footer>
 </nz-layout>
