@@ -45,8 +45,8 @@
         <input nz-col [nzSpan]="8" maxlength="255" formControlName="nome" nz-input placeholder="Nome do acervo" />
 
         <div nz-col [nzSpan]="4" style="padding-left: 15px;">
-          <button style="width: 100%;" nzType="primary" [nzLoading]="pesquisando" nz-button><i nz-icon
-              nzType="search"></i>Pesquisar</button>
+          <button style="width: 100%;" nzType="primary" (click)="fazerPesquisa()" [nzLoading]="pesquisando" nz-button><i
+              nz-icon nzType="search"></i>Pesquisar</button>
         </div>
 
       </form>

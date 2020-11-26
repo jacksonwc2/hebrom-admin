@@ -179,4 +179,18 @@ export class MuseuComponent implements OnInit {
   handleOkItem(): void {
     this.isVisible2 = false;
   }
+
+  fazerPesquisa() {
+    this.acervoService
+      .adquirirTodos(
+        this.filtroForm.get('codigoCategoria').value,
+        this.filtroForm.get('codigoEsoaco').value,
+        this.filtroForm.get('nome').value
+      )
+      .pipe(take(1))
+      .subscribe((x) => {
+        this.pesquisando = false;
+        this.items = x;
+      });
+  }
 }
