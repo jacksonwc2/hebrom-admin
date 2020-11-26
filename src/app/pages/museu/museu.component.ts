@@ -192,4 +192,18 @@ export class MuseuComponent implements OnInit {
         this.items = x;
       });
   }
+
+  getImagem(item) {
+    if (item.files.length === 0) {
+      return 'https://www.viainternet.com.mx/wp-content/themes/arkahost/assets/images/default.jpg';
+    }
+
+    const a = item.files.filter((x) => x.indexOf('.png') >= 0);
+
+    if (a.length === 0) {
+      return 'https://www.viainternet.com.mx/wp-content/themes/arkahost/assets/images/default.jpg';
+    }
+
+    return 'http://127.0.0.1:8080/fileService/files/' + a[0];
+  }
 }

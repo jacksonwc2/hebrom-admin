@@ -59,7 +59,7 @@
           <nz-card-meta nzTitle="{{item.nome}}" nzDescription="{{item.descricao}}"></nz-card-meta>
         </nz-card>
         <ng-template #coverTemplate>
-          <img alt="example" src="#" alt="Sem Imagem" width="100%" />
+          <img alt="example" [src]="getImagem(item)" alt="Sem Imagem" width="100%" />
         </ng-template>
       </div>
     </div>
