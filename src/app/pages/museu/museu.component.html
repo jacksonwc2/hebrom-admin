@@ -20,7 +20,7 @@
         display: flex;">
     </div>
   </div>
-  <nz-content *ngIf="!flagVisitanteInformado" style="background: #fff;">
+  <nz-content *ngIf="flagVisitanteInformado" style="background: #fff;">
     <div nz-row style="padding: 30px 50px; background: #e2e2e2;">
 
       <form nz-form [formGroup]="filtroForm" (ngSubmit)="submitFormFiltro(filtroForm.value)"
@@ -52,26 +52,28 @@
       </form>
     </div>
 
-    <div style="padding: 50px;">
+    <div style="padding: 50px;     display: flow-root;">
       <div *ngFor="let item of items">
-        <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
-          <nz-card-meta nzTitle="item.nome" nzDescription="item.descricao"></nz-card-meta>
+        <nz-card (click)="showModalItem(item)" nz-card-grid nzHoverable style="width: 300px; margin: 5px;"
+          [nzCover]="coverTemplate">
+          <nz-card-meta nzTitle="{{item.nome}}" nzDescription="{{item.descricao}}"></nz-card-meta>
         </nz-card>
         <ng-template #coverTemplate>
-          <img alt="example" src="item.files[0]" alt="Sem Imagem" width="100%" />
+          <img alt="example" src="#" alt="Sem Imagem" width="100%" />
         </ng-template>
       </div>
     </div>
 
 
   </nz-content>
-  <nz-footer style="padding: 50px; background: #474747;">Footer</nz-footer>
+  <nz-footer style="padding: 50px; background: #474747; color: #e2e2e2;text-align: center;">Desenvolvido pelos Guri
+    © Copyright 2020
+  </nz-footer>
 </nz-layout>
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Cadastro de visitante" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
   nzOkText="Salvar" nzCancelText="Cancelar" nzWrapClassName="vertical-center-modal">
   <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
-    <input hidden formControlName="id" />
 
     <!-- NOME -->
     <nz-form-item>
@@ -124,7 +126,7 @@
 
 
 <!-- MODAL EXIBIÇÃO ITEM -->
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Informações do item." (nzOnOk)="handleOkItem()"
+<nz-modal [(nzVisible)]="isVisible2" nzTitle="Informações do item." (nzOnOk)="handleOkItem()"
   nzWrapClassName="vertical-center-modal">
   <form nz-form [formGroup]="itemForm" (ngSubmit)="submitFormItem(itemForm.value)">
 

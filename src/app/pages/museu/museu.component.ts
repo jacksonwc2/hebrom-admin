@@ -162,16 +162,16 @@ export class MuseuComponent implements OnInit {
     console.log(value);
   }
 
-  showModalItem(): void {
+  showModalItem(item): void {
     this.isVisible2 = true;
     this.itemForm.setValue({
-      nome: '',
-      descricao: '',
-      codigoCategoria: '',
-      codigoEspaco: '',
-      codigoAcervoStatus: '',
-      dataCadastro: '',
-      id: null,
+      nome: item.nome,
+      descricao: item.descricao,
+      codigoCategoria: item.codigoCategoria,
+      codigoEspaco: item.codigoEspaco,
+      codigoAcervoStatus: item.codigoAcervoStatus,
+      dataCadastro: item.dataCadastro,
+      id: item.id,
     });
   }
 
