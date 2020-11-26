@@ -119,7 +119,7 @@
 <!-- MODAL EXIBIÇÃO ITEM -->
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Informações do item." (nzOnOk)="handleOkItem()"
   nzWrapClassName="vertical-center-modal">
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitFormItem(validateForm.value)">
+  <form nz-form [formGroup]="itemForm" (ngSubmit)="submitFormItem(itemForm.value)">
 
     <input hidden formControlName="id" />
 
