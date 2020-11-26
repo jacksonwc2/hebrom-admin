@@ -52,7 +52,6 @@ export class MuseuComponent implements OnInit {
       idade: [null, [Validators.required]],
       telefone: [null, [Validators.required]],
       email: [null, [Validators.required]],
-      id: null,
     });
 
     this.filtroForm = this.fb.group({

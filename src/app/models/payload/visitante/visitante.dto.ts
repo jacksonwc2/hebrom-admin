@@ -3,5 +3,4 @@ export interface VisitanteDTO {
   idade: number;
   telefone: string;
   email: string;
-  id: number;
 }
