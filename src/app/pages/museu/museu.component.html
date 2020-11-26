@@ -114,3 +114,93 @@
     <!-- EMAIL -->
   </form>
 </nz-modal>
+
+
+<!-- MODAL EXIBIÇÃO ITEM -->
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Informações do item." (nzOnOk)="handleOkItem()"
+  nzWrapClassName="vertical-center-modal">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitFormItem(validateForm.value)">
+
+    <input hidden formControlName="id" />
+
+    <!-- NOME -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ NOME }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <input maxlength="255" disabled="true" nz-input formControlName="nome" placeholder="Nome do item" />
+
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- NOME -->
+
+    <!-- DESCRICAO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ DESCRICAO }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <input maxlength="255" disabled="true" nz-input formControlName="descricao" placeholder="Descricão do item" />
+
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- DESCRICAO -->
+
+    <!-- CATEGORIA -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ CATEGORIA }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <input maxlength="255" disabled="true" nz-input formControlName="codigoCategoria"
+          placeholder="Categoria do item" />
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- CATEGORIA -->
+
+    <!-- ESPAÇO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ ESPACO }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <input maxlength="255" disabled="true" nz-input formControlName="codigoEspaco" placeholder="Espaço do item" />
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- ESPAÇO -->
+
+    <!-- STATUS -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ STATUS }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <input maxlength="255" disabled="true" nz-input formControlName="codigoAcervoStatus"
+          placeholder="Status do item" />
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- STATUS -->
+
+    <!-- DATA CADASTRO -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>{{ DATA }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <nz-date-picker style="width: 100%;" disabled="true" formControlName="dataCadastro" nzShowTime
+          nzFormat="dd/MM/yyyy HH:mm">
+        </nz-date-picker>
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- DATA CADASTRO -->
+
+  </form>
+</nz-modal>
+<!-- MODAL EXIBIÇÃO ITEM -->
