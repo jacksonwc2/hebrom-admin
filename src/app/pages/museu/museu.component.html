@@ -11,7 +11,7 @@
         Atraves das imagens e outros dados disponibilizados, você terá acesso a informações sobre peças, sites entre
         outros.
       </p>
-      <a href="#" style="background: #545456  !important"
+      <a (click)="showModal()" href="#" style="background: #545456  !important"
         class="u-btn u-btn-round u-button-style u-hover-black u-palette-2-base u-radius-50 u-btn-3">
         Iniciar Visita ao Museu</a>
     </div>
@@ -47,3 +47,57 @@
   </nz-content>
   <nz-footer style="padding: 50px; background: #474747;">Footer</nz-footer>
 </nz-layout>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Cadastro de visitante" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+  nzOkText="Salvar" nzCancelText="Cancelar" nzWrapClassName="vertical-center-modal">
+  <form nz-form [formGroup]=" validateForm" (ngSubmit)="submitForm(validateForm.value)">
+    <input hidden formControlName="id" />
+
+    <!-- NOME -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>{{ NOME }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <input maxlength="255" nz-input formControlName="nome" placeholder="Informe seu nome" />
+
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- NOME -->
+
+    <!-- IDADE -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>{{ IDADE }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+
+        <input maxlength="255" nz-input formControlName="idade" placeholder="Informe sua idade" />
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- IDADE -->
+
+    <!-- TELEFONE -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>{{ TELEFONE }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+        <input maxlength="255" nz-input formControlName="telefone" placeholder="Informe seu telefone" />
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- TELEFONE -->
+
+    <!-- EMAIL -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>{{ EMAIL }}</nz-form-label>
+
+      <nz-form-control [nzSpan]="18" nzHasFeedback nzValidatingTip="Validando...">
+        <input maxlength="255" nz-input formControlName="email" placeholder="Informe seu email." />
+
+      </nz-form-control>
+    </nz-form-item>
+    <!-- EMAIL -->
+  </form>
+</nz-modal>

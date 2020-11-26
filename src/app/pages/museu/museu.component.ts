@@ -1,10 +1,8 @@
 import { NzMessageService } from 'ng-zorro-antd';
-import { throwError } from 'rxjs';
-import { catchError, finalize, take } from 'rxjs/operators';
-import { AutenticacaoService } from 'src/app/core/services/autenticacao.service';
+import { take } from 'rxjs/operators';
+import { VisitanteService } from 'src/app/core/services/visitante.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-museu',
@@ -12,50 +10,60 @@ import { Router } from '@angular/router';
   styleUrls: ['./museu.component.css'],
 })
 export class MuseuComponent implements OnInit {
-  public autenticacaoForm!: FormGroup;
-  public requesting = false;
+  public validateForm!: FormGroup;
+
+  readonly NOME = 'Nome';
+  readonly IDADE = 'Idade';
+  readonly TELEFONE = 'Telefone';
+  readonly EMAIL = 'Email';
+
+  isVisible = false;
+
+  flagVisitanteInformado = false;
 
   constructor(
     private fb: FormBuilder,
-    public router: Router,
-    private autenticacaoService: AutenticacaoService,
+    private visitanteService: VisitanteService,
     private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
-    this.autenticacaoForm = this.fb.group({
-      login: [null, [Validators.required]],
-      senha: [null, [Validators.required]],
+    this.validateForm = this.fb.group({
+      nome: [null, [Validators.required]],
+      idade: [null, [Validators.required]],
+      telefone: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      id: null,
     });
   }
 
-  submitForm(): void {
-    // tslint:disable-next-line: forin
-    for (const i in this.autenticacaoForm.controls) {
-      this.autenticacaoForm.controls[i].markAsDirty();
-      this.autenticacaoForm.controls[i].updateValueAndValidity();
-    }
+  showModal(): void {
+    this.isVisible = true;
   }
 
-  login(): void {
-    this.requesting = true;
+  handleOk(): void {
+    this.visitanteService
+      .salvar(this.validateForm.value)
+      .pipe(take(1))
+      .subscribe((x) => {
+        this.message.success('Entrada registrada com sucesso!');
 
-    this.autenticacaoService
-      .autenticar(this.autenticacaoForm.value)
-      .pipe(
-        take(1),
-        finalize(() => (this.requesting = false)),
-        catchError((error) => {
-          this.message.error('Dados inválidos!');
-          return throwError(error);
-        })
-      )
-      .subscribe((retorno) => {
-        if (retorno) {
-          this.message.success('Bem Vindo!');
-          localStorage.setItem('logado', 'true');
-          this.router.navigate(['pages/dashboard']);
-        }
+        this.flagVisitanteInformado = true;
+
+        this.isVisible = false;
       });
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  submitForm(value: { descricao: string }): void {
+    for (const key of Object.keys(this.validateForm.controls)) {
+      this.validateForm.controls[key].markAsDirty();
+      this.validateForm.controls[key].updateValueAndValidity();
+    }
+    console.log(value);
   }
 }

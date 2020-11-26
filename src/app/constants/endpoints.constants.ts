@@ -12,6 +12,10 @@ export class EndpointsConstants {
     DELETAR: URL_BASE.concat('/eventoService/deletar/'),
   };
 
+  static readonly VISITANTE = {
+    SALVAR: URL_BASE.concat('/visitanteService/salvar'),
+  };
+
   static readonly ENTIDADES = {
     ADQUIRIR_TODOS: URL_BASE.concat('/entidadeService/adquirirTodos'),
     SALVAR: URL_BASE.concat('/entidadeService/salvar'),
