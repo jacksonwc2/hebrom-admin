@@ -45,6 +45,17 @@ export class EndpointsConstants {
     DELETAR: URL_BASE.concat('/espacoService/deletar/'),
   };
 
+  static readonly CADASTRO_FUNCIONARIO = {
+    ADQUIRIR_TODOS: URL_BASE.concat(
+      '/cadastroFuncionarioService/adquirirTodos'
+    ),
+    SALVAR: URL_BASE.concat('/cadastroFuncionarioService/salvar'),
+    ADQUIRIR_POR_ID: URL_BASE.concat(
+      '/cadastroFuncionarioService/adquirirPorId'
+    ),
+    DELETAR: URL_BASE.concat('/cadastroFuncionarioService/deletar/'),
+  };
+
   static readonly LOCALIZACAO = {
     ADQUIRIR_TODOS: URL_BASE.concat('/espacoService/adquirirTodos'),
     SALVAR: URL_BASE.concat('/espacoService/salvar'),

@@ -62,6 +62,15 @@ export class FullComponent implements OnInit {
       selected: false,
       disabled: false,
     },
+    {
+      level: 1,
+      title: 'Cadastro Funcionario',
+      icon: 'tag',
+      router: 'cadastro-funcionario',
+      open: false,
+      selected: false,
+      disabled: false,
+    },
   ];
 
   /**

@@ -21,7 +21,7 @@ export class AcervoComponent implements OnInit {
   readonly ATIVO = 'Ativo';
   readonly STATUS = 'Status';
   readonly DATA = 'Data Cadastro';
-  readonly ACOES = 'AÇÕES';
+  readonly ACOES = 'Ações';
   readonly ADICIONAR = 'ADICIONAR';
 
   readonly EXCECAO_NAO_HA_DADOS = 'Não há Dados.';

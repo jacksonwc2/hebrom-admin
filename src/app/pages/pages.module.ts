@@ -6,6 +6,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { AcervoComponent } from 'src/app/pages/acervo/acervo.component';
+import { CadastroFuncionarioComponent } from 'src/app/pages/cadastro-funcionario/cadastro-funcionario.component';
 import { EspacoComponent } from 'src/app/pages/espaco/espaco.component';
 import { LocalizacoesComponent } from 'src/app/pages/localizacoes/localizacoes.component';
 import { MuseuComponent } from 'src/app/pages/museu/museu.component';
@@ -58,6 +59,7 @@ const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
     AcervoComponent,
     MuseuComponent,
     LocalizacoesComponent,
+    CadastroFuncionarioComponent,
   ],
 })
 export class PagesModule {}

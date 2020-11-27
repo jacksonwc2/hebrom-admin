@@ -1,4 +1,5 @@
 import { AcervoComponent } from 'src/app/pages/acervo/acervo.component';
+import { CadastroFuncionarioComponent } from 'src/app/pages/cadastro-funcionario/cadastro-funcionario.component';
 import { EspacoComponent } from 'src/app/pages/espaco/espaco.component';
 import { Routes } from '@angular/router';
 import { CategoriasComponent } from './categorias/categorias.component';
@@ -14,4 +15,5 @@ export const PageRoutes: Routes = [
   { path: 'acervo', component: AcervoComponent },
   { path: 'espaco', component: EspacoComponent },
   { path: 'eventos', component: EventosComponent },
+  { path: 'cadastro-funcionario', component: CadastroFuncionarioComponent },
 ];
