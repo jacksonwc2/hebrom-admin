@@ -164,15 +164,32 @@ export class MuseuComponent implements OnInit {
 
   showModalItem(item): void {
     this.isVisible2 = true;
+
+    const categoria = this.categorias
+      .filter((itemCategoria) => itemCategoria.id === item.codigoCategoria)
+      .map((itemCategoria) => itemCategoria.descricao);
+
+    const espaco = this.espacos
+      .filter((itemEspaco) => itemEspaco.id === item.codigoEspaco)
+      .map((itemEspaco) => itemEspaco.descricao);
+
+    const status = this.verificarStatus(item.codigoAcervoStatus);
+
     this.itemForm.setValue({
       nome: item.nome,
       descricao: item.descricao,
-      codigoCategoria: item.codigoCategoria,
-      codigoEspaco: item.codigoEspaco,
-      codigoAcervoStatus: item.codigoAcervoStatus,
+      codigoCategoria: categoria,
+      codigoEspaco: espaco,
+      codigoAcervoStatus: status,
       dataCadastro: item.dataCadastro,
       id: item.id,
     });
+  }
+
+  private verificarStatus(codigoStatus: number): string {
+    if (codigoStatus === 1) {
+      return 'TUDO OK';
+    }
   }
 
   handleOkItem(): void {
@@ -183,7 +200,7 @@ export class MuseuComponent implements OnInit {
     this.acervoService
       .adquirirTodos(
         this.filtroForm.get('codigoCategoria').value,
-        this.filtroForm.get('codigoEsoaco').value,
+        this.filtroForm.get('codigoEspaco').value,
         this.filtroForm.get('nome').value
       )
       .pipe(take(1))
