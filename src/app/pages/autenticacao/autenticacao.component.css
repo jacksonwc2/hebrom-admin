@@ -4,7 +4,7 @@
 
 nz-content {
   display: flex;
-  background-color: #0c6fa5;
+  background-color: #383838;
   height: 100%
 }
 
@@ -14,7 +14,7 @@ nz-content {
   margin: auto;
   padding: 40px 20px;
   border-radius: 3px;
-  background: #045e90;
+  background: black;
 }
 
 .login-form .logo {
