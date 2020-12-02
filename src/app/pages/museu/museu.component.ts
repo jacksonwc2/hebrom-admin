@@ -29,6 +29,7 @@ export class MuseuComponent implements OnInit {
   readonly STATUS = 'Status';
   readonly DATA = 'Data Cadastro';
 
+  filesEditando = [];
   espacos = [];
   categorias = [];
 
@@ -180,6 +181,7 @@ export class MuseuComponent implements OnInit {
 
     const status = this.verificarStatus(item.codigoAcervoStatus);
 
+    this.filesEditando = item.files;
     this.itemForm.setValue({
       nome: item.nome,
       descricao: item.descricao,

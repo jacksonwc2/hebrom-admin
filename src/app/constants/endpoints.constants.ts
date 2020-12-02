@@ -46,14 +46,10 @@ export class EndpointsConstants {
   };
 
   static readonly CADASTRO_FUNCIONARIO = {
-    ADQUIRIR_TODOS: URL_BASE.concat(
-      '/cadastroFuncionarioService/adquirirTodos'
-    ),
-    SALVAR: URL_BASE.concat('/cadastroFuncionarioService/salvar'),
-    ADQUIRIR_POR_ID: URL_BASE.concat(
-      '/cadastroFuncionarioService/adquirirPorId'
-    ),
-    DELETAR: URL_BASE.concat('/cadastroFuncionarioService/deletar/'),
+    ADQUIRIR_TODOS: URL_BASE.concat('/usuarioService/adquirirTodos'),
+    SALVAR: URL_BASE.concat('/usuarioService/salvar'),
+    ADQUIRIR_POR_ID: URL_BASE.concat('/usuarioService/adquirirPorId'),
+    DELETAR: URL_BASE.concat('/usuarioService/deletar/'),
   };
 
   static readonly LOCALIZACAO = {

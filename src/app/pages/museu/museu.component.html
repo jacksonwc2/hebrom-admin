@@ -219,6 +219,9 @@
     </nz-form-item>
     <!-- DATA CADASTRO -->
 
+    <a *ngFor="let file of filesEditando" target="_blank"
+      href="{{'http://127.0.0.1:8080/fileService/files/' + file}}">{{file}}</a>
+
   </form>
 
   <ng-template #modalFooter>
