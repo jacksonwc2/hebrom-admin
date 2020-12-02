@@ -7,8 +7,9 @@
 
     <!-- INICIO LOGO SLIDER -->
     <div class="sidebar-logo">
-      <img *ngIf="isCollapsed" src="../../../assets/images/icone.png" alt="logo">
-      <img *ngIf="!isCollapsed" src="../../../assets/images/logo.png" alt="logo">
+      <h1 *ngIf="!isCollapsed">MUSEU DUSGURI</h1>
+      <h1 *ngIf="isCollapsed" style="margin-left: 0;">MSDG</h1>
+
       <span class="header-trigger fold" *ngIf="!isCollapsed" (click)="isCollapsed = !isCollapsed">
         <i class="trigger" nz-icon nzType="menu-fold"></i>
       </span>

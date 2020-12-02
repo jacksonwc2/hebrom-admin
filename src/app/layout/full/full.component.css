@@ -56,7 +56,7 @@
   padding-left: 24px;
   overflow: hidden;
   line-height: 64px;
-  background: #0081bd;
+  background: black;
   transition: all .3s;
 }
 
@@ -91,7 +91,7 @@ nz-header {
   position: relative;
   height: 64px;
   padding: 0;
-  background: #009adf;
+  background: #292828;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 }
 
