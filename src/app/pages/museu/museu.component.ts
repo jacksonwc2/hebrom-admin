@@ -16,6 +16,7 @@ export class MuseuComponent implements OnInit {
   public validateForm!: FormGroup;
   public filtroForm!: FormGroup;
   public itemForm!: FormGroup;
+  public filtroAntigo!: FormGroup;
 
   readonly NOME = 'Nome';
   readonly IDADE = 'Idade';
@@ -35,7 +36,7 @@ export class MuseuComponent implements OnInit {
 
   isVisible2 = false;
 
-  flagVisitanteInformado = false;
+  flagVisitanteInformado = true;
 
   pesquisando = false;
   items = [];
@@ -61,6 +62,10 @@ export class MuseuComponent implements OnInit {
       codigoCategoria: [null, [Validators.required]],
       codigoEspaco: [null, [Validators.required]],
       nome: [null, [Validators.required]],
+    });
+
+    this.filtroAntigo = this.fb.group({
+      filtro: ['Mais antigo', [Validators.required]],
     });
 
     this.itemForm = this.fb.group({

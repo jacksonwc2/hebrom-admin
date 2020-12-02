@@ -50,6 +50,17 @@
         </div>
 
       </form>
+
+      <form nz-form [formGroup]="filtroAntigo">
+        <div>
+          <label>ONDENAR POR:</label>
+          <nz-select nzShowSearch nzAllowClear style="width: 150px; padding-left: 10px;" formControlName="filtro"
+            [nzDisabled]="true">
+            <nz-option nzLabel="Mais antigo" nzValue="Mais antigo">
+            </nz-option>
+          </nz-select>
+        </div>
+      </form>
     </div>
 
     <div style="padding: 50px;     display: flow-root;">
