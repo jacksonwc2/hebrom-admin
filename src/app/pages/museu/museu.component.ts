@@ -104,7 +104,9 @@ export class MuseuComponent implements OnInit {
       .pipe(take(1))
       .subscribe((x) => {
         this.pesquisando = false;
-        this.items = x;
+        this.items = x.filter(
+          (retorno) => retorno.codigoAcervoStatus === 1 && retorno.flagAtivo
+        );
       });
 
     this.categoriaService

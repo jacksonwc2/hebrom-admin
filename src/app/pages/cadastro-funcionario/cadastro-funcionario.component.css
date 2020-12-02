@@ -24,30 +24,25 @@
   display: inline-flex;
 }
 
-.content,
+.content {
+  border: 1px solid #f1f1f1;
+}
+
+.anticon-delete {
+  color: #ef0808
+}
+
 .layout,
 .content cdk-virtual-scroll-viewport {
   height: 100%;
   background: none;
 }
 
-.content {
-  border: 1px solid #f1f1f1;
-}
-
-.cabecalho-list nz-list-item {
-  width: 100%;
-}
-
-.cabecalho-list nz-list-item,
-.cabecalho-list {
-  padding: 0px;
-}
-
 .cabecalho-list {
   display: inline-flex;
   background: #f6f6f6;
   width: 100%;
+  padding: 0;
 }
 
 .cabecalho-list .item {
@@ -57,6 +52,41 @@
   font-weight: bold;
 }
 
-.anticon-delete {
-  color: #ef0808
+.cabecalho-list nz-list-item {
+  padding: 0;
+  width: 100%;
+}
+
+.cabecalho-list .item.acoes {
+  justify-content: flex-end;
+}
+
+.body-list {
+  display: inline-block;
+  width: 100%;
+  padding: 0;
+}
+
+.body-list .item {
+  padding: 8px 16px;
+  display: inline-flex;
+}
+
+.body-list .item a {
+  padding: 0 0 0 10px;
+}
+
+.body-list nz-list-item {
+  padding: 0;
+  width: 100%;
+}
+
+.body-list .body-list-item {
+  width: 100%;
+}
+
+.body-list-item .item.acoes {
+  margin: 0;
+  justify-content: flex-end;
+  width: 100%;
 }
