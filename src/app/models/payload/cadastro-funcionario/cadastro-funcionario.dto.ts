@@ -1,6 +1,6 @@
 export interface CadastroFuncionarioDTO {
   id: number;
-  usuario: string;
+  login: string;
   senha: string;
   flagEditar: number;
   flagExcluir: number;
