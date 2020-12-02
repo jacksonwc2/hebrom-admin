@@ -36,7 +36,7 @@ export class MuseuComponent implements OnInit {
 
   isVisible2 = false;
 
-  flagVisitanteInformado = true;
+  flagVisitanteInformado = false;
 
   pesquisando = false;
   items = [];

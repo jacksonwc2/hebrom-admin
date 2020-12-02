@@ -14,10 +14,10 @@ export class AcervoService {
     codigoEspaco?,
     nome?
   ): Observable<Array<AcervoRetrieveDTO>> {
-    const params = new HttpParams();
-    params.set('codigoCategoria', codigoCategoria);
-    params.set('codigoEspaco', codigoEspaco);
-    params.set('nome', nome);
+    let params = new HttpParams();
+    params = params.set('codigoCategoria', codigoCategoria || '');
+    params = params.set('codigoEspaco', codigoEspaco || '');
+    params = params.set('nome', nome || '');
 
     return this.http.get<Array<AcervoRetrieveDTO>>(
       EndpointsConstants.ACERVO.ADQUIRIR_TODOS,
