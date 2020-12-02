@@ -40,24 +40,26 @@
         <nz-list-empty *ngIf="dataFilter.length == 0">
           Não há Dados
         </nz-list-empty>
-        <nz-list-item *cdkVirtualFor="let item of dataFilter">
-          <div nz-row class="body-list-item">
-            <div nz-col nzSpan="4" class="item">{{item.login}}</div>
+        <nz-list-body class="body-list">
+          <nz-list-item *cdkVirtualFor="let item of dataFilter">
+            <div nz-row class="body-list-item">
+              <div nz-col nzSpan="4" class="item">{{item.login}}</div>
 
-            <div nz-col nzSpan="3" class="item">{{item.senha}}</div>
+              <div nz-col nzSpan="3" class="item">{{item.senha}}</div>
 
-            <div nz-col nzSpan="4" class="item">{{item.flagEditar}}</div>
+              <div nz-col nzSpan="4" class="item">{{item.flagEditar}}</div>
 
-            <div nz-col nzSpan="5" class="item">{{item.flagExluir}}</div>
+              <div nz-col nzSpan="5" class="item">{{item.flagExcluir}}</div>
 
-            <div nz-col nzSpan="5" class="item">{{item.flagCadastrar}}</div>
+              <div nz-col nzSpan="5" class="item">{{item.flagCadastrar}}</div>
 
-            <div nz-col nzSpan="3" class="item acoes">
-              <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>
-              <a (click)="delete(item)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
+              <div nz-col nzSpan="3" class="item acoes">
+                <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>
+                <a (click)="delete(item)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
+              </div>
             </div>
-          </div>
-        </nz-list-item>
+          </nz-list-item>
+        </nz-list-body>
       </nz-list>
     </cdk-virtual-scroll-viewport>
   </nz-content>
