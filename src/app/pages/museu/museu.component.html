@@ -219,8 +219,12 @@
     </nz-form-item>
     <!-- DATA CADASTRO -->
 
-    <a *ngFor="let file of filesEditando" target="_blank"
-      href="{{'http://127.0.0.1:8080/fileService/files/' + file}}">{{file}}</a>
+    <a *ngFor="let file of filesEditando" target="_blank" href="{{'http://127.0.0.1:8080/fileService/files/' + file}}">
+
+      <i nz-icon nzType="cloud-download" nzTheme="outline"></i>
+      {{file}}</a>
+
+
 
   </form>
 
