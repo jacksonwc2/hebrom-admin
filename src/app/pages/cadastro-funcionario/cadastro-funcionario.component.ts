@@ -17,9 +17,9 @@ export class CadastroFuncionarioComponent implements OnInit {
 
   readonly LOGIN = 'Login';
   readonly SENHA = 'Senha';
-  readonly PREMISSAO_EDITAR = 'Permissão para editar';
-  readonly PREMISSAO_EXCLUIR = 'Permissão para excluir';
-  readonly PREMISSAO_CADASTRAR = 'Permissão para cadastrar';
+  readonly PREMISSAO_EDITAR = 'Editar';
+  readonly PREMISSAO_EXCLUIR = 'Excluir';
+  readonly PREMISSAO_CADASTRAR = 'Cadastrar';
   readonly ACOES = 'Ações';
   readonly ADICIONAR = 'ADICIONAR';
 
