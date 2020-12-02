@@ -14,4 +14,8 @@ export class VisitanteService {
       visanteDTO
     );
   }
+
+  adquirirTodos(): Observable<any> {
+    return this.http.get<any>(EndpointsConstants.VISITANTE.ADQUIRIR_TODOS);
+  }
 }

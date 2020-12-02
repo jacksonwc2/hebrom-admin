@@ -1,3 +1,4 @@
+import { GoogleChartsModule } from 'angular-google-charts';
 import { NgZorroAntdModule, NzFormModule, NzIconModule } from 'ng-zorro-antd';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
@@ -46,6 +47,7 @@ const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
     NzAutocompleteModule,
     NzSelectModule,
     NzUploadModule,
+    GoogleChartsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [

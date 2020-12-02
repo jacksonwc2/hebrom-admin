@@ -28,6 +28,15 @@ export class FullComponent implements OnInit {
   menus = [
     {
       level: 1,
+      title: 'Dashboard',
+      icon: 'home',
+      router: 'dashboard',
+      open: false,
+      selected: false,
+      disabled: false,
+    },
+    {
+      level: 1,
       title: 'Entidades',
       icon: 'home',
       router: 'entidades',

@@ -1,1 +1,12 @@
-<nz-calendar></nz-calendar>
+<h2>Faixa Etária Dos Visitantes</h2>
+<div style="display: inline-flex;">
+  <google-chart #chart type="PieChart" [data]="data" [width]="width" [height]="height">
+  </google-chart>
+  <img _ngcontent-yjt-c327="" src="https://mechatronicstec.files.wordpress.com/2014/06/robo.png"
+    style="max-width: 100%; max-height: 520px; margin: auto; display: flex;">
+</div>
+
+<div style="padding: 30px; background: #ececec;">
+  <h2 style="display: inline-block;">Total De Visitantes: </h2>
+  <span style="font-size: 20px; float: right;">{{total}}</span>
+</div>
