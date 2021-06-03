@@ -157,15 +157,20 @@ export class EventosComponent implements OnInit {
         take(1)
       )
       .subscribe((x) => {
-        debugger;
         this.message.success('Dados Salvos com Sucesso!');
+
         this.isVisible = false;
+
+        this.validateForm.reset();
+
         this.adquirirTodos();
       });
   }
 
   handleCancel(): void {
     this.isVisible = false;
+
+    this.validateForm.reset();
   }
 
   delete(item): void {

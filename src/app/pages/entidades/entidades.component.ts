@@ -164,12 +164,17 @@ export class EntidadesComponent implements OnInit {
 
         this.isVisible = false;
 
+        this.validateForm.reset();
+
         this.adquirirTodos();
       });
   }
 
   handleCancel(): void {
     this.isVisible = false;
+
+    this.validateForm.reset();
+
   }
 
   delete(item): void {

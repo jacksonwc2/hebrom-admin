@@ -1,4 +1,4 @@
-const URL_BASE = 'http://127.0.0.1:8080';
+const URL_BASE = 'http://18.116.72.213:8081';
 
 export class EndpointsConstants {
   static readonly AUTENTICACAO = {
