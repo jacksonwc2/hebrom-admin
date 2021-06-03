@@ -54,7 +54,8 @@
 
               <div nz-col nzSpan="4" class="item">{{item.documento}}</div>
 
-              <div nz-col nzSpan="3" class="item">{{item.localizacao.uriMaps}}</div>
+              <div nz-col nzSpan="3" class="item"><a target="_blank" href="{{item.localizacao.uriMaps}}">Abrir Local</a>
+              </div>
 
               <div nz-col nzSpan="3" class="item acoes">
                 <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>

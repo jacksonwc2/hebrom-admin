@@ -1,5 +1,5 @@
 import { NzMessageService, NzModalService, NzUploadFile } from 'ng-zorro-antd';
-import { take } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { EntidadeService } from 'src/app/core/services/entidade.service';
 import { EventoService } from 'src/app/core/services/evento.service';
@@ -145,19 +145,19 @@ export class EventosComponent implements OnInit {
   }
 
   handleOk(): void {
-    debugger;
     this.eventosService
       .upload(this.fileList)
-      .pipe(take(1))
+      .pipe(
+        switchMap((banner: any) => {
+          const eventoDTO = this.validateForm.value;
+          eventoDTO.banner = banner.valor;
+
+          return this.eventosService.salvar(eventoDTO);
+        }),
+        take(1)
+      )
       .subscribe((x) => {
         debugger;
-        alert(x);
-      });
-
-    this.eventosService
-      .salvar(this.validateForm.value)
-      .pipe(take(1))
-      .subscribe((x) => {
         this.message.success('Dados Salvos com Sucesso!');
         this.isVisible = false;
         this.adquirirTodos();

@@ -42,9 +42,9 @@
             <div nz-row class="body-list-item">
               <div nz-col nzSpan="12" class="item">{{item.titulo}}</div>
 
-              <div nz-col nzSpan="4" class="item">{{item.dataInicio | date:'dd/MM/yyyy HH:mm'}}</div>
+              <div nz-col nzSpan="4" class="item">{{item.dataInicio}}</div>
 
-              <div nz-col nzSpan="4" class="item">{{item.dataFinal | date:'dd/MM/yyyy HH:mm'}}</div>
+              <div nz-col nzSpan="4" class="item">{{item.dataFinal}}</div>
 
               <div nz-col nzSpan="4" class="item acoes">
                 <a (click)="showModal(item)"><i nz-icon nzType="form" nzTheme="outline"></i></a>

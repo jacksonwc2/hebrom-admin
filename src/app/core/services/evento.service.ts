@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 export class EventoService {
   constructor(private http: HttpClient) {}
 
-  upload(files: Array<File>): Observable<any> {
+  upload(files: Array<any>): Observable<String> {
     const formData = new FormData();
 
     files.forEach((x) => {
