@@ -103,13 +103,20 @@ export class LocalizacoesComponent implements OnInit {
       .pipe(take(1))
       .subscribe((x) => {
         this.message.success('Dados Salvos com Sucesso!');
+
         this.isVisible = false;
+
+        this.validateForm.reset();
+
         this.adquirirTodos();
       });
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
+
+    this.validateForm.reset();
+
     this.isVisible = false;
   }
 

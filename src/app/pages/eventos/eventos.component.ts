@@ -7,6 +7,7 @@ import { LocalizacaoService } from 'src/app/core/services/localizacao.service';
 import { TitleService } from 'src/app/core/services/tittle.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-eventos',
@@ -137,8 +138,8 @@ export class EventosComponent implements OnInit {
       codigoEntidade: this.editar ? item.codigoEntidade : null,
       codigoCategoria: this.editar ? item.codigoCategoria : null,
       codigoLocalizacao: this.editar ? item.codigoLocalizacao : null,
-      dataInicio: this.editar ? item.dataInicio : null,
-      dataFinal: this.editar ? item.dataFinal : null,
+      dataInicio: this.editar ? moment(item.dataInicio,'DD/MM/YYYY hh:mm').format() : null,
+      dataFinal: this.editar ? moment(item.dataFinal,'DD/MM/YYYY hh:mm').format()  : null,
       banner: this.editar ? null : null,
       id: this.editar ? item.id : null,
     });
@@ -157,15 +158,20 @@ export class EventosComponent implements OnInit {
         take(1)
       )
       .subscribe((x) => {
-        debugger;
         this.message.success('Dados Salvos com Sucesso!');
+
         this.isVisible = false;
+
+        this.validateForm.reset();
+
         this.adquirirTodos();
       });
   }
 
   handleCancel(): void {
     this.isVisible = false;
+
+    this.validateForm.reset();
   }
 
   delete(item): void {

@@ -55,6 +55,7 @@ export class CategoriasComponent implements OnInit {
       .pipe(take(1))
       .subscribe((retorno) => {
         this.data = retorno;
+        
         this.pesquisar(this.search.value);
       });
   }
@@ -101,13 +102,20 @@ export class CategoriasComponent implements OnInit {
       .pipe(take(1))
       .subscribe((x) => {
         this.message.success('Dados Salvos com Sucesso!');
+
         this.isVisible = false;
+
+        this.validateForm.reset();
+
         this.adquirirTodos();
       });
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
+
+    this.validateForm.reset();
+
     this.isVisible = false;
   }
 
@@ -128,6 +136,7 @@ export class CategoriasComponent implements OnInit {
       .pipe(take(1))
       .subscribe(() => {
         this.message.success('Categoria excluida com Sucesso!');
+
         this.adquirirTodos();
       });
   }
