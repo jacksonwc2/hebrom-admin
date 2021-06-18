@@ -14,17 +14,7 @@ export const AppRoutes: Routes = [
     path: '',
     canActivate: [AutenticacaoGuard],
     component: FullComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: '/pages',
-        pathMatch: 'full',
-      },
-      {
-        path: 'pages',
-        loadChildren: () =>
-          import('./pages/pages.module').then((m) => m.PagesModule),
-      },
-    ],
+    loadChildren: () =>
+      import('./pages/pages.module').then((m) => m.PagesModule),
   },
 ];

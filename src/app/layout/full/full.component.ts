@@ -119,7 +119,7 @@ export class FullComponent implements OnInit {
   }
 
   openRoute(rota: string) {
-    this.router.navigate(['pages/' + rota]);
+    this.router.navigate([rota]);
   }
 
   perfil() {

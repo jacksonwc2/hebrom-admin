@@ -54,7 +54,7 @@ export class AutenticacaoComponent implements OnInit {
         if (retorno) {
           this.message.success('Bem Vindo!');
           localStorage.setItem('logado', 'true');
-          this.router.navigate(['pages/dashboard']);
+          this.router.navigate(['dashboard']);
         }
       });
   }
