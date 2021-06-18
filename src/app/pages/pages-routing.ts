@@ -12,8 +12,5 @@ export const PageRoutes: Routes = [
   { path: 'categorias', component: CategoriasComponent },
   { path: 'localizacoes', component: LocalizacoesComponent },
   { path: 'eventos', component: EventosComponent },
-  {
-    path: '',
-    redirectTo: 'dashboard',
-  },
+  { path: '', component: DashboardComponent },
 ];
