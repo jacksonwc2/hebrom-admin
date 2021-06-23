@@ -151,7 +151,7 @@ export class EntidadesComponent implements OnInit {
       razaoSocial: this.editar ? item.razaoSocial : '',
       documento: this.editar ? item.documento : '',
       codigoLocalizacao: this.editar ? item.codigoLocalizacao : '',
-      id: null,
+      id: this.editar ? item.id : null,
     });
   }
 

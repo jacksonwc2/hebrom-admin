@@ -138,11 +138,19 @@ export class EventosComponent implements OnInit {
       codigoEntidade: this.editar ? item.codigoEntidade : null,
       codigoCategoria: this.editar ? item.codigoCategoria : null,
       codigoLocalizacao: this.editar ? item.codigoLocalizacao : null,
-      dataInicio: this.editar ? moment(item.dataInicio,'DD/MM/YYYY hh:mm').format() : null,
-      dataFinal: this.editar ? moment(item.dataFinal,'DD/MM/YYYY hh:mm').format()  : null,
+      dataInicio: this.editar ? moment(item.dataInicio, 'DD/MM/YYYY hh:mm').format() : null,
+      dataFinal: this.editar ? this.setarData(item) : null,
       banner: this.editar ? null : null,
       id: this.editar ? item.id : null,
     });
+  }
+
+  private setarData(item) {
+    if (!item?.dataFinal) {
+      return null;
+    }
+
+    return moment(item.dataFinal, 'DD/MM/YYYY hh:mm').format()
   }
 
   handleOk(): void {
