@@ -172,6 +172,8 @@ export class EventosComponent implements OnInit {
 
         this.validateForm.reset();
 
+        this.fileList = [];
+
         this.adquirirTodos();
       });
   }
